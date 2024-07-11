@@ -10,22 +10,6 @@ class World{
 
     // backgroundObjects = this.returnBackgroundImageArray(5);
 
-
-    canvas;
-    ctx;
-    keyboard;
-    camera_x = 0;
-
-    constructor(canvas, keyboard){
-    this.ctx = canvas.getContext('2d');
-    this.canvas = canvas;
-    this.keyboard = keyboard;
-    this.draw();
-
-    this.setWorld();
-    }
-
-
     // returnBackgroundImageArray(levelLength){
     //     let backgroundArray = [];
 
@@ -43,9 +27,43 @@ class World{
     //     return backgroundArray;
     // }
 
+
+
+    canvas;
+    ctx;
+    keyboard;
+    camera_x = 0;
+
+    constructor(canvas, keyboard){
+    this.ctx = canvas.getContext('2d');
+    this.canvas = canvas;
+    this.keyboard = keyboard;
+    this.draw();
+
+    this.setWorld();
+    this.checkCollisions();
+    }
+
+    
     setWorld(){
         this.character.world = this;
     }
+
+    checkCollisions(){
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+               if(this.character.isColliding(enemy)){
+                
+                this.character.hit();
+                console.log(this.character.energy);
+                
+               }
+            })
+
+        }, 200);
+    };
+
+
 
     draw(){
 
