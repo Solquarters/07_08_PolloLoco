@@ -83,21 +83,29 @@ class World{
 
         ///Spiegelung der Bilder bei linksseitiger Bewegung
         if(moveableObject.otherDirection){
-            this.ctx.save();
-            this.ctx.translate(moveableObject.width, 0);
-            this.ctx.scale(-1, 1);
-            moveableObject.x = moveableObject.x * -1;
+            this.flipImage(moveableObject);
         }
 
-        this.ctx.drawImage(moveableObject.img, moveableObject.x, moveableObject.y, moveableObject.width, moveableObject.height)
+        moveableObject.draw(this.ctx);
+
+        moveableObject.drawFrame(this.ctx);
 
         if(moveableObject.otherDirection){
-            this.ctx.restore();
-            moveableObject.x = moveableObject.x * -1;
-
-
+           this.flipImageBack(moveableObject);
         }
 
+    }
+
+    flipImage(moveableObject){
+        this.ctx.save();
+        this.ctx.translate(moveableObject.width, 0);
+        this.ctx.scale(-1, 1);
+        moveableObject.x = moveableObject.x * -1;
+    }
+
+    flipImageBack(moveableObject){
+        this.ctx.restore();
+        moveableObject.x = moveableObject.x * -1;
     }
 
 }

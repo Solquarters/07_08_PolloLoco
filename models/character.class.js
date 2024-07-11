@@ -50,6 +50,7 @@ class Character extends MoveableObject{
 
             if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){
                 this.moveRight();
+                this.otherDirection = false;
                 if(!this.isAboveGround()){
                     this.walking_sound.play();
                 }
@@ -57,6 +58,7 @@ class Character extends MoveableObject{
 
             if(this.world.keyboard.LEFT && this.x > -660 ){
                this.moveLeft();
+               this.otherDirection = true;
                 if(!this.isAboveGround()){
                     this.walking_sound.play();
                 }
@@ -77,6 +79,7 @@ class Character extends MoveableObject{
                 this.playAnimation(this.IMAGES_JUMPING);
             }
             else{
+
                 if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
                 
                     this.playAnimation(this.IMAGES_WALKING);
