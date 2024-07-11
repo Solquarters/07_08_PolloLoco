@@ -2,23 +2,14 @@ class World{
 
     character = new Character();
     
-    enemies = [
-    new Chicken(),
-    new Chicken(),
-    new Chicken(),
-    ];
+    level = level1;
 
-    clouds = [
-    new Cloud()
-  
-    ];
+    // enemies = level1.enemies;
+    // clouds = level1.clouds;
+    // backgroundObjects = level1.backgroundObjects;
 
-    backgroundObjects = [
-        new BackgroundObject('./img/5_background/layers/air.png', 0, 0),
-        new BackgroundObject('img/5_background/layers/3_third_layer/1.png', 0, 0),
-        new BackgroundObject('img/5_background/layers/2_second_layer/1.png', 0, 0),
-        new BackgroundObject('./img/5_background/layers/1_first_layer/1.png', 0, 0)
-    ];
+    // backgroundObjects = this.returnBackgroundImageArray(5);
+
 
     canvas;
     ctx;
@@ -34,6 +25,24 @@ class World{
     this.setWorld();
     }
 
+
+    // returnBackgroundImageArray(levelLength){
+    //     let backgroundArray = [];
+
+    //     for(let i = 0; i < levelLength; i++){
+    //         backgroundArray.push(new BackgroundObject('./img/5_background/layers/air.png', (-719 + 719*i*2), 0));
+    //         backgroundArray.push(new BackgroundObject('img/5_background/layers/3_third_layer/2.png', (-719+ 719*i*2), 0));
+    //         backgroundArray.push(new BackgroundObject('img/5_background/layers/2_second_layer/2.png',(-719+ 719*i*2), 0));
+    //         backgroundArray.push(new BackgroundObject('./img/5_background/layers/1_first_layer/2.png', (-719+ 719*i*2), 0));
+
+    //         backgroundArray.push(new BackgroundObject('./img/5_background/layers/air.png',  719*i*2, 0));
+    //         backgroundArray.push(new BackgroundObject('img/5_background/layers/3_third_layer/1.png',  719*i*2, 0));
+    //         backgroundArray.push(new BackgroundObject('img/5_background/layers/2_second_layer/1.png',  719*i*2, 0));
+    //         backgroundArray.push(new BackgroundObject('./img/5_background/layers/1_first_layer/1.png',  719*i*2, 0));
+    //     }
+    //     return backgroundArray;
+    // }
+
     setWorld(){
         this.character.world = this;
     }
@@ -44,10 +53,10 @@ class World{
 
         this.ctx.translate(this.camera_x, 0);
 
-        this.addObjectsToMap(this.backgroundObjects);
-        this.addObjectsToMap(this.clouds);
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.clouds);
         this.addToMap(this.character);
-        this.addObjectsToMap(this.enemies);
+        this.addObjectsToMap(this.level.enemies);
         
 
         this.ctx.translate(-this.camera_x, 0);
