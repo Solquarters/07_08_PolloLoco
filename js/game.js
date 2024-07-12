@@ -10,7 +10,7 @@ function init(){
     ctx = canvas.getContext('2d');
     
 
-    console.log("My Character is", world.character);
+    // console.log("My Character is", world.character);
     
   
 
@@ -21,41 +21,51 @@ function init(){
 
 
 window.addEventListener("keydown", (event) => {
-  if(event.key == "ArrowRight"){
+  if(event.keyCode == 39){
     keyboard.RIGHT = true;
   }
-  if(event.key == "ArrowLeft"){
+  if(event.keyCode == 37){
     keyboard.LEFT = true;
   }
-  if(event.key == "ArrowDown"){
-    keyboard.DOWN = true;
-  }
-  if(event.key == "ArrowUp"){
+  if(event.keyCode == 38){
     keyboard.UP = true;
   }
-  if(event.key == " "){
+  if(event.keyCode == 40){
+    keyboard.DOWN = true;
+  }
+  if(event.keyCode == 32){
     keyboard.SPACE = true;
   }
-
+  if(event.keyCode == 68){
+    keyboard.D = true;
+  }
   
 });
 
 
 window.addEventListener("keyup", (event) => {
-  if(event.key == "ArrowRight"){
+
+  console.log(event);
+  if(event.keyCode == 39){
     keyboard.RIGHT = false;
   }
-  if(event.key == "ArrowLeft"){
+  if(event.keyCode == 37){
     keyboard.LEFT = false;
   }
-  if(event.key == "ArrowDown"){
+  if(event.keyCode == 38){
+    keyboard.UP = false;
+    world.character.jumpAlreadyTriggered = false;
+  }
+  if(event.keyCode == 40){
     keyboard.DOWN = false;
   }
-  if(event.key == "ArrowUp"){
-    keyboard.UP = false;
-  }
-  if(event.key == " "){
+  if(event.keyCode == 32){
     keyboard.SPACE = false;
+    world.character.jumpAlreadyTriggered = false;
+  
+  }
+  if(event.keyCode == 68){
+    keyboard.D = false;
   }
 
   

@@ -6,8 +6,8 @@ class Character extends MoveableObject{
     currentImage = 0;
     world;
     walking_sound = new Audio('./sounds/running_steps.mp3');
-
-   
+    jumpAlreadyTriggered = false;
+    
 
     IMAGES_WALKING = [
         './img/2_character_pepe/2_walk/W-21.png',
@@ -40,14 +40,11 @@ class Character extends MoveableObject{
         'img/2_character_pepe/5_dead/D-57.png',
     ];
 
-
     IMAGES_HURT = [
         'img/2_character_pepe/4_hurt/H-41.png',
         'img/2_character_pepe/4_hurt/H-42.png',
         'img/2_character_pepe/4_hurt/H-43.png',
     ]
-
-    
 
     constructor(){
         super().loadImage('./img/2_character_pepe/1_idle/idle/I-1.png');
@@ -55,9 +52,7 @@ class Character extends MoveableObject{
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
-
         this.applyGravity();
-
         this.animate();
     }
 
@@ -82,18 +77,16 @@ class Character extends MoveableObject{
                 }
             }
 
-            if((this.world.keyboard.UP || this.world.keyboard.SPACE) && !this.isAboveGround()){
+            if((this.world.keyboard.UP || this.world.keyboard.SPACE) && !this.isAboveGround() && !this.jumpAlreadyTriggered){
+                this.jumpAlreadyTriggered = true;
                 this.jump();
             }
 
             this.world.camera_x = -this.x +50;
-
-
         }, 1000/60)
 
+
         setInterval(() => {
-
-
             if(this.isDead()){
                 this.playAnimation(this.IMAGES_DEAD);
             }
@@ -112,8 +105,5 @@ class Character extends MoveableObject{
                  }
             }
         }, 1000/14);
-    
     }
-
-    
 }
