@@ -1,6 +1,7 @@
 class World{
 
     character = new Character();
+    statusBar = new StatusBar();
     
     level = level1;
 
@@ -27,12 +28,12 @@ class World{
     //     return backgroundArray;
     // }
 
-
-
     canvas;
     ctx;
     keyboard;
     camera_x = 0;
+    
+
 
     constructor(canvas, keyboard){
     this.ctx = canvas.getContext('2d');
@@ -56,6 +57,7 @@ class World{
                 
                 this.character.hit();
                 console.log(this.character.energy);
+                this.statusBar.setPercentage(this.character.energy);
                 
                }
             })
@@ -72,11 +74,23 @@ class World{
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.backgroundObjects);
-        this.addObjectsToMap(this.level.clouds);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.level.enemies);
-        
 
+        this.addObjectsToMap(this.level.clouds);
+
+
+        ///Was genau passiert hier ,damit die Status Bar an der selben Stelle bleibt ? 
+        //SPACE FOR FIXED OBJECTS ON THE CANVAS /// START
+        this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusBar);
+        this.ctx.translate(this.camera_x, 0);
+        //SPACE FOR FIXED OBJECTS ON THE CANVAS /// END
+
+        this.addToMap(this.character);
+
+        this.addObjectsToMap(this.level.enemies);
+
+        
+        
         this.ctx.translate(-this.camera_x, 0);
 
 
