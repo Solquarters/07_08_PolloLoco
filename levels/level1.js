@@ -40,5 +40,5 @@ let level1 = new Level(
     [new Chicken(),new Chicken(),new Chicken(), new Endboss()],
     [new Cloud()],
     returnLevelBackgroundArray(4),
-    returnCoinsForLevel(15)
+    returnCoinsForLevel(12)
 );

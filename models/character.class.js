@@ -9,6 +9,8 @@ class Character extends MoveableObject{
     jumpAlreadyTriggered = false;
     deadAnimationFrame=0;
     idleTimer = 0;
+    
+    
 
     // jumpAnimationImage = 0;
 
@@ -148,20 +150,11 @@ class Character extends MoveableObject{
         this.loadImages(this.IMAGES_HURT);
         this.applyGravity();
         this.animate();
+        this.x = -300;
         
     }
 
-    startIdleTimer(){
-            // let lastInput = new Date().getTime();
-            // let timePassed = new Date().getTime() - lastInput;
-      
-    }
-
-    resetIdleTimer(){
-
-
-    }
-
+  
     animate(){
         setInterval(() =>{
             this.walking_sound.pause();
@@ -234,6 +227,8 @@ class Character extends MoveableObject{
             }
 
         }, 1000/20);
+
+        
     }
 }
 
