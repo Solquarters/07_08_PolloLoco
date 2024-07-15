@@ -8,7 +8,7 @@ class MoveableObject extends DrawableObject {
     acceleration = 6;
     energy = 100;
     lastHit = 0;
-    
+    justDied=false;
 
     offset = {
         top: 0,
@@ -29,7 +29,7 @@ class MoveableObject extends DrawableObject {
     isAboveGround(){
         if(this instanceof ThrowableObject){return true;}
         else{
-            return this.y < 170;
+            return this.y < 160;
         }
     }
 
@@ -77,7 +77,9 @@ hit(){
     document.getElementById('lifeDivId').style.width = `${this.energy}%`
 
     if(this.energy < 0){
+        
         this.energy = 0;
+        this.justDied = true;
     }
     else{
         this.lastHit = new Date().getTime();
@@ -88,34 +90,39 @@ isHurt(){
     //Difference in millisecs
     let timePassed = new Date().getTime() - this.lastHit;
     //difference in secs
-    return timePassed < 300; //wehen last hit was not longer than 3 secs ago return true
+    return timePassed < 400; //wehen last hit was not longer than 3 secs ago return true
 }
 
 isDead(){
+    
+    if(this.justDied){
+        this.currentImage = 0; 
+        this.justDied = false;
+    }
     return this.energy == 0;
 }
 
 
-    playAnimation(images){
-        let i = this.currentImage % images.length;
-        let path =  images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
+playAnimation(images){
+    let i = this.currentImage % images.length;
+    let path =  images[i];
+    this.img = this.imageCache[path];
+    this.currentImage++;
     }
 
-    moveRight(){
-        this.x += this.speed;
+moveRight(){
+    this.x += this.speed;
         
         
     }
 
-    moveLeft(){
-        this.x -= this.speed;
+moveLeft(){
+    this.x -= this.speed;
         
     }
 
-    jump(){
-        this.speedY = 50;
+jump(){
+    this.speedY = 50;
     }
         
     

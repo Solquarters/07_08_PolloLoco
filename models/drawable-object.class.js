@@ -19,8 +19,6 @@ class DrawableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height)
     }
 
-
-    
     loadImages(arr){
         arr.forEach((path) => {
             let img = new Image();
@@ -28,7 +26,6 @@ class DrawableObject {
             this.imageCache[path] = img;
         });
     }
-
 
     //Draw frame depending on the img size
     // drawFrame(ctx){

@@ -61,7 +61,7 @@ class World{
     };
 
     checkThrowObjects(){
-        if(this.keyboard.D){
+        if(this.keyboard.D || this.keyboard.DOWN ){
             let bottle = new ThrowableObject(this.character.x+30, this.character.y+50);
             this.throwableObjects.push(bottle);
         }
@@ -104,14 +104,10 @@ checkCollisions(){
         //SPACE FOR FIXED OBJECTS ON THE CANVAS /// END
 
         this.addToMap(this.character);
-
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
 
-        
-        
         this.ctx.translate(-this.camera_x, 0);
-
 
         ////Wird asynchron ausgeführt , nachdem alle Objecte oberhalb gerendert wurden.
         ///Innerhalb von requestAnimationFrame funktioniert this nicht mehr !!! Eigenheit von JS
