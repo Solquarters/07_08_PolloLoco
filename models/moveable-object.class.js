@@ -10,6 +10,13 @@ class MoveableObject extends DrawableObject {
     lastHit = 0;
     
 
+    offset = {
+        top: 0,
+        left:0,
+        right:0,
+        bottom:0
+    }
+
     applyGravity(){
         setInterval(() =>{
             if(this.isAboveGround() || this.speedY > 0){
@@ -22,35 +29,48 @@ class MoveableObject extends DrawableObject {
     isAboveGround(){
         if(this instanceof ThrowableObject){return true;}
         else{
-            return this.y < 180;
+            return this.y < 170;
         }
     }
 
-   
-
-
-//Collision detection
-//character.isColliding(chicken)
-// isColliding(obj){
-//     return  (this.x + this.width) >= obj.x && this.x <= (obj.x + obj.width) && 
-//             (this.y + this.offsety + this.height) >= obj.y &&
-//             (this.y + this.offsetY) <= (obj.y + obj.height) &&
-//             obj.onCollisionCourse; 
-// }
 
 // isColliding(moveableObject){
-//     return (this.x + this.width > moveableObject.x &&
-//             this.y + this.height > moveableObject.y &&
-//             this.x < moveableObject.x &&
-//             this.y < moveableObject.y + moveableObject.height);
+//     return ( 
+//         (moveableObject.x <= this.x && this.x < moveableObject.x + moveableObject.width) ||
+//         (moveableObject.x <= this.x + this.width && this.x + this.width <= moveableObject.x + moveableObject.width) ||
+//         (this.x <= moveableObject.x && moveableObject.x <= this.x + this.width)
+//     ) && (
+//         (moveableObject.y <= this.y && this.y <= moveableObject.y + moveableObject.height) ||
+//         (moveableObject.y <= this.y + this.height && this.y + this.height <= moveableObject.y + moveableObject.height) ||
+//         (this.y <= moveableObject.y && moveableObject.y <= this.y + this.height)
+//     );
 // }
 
-isColliding(moveableObject){
-    return ( (this.x <= moveableObject.x && this.x+this.width > moveableObject.x)
-        ||  (this.x < moveableObject.x+moveableObject.width && this.x+this.width > moveableObject.x+moveableObject.width)
-        ||  (moveableObject.x < this.x && moveableObject.x+moveableObject.width > this.x)
+
+
+///colliding with offsets:
+isColliding(moveableObject) {
+    const thisLeft = this.x + this.offset.left;
+    const thisRight = this.x + this.width - this.offset.right;
+    const thisTop = this.y + this.offset.top;
+    const thisBottom = this.y + this.height - this.offset.bottom;
+
+    const moveableLeft = moveableObject.x + moveableObject.offset.left;
+    const moveableRight = moveableObject.x + moveableObject.width - moveableObject.offset.right;
+    const moveableTop = moveableObject.y + moveableObject.offset.top;
+    const moveableBottom = moveableObject.y + moveableObject.height - moveableObject.offset.bottom;
+
+    return (
+        (moveableLeft <= thisLeft && thisLeft <= moveableRight) ||
+        (moveableLeft <= thisRight && thisRight <= moveableRight) ||
+        (thisLeft <= moveableLeft && moveableLeft <= thisRight)
+    ) && (
+        (moveableTop <= thisTop && thisTop <= moveableBottom) ||
+        (moveableTop <= thisBottom && thisBottom <= moveableBottom) ||
+        (thisTop <= moveableTop && moveableTop <= thisBottom)
     );
 }
+
 
 hit(){
     this.energy -= 5;

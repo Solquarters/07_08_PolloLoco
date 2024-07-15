@@ -7,6 +7,13 @@ class Character extends MoveableObject{
     world;
     walking_sound = new Audio('./sounds/running_steps.mp3');
     jumpAlreadyTriggered = false;
+
+    offset = {
+        top: 100,
+        bottom: 5,
+        left: 25,
+        right: 15,
+    }
     
 
     IMAGES_WALKING = [

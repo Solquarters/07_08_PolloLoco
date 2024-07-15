@@ -72,7 +72,11 @@ checkCollisions(){
         if(this.character.isColliding(enemy)){
          
          this.character.hit();
-         console.log(this.character.energy);
+       
+       
+       ////////////testing
+         //  console.log(this.character.energy);
+        
         
 
          this.statusBar.setPercentage(this.character.energy);
