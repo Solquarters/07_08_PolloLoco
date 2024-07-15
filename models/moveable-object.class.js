@@ -8,7 +8,7 @@ class MoveableObject extends DrawableObject {
     acceleration = 6;
     energy = 100;
     lastHit = 0;
-    justDied=false;
+    justDied=true;
 
     offset = {
         top: 0,
@@ -74,27 +74,30 @@ isColliding(moveableObject) {
 
 hit(){
     this.energy -= 5;
-    document.getElementById('lifeDivId').style.width = `${this.energy}%`
+    document.getElementById('lifeDivId').style.width = `${this.energy}%`;
+    lastInputTimer = new Date().getTime();
 
     if(this.energy < 0){
         
         this.energy = 0;
-        this.justDied = true;
+        
     }
     else{
         this.lastHit = new Date().getTime();
     }
 }
 
+
+
 isHurt(){
     //Difference in millisecs
     let timePassed = new Date().getTime() - this.lastHit;
+    // lastInputTimer = new Date().getTime();
     //difference in secs
     return timePassed < 400; //wehen last hit was not longer than 3 secs ago return true
 }
 
 isDead(){
-    
     if(this.justDied){
         this.currentImage = 0; 
         this.justDied = false;

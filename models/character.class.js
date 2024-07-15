@@ -8,8 +8,9 @@ class Character extends MoveableObject{
     walking_sound = new Audio('./sounds/running_steps.mp3');
     jumpAlreadyTriggered = false;
 
+    idleTimer = 0;
 
-    jumpAnimationImage = 0;
+    // jumpAnimationImage = 0;
 
     offset = {
         top: 100,
@@ -20,15 +21,59 @@ class Character extends MoveableObject{
     
     IMAGES_IDLE = [
         './img/2_character_pepe/1_idle/idle/I-1.png',
+        './img/2_character_pepe/1_idle/idle/I-1.png',
+        './img/2_character_pepe/1_idle/idle/I-1.png',
+        './img/2_character_pepe/1_idle/idle/I-2.png',
+        './img/2_character_pepe/1_idle/idle/I-2.png',
         './img/2_character_pepe/1_idle/idle/I-2.png',
         './img/2_character_pepe/1_idle/idle/I-3.png',
+        './img/2_character_pepe/1_idle/idle/I-3.png',
+        './img/2_character_pepe/1_idle/idle/I-3.png',
+        './img/2_character_pepe/1_idle/idle/I-4.png',
+        './img/2_character_pepe/1_idle/idle/I-4.png',
         './img/2_character_pepe/1_idle/idle/I-4.png',
         './img/2_character_pepe/1_idle/idle/I-5.png',
+        './img/2_character_pepe/1_idle/idle/I-5.png',
+        './img/2_character_pepe/1_idle/idle/I-5.png',
+        './img/2_character_pepe/1_idle/idle/I-6.png',
+        './img/2_character_pepe/1_idle/idle/I-6.png',
         './img/2_character_pepe/1_idle/idle/I-6.png',
         './img/2_character_pepe/1_idle/idle/I-7.png',
+        './img/2_character_pepe/1_idle/idle/I-7.png',
+        './img/2_character_pepe/1_idle/idle/I-7.png',
+        './img/2_character_pepe/1_idle/idle/I-8.png',
+        './img/2_character_pepe/1_idle/idle/I-8.png',
         './img/2_character_pepe/1_idle/idle/I-8.png',
         './img/2_character_pepe/1_idle/idle/I-9.png',
+        './img/2_character_pepe/1_idle/idle/I-9.png',
+        './img/2_character_pepe/1_idle/idle/I-9.png',
         './img/2_character_pepe/1_idle/idle/I-10.png',
+        './img/2_character_pepe/1_idle/idle/I-10.png',
+        './img/2_character_pepe/1_idle/idle/I-10.png',
+    ];
+
+    IMAGES_IDLE_LONG = [
+        'img/2_character_pepe/1_idle/long_idle/I-11.png',
+        'img/2_character_pepe/1_idle/long_idle/I-11.png',
+        'img/2_character_pepe/1_idle/long_idle/I-12.png',
+        'img/2_character_pepe/1_idle/long_idle/I-12.png',
+        'img/2_character_pepe/1_idle/long_idle/I-13.png',
+        'img/2_character_pepe/1_idle/long_idle/I-13.png',
+        'img/2_character_pepe/1_idle/long_idle/I-14.png',
+        'img/2_character_pepe/1_idle/long_idle/I-14.png',
+        'img/2_character_pepe/1_idle/long_idle/I-15.png',
+        'img/2_character_pepe/1_idle/long_idle/I-15.png',
+        'img/2_character_pepe/1_idle/long_idle/I-16.png',
+        'img/2_character_pepe/1_idle/long_idle/I-16.png',
+        'img/2_character_pepe/1_idle/long_idle/I-17.png',
+        'img/2_character_pepe/1_idle/long_idle/I-17.png',
+        'img/2_character_pepe/1_idle/long_idle/I-18.png',
+        'img/2_character_pepe/1_idle/long_idle/I-18.png',
+        'img/2_character_pepe/1_idle/long_idle/I-19.png',
+        'img/2_character_pepe/1_idle/long_idle/I-19.png',
+        'img/2_character_pepe/1_idle/long_idle/I-20.png',
+        'img/2_character_pepe/1_idle/long_idle/I-20.png',
+
     ];
 
     IMAGES_WALKING = [
@@ -95,6 +140,8 @@ class Character extends MoveableObject{
 
     constructor(){
         super().loadImage('./img/2_character_pepe/1_idle/idle/I-1.png');
+        this.loadImages(this.IMAGES_IDLE);
+        this.loadImages(this.IMAGES_IDLE_LONG);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
@@ -102,6 +149,17 @@ class Character extends MoveableObject{
         this.applyGravity();
         this.animate();
         
+    }
+
+    startIdleTimer(){
+            // let lastInput = new Date().getTime();
+            // let timePassed = new Date().getTime() - lastInput;
+      
+    }
+
+    resetIdleTimer(){
+
+
     }
 
     animate(){
@@ -138,7 +196,7 @@ class Character extends MoveableObject{
 
 
         setInterval(() => {
-            if(this.isDead() && this.currentImage < this.IMAGES_DEAD.length){
+            if(this.isDead() ){
                 this.playAnimation(this.IMAGES_DEAD);
                 ////HIER BLOCK ALL MOVEMENT UND PLAY AGAIN SCREEN
                 return;
@@ -155,14 +213,18 @@ class Character extends MoveableObject{
                  }
             }
 
-            // if(!this.isAboveGround() && !this.isDead() && !this.isHurt()){
-            //     this.playAnimation(this.IMAGES_IDLE);
-            // }
-        }, 1000/24);
+            let timePassed = new Date().getTime() - lastInputTimer;
+            
+
+            if((timePassed/1000) > 4){
+                this.playAnimation(this.IMAGES_IDLE_LONG);
+            }
+            else if(!this.isAboveGround() && !this.isDead() && !this.isHurt() && !(this.world.keyboard.RIGHT || this.world.keyboard.LEFT)){
+                this.playAnimation(this.IMAGES_IDLE);
+            }
+
+        }, 1000/20);
     }
 }
 
 
-// if(!this.isAboveGround() && !this.world.keyboard.RIGHT && !this.world.keyboard.LEFT){
-//     this.loadImage('./img/2_character_pepe/1_idle/idle/I-1.png');
-// }
