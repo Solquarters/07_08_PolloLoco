@@ -70,19 +70,25 @@ class World{
 checkCollisions(){
     this.level.enemies.forEach((enemy) => {
         if(this.character.isColliding(enemy)){
-         
-         this.character.hit();
-       
-       
-       ////////////testing
-         //  console.log(this.character.energy);
-        
-        
-
-         this.statusBar.setPercentage(this.character.energy);
-         
+        this.character.hit();
+        ////////////testing
+        //console.log(this.character.energy);
+        this.statusBar.setPercentage(this.character.energy);
         }
-     })
+     });
+
+     this.level.items.forEach((item) =>{
+        if(this.character.isColliding(item)){
+        this.character.collectCoin();
+        ///REMOVE THIS COIN
+    
+        ///Set Coin Number 
+        // this.statusBar.setPercentage(this.character.energy);
+        }
+     });
+
+
+     
 }
 
     draw(){

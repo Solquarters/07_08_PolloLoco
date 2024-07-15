@@ -1,7 +1,7 @@
 class MoveableObject extends DrawableObject {
    
     static lastCoinX = 0; // Make lastCoinX a static property
-    
+
     speed = 0.15;
     otherDirection = false;
     onCollisionCourse = true;
@@ -113,12 +113,7 @@ moveLeft(){
 
 
 jump(){
-    this.speedY = 50;
+    this.speedY = 47;
     }
 
-
-
-
-        
-    
 }
