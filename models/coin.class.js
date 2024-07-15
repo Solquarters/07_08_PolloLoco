@@ -4,7 +4,7 @@ class Coin extends MoveableObject {
     constructor(){
         super().loadImage('./img/8_coin/coin_1.png');
         
-        this.x = 10 + MoveableObject.lastCoinX; // Use the static property for x coordinate
+        this.x = 500 + MoveableObject.lastCoinX; // Use the static property for x coordinate
         MoveableObject.lastCoinX += 200; // Update the static property
         if(MoveableObject.lastCoinX % 800){
             MoveableObject.lastCoinX += 200;

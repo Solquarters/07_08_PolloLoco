@@ -90,9 +90,28 @@ class World {
 
     this.ctx.translate(this.camera_x, 0);
 
-    this.addObjectsToMap(this.level.backgroundObjects);
 
-    this.addObjectsToMap(this.level.clouds);
+
+    ///////////an stelle der alten statischen Background Funktion
+    // this.addObjectsToMap(this.level.backgroundObjects);
+
+    //////////////HIER PARALLAX START
+     // Draw background layers with different speed factors
+     this.level.backgroundObjects.forEach(bgObject => {
+        this.ctx.save();
+        this.ctx.translate(-this.camera_x * bgObject.speedFactor, 0);
+        this.addToMap(bgObject);
+        this.ctx.restore();
+    });
+    ////////////// PARALLAX END
+    
+    this.level.clouds.forEach(cloud => {
+        this.ctx.save();
+        this.ctx.translate(-this.camera_x * 0.98, 0);
+        this.addToMap(cloud);
+        this.ctx.restore();
+    });
+    // this.addObjectsToMap(this.level.clouds);
 
     this.addObjectsToMap(this.level.items);
 

@@ -1,7 +1,7 @@
 class Character extends MoveableObject{
     height= 250;
     width= 130;
-    speed= 10;
+    speed= 9;
     y = 20;
     currentImage = 0;
     world;
@@ -150,7 +150,7 @@ class Character extends MoveableObject{
         this.loadImages(this.IMAGES_HURT);
         this.applyGravity();
         this.animate();
-        this.x = -300;
+        this.x = 300;
         
     }
 
@@ -169,7 +169,7 @@ class Character extends MoveableObject{
                 }
             }
 
-            if(this.world.keyboard.LEFT && this.x > -660 ){
+            if(this.world.keyboard.LEFT && this.x > 100 ){
                this.moveLeft();
                this.otherDirection = true;
                 if(!this.isAboveGround()){
