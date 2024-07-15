@@ -24,10 +24,21 @@ function returnLevelBackgroundArray(levelLength){
     return backgroundArray;
 }
 
+function returnCoinsForLevel(coinInputNumber){
+    coinArray = [];
+    for(let i = 0; i < coinInputNumber; i++){
+        coinArray.push(new Coin());
+    }
+    return coinArray;
+}
+
+
+
 //////Setting Level length here ! 
 //returnLevelBackgroundArray(1);
 let level1 = new Level(
     [new Chicken(),new Chicken(),new Chicken(), new Endboss()],
     [new Cloud()],
-    returnLevelBackgroundArray(4)
+    returnLevelBackgroundArray(4),
+    returnCoinsForLevel(15)
 );

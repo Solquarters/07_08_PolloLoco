@@ -95,6 +95,8 @@ checkCollisions(){
 
         this.addObjectsToMap(this.level.clouds);
 
+        this.addObjectsToMap(this.level.items);
+
 
         ///Was genau passiert hier ,damit die Status Bar an der selben Stelle bleibt ? 
         //SPACE FOR FIXED OBJECTS ON THE CANVAS /// START

@@ -7,7 +7,7 @@ class Character extends MoveableObject{
     world;
     walking_sound = new Audio('./sounds/running_steps.mp3');
     jumpAlreadyTriggered = false;
-
+    deadAnimationFrame=0;
     idleTimer = 0;
 
     // jumpAnimationImage = 0;
@@ -196,9 +196,19 @@ class Character extends MoveableObject{
 
 
         setInterval(() => {
-            if(this.isDead() ){
+            if(this.isDead() && (this.deadAnimationFrame < 12)){
+                if(this.deadAnimationFrame == 0){
+                    this.currentImage = 0;
+                }
                 this.playAnimation(this.IMAGES_DEAD);
+                this.deadAnimationFrame++;
+
+                
+
+                if(deadAnimationFrame ==12){
                 ////HIER BLOCK ALL MOVEMENT UND PLAY AGAIN SCREEN
+                ///Block sleep idle
+                }
                 return;
             }
             else if(this.isHurt()){

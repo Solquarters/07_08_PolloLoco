@@ -6,6 +6,7 @@ let lastInputTimer = new Date().getTime();
 
 
 
+
 function init(){
    
     canvas = document.getElementById('canvasId');

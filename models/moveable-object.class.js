@@ -1,5 +1,6 @@
 class MoveableObject extends DrawableObject {
    
+    static lastCoinX = 0; // Make lastCoinX a static property
     
     speed = 0.15;
     otherDirection = false;
@@ -32,20 +33,6 @@ class MoveableObject extends DrawableObject {
             return this.y < 160;
         }
     }
-
-
-// isColliding(moveableObject){
-//     return ( 
-//         (moveableObject.x <= this.x && this.x < moveableObject.x + moveableObject.width) ||
-//         (moveableObject.x <= this.x + this.width && this.x + this.width <= moveableObject.x + moveableObject.width) ||
-//         (this.x <= moveableObject.x && moveableObject.x <= this.x + this.width)
-//     ) && (
-//         (moveableObject.y <= this.y && this.y <= moveableObject.y + moveableObject.height) ||
-//         (moveableObject.y <= this.y + this.height && this.y + this.height <= moveableObject.y + moveableObject.height) ||
-//         (this.y <= moveableObject.y && moveableObject.y <= this.y + this.height)
-//     );
-// }
-
 
 
 ///colliding with offsets:
@@ -121,12 +108,17 @@ moveRight(){
 
 moveLeft(){
     this.x -= this.speed;
-        
     }
+
+
 
 jump(){
     this.speedY = 50;
     }
+
+
+
+
         
     
 }
