@@ -32,12 +32,21 @@ function returnCoinsForLevel(coinInputNumber){
     return coinArray;
 }
 
+function returnChickensForLevel(chickenInputNumber){
+    chickenArray = [];
+    for(let i = 0; i < chickenInputNumber; i++){
+        chickenArray.push(new Chicken());
+    }
+    chickenArray.push(new Endboss());
+    return chickenArray ;
+}
 
 
 //////Setting Level length here ! 
 //returnLevelBackgroundArray(1);
 let level1 = new Level(
-    [new Chicken(),new Chicken(),new Chicken(),new Chicken(),new Chicken(),new Chicken(), new Endboss()],
+    // [new Chicken(),new Chicken(),new Chicken(),new Chicken(),new Chicken(),new Chicken(), new Endboss()],
+    returnChickensForLevel(20), 
     [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()],
     returnLevelBackgroundArray(6),
     returnCoinsForLevel(12)

@@ -1,6 +1,8 @@
 class Chicken extends MoveableObject{
     isAlive = true;
 
+    
+
     offset = {
         top: 0,
         bottom: 0,
@@ -18,7 +20,8 @@ class Chicken extends MoveableObject{
 
     constructor(){
         super().loadImage('./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
-        this.x = 750 + Math.random() * (2000);
+        this.x = 750 + MoveableObject.lastChickenX + Math.random() * (2000);; 
+        MoveableObject.lastChickenX += 500; 
         this.y = 350;
         this.height=80;
         this.width=80;

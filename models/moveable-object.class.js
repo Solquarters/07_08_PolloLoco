@@ -2,6 +2,7 @@ class MoveableObject extends DrawableObject {
    
     static lastCoinX = 0; // Make lastCoinX a static property
     static lastCloudX = 0;
+    static lastChickenX = 0;
 
     speed = 0.15;
     otherDirection = false;
