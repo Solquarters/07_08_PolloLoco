@@ -46,7 +46,7 @@ class World {
       //////Collision from above
       if(this.character.checkCollisionFromAbove(this.character, enemy) && enemy.isAlive){
         enemy.isAlive = false;
-        this.character.speedY =  30;
+        this.character.speedY =  20;
       }
 
       if (this.character.isColliding(enemy) && enemy.isAlive) {

@@ -60,7 +60,7 @@ isColliding(moveableObject) {
 }
 
 checkCollisionFromAbove(player, enemy) {
-    let playerBottom = player.y + player.height - player.offset.bottom;
+    let playerBottom = player.y + player.height - player.offset.bottom -player.offset.top;
     let playerNextBottom = playerBottom + player.speedY;
   
     let playerLeft = player.x + player.offset.left;
@@ -72,7 +72,7 @@ checkCollisionFromAbove(player, enemy) {
   
     if((enemyLeft < playerLeft && playerLeft < enemyRight) ||
         (enemyLeft < playerRight && playerRight < enemyRight) &&
-      (playerBottom < enemyTop ) && (playerNextBottom+25 > enemyTop)){
+      (playerBottom < enemyTop ) && (playerNextBottom > enemyTop)){
 
         if(player.isAboveGround() && player.speedY < 0 ){
             return true;
