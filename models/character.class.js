@@ -198,7 +198,7 @@ class Character extends MoveableObject{
 
                 
 
-                if(deadAnimationFrame ==12){
+                if(this.deadAnimationFrame ==12){
                 ////HIER BLOCK ALL MOVEMENT UND PLAY AGAIN SCREEN
                 ///Block sleep idle
                 }

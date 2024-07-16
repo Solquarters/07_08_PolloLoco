@@ -9,28 +9,6 @@ class World {
   camera_x = 0;
   throwableObjects = [];
 
-  // enemies = level1.enemies;
-  // clouds = level1.clouds;
-  // backgroundObjects = level1.backgroundObjects;
-
-  // backgroundObjects = this.returnBackgroundImageArray(5);
-
-  // returnBackgroundImageArray(levelLength){
-  //     let backgroundArray = [];
-
-  //     for(let i = 0; i < levelLength; i++){
-  //         backgroundArray.push(new BackgroundObject('./img/5_background/layers/air.png', (-719 + 719*i*2), 0));
-  //         backgroundArray.push(new BackgroundObject('img/5_background/layers/3_third_layer/2.png', (-719+ 719*i*2), 0));
-  //         backgroundArray.push(new BackgroundObject('img/5_background/layers/2_second_layer/2.png',(-719+ 719*i*2), 0));
-  //         backgroundArray.push(new BackgroundObject('./img/5_background/layers/1_first_layer/2.png', (-719+ 719*i*2), 0));
-
-  //         backgroundArray.push(new BackgroundObject('./img/5_background/layers/air.png',  719*i*2, 0));
-  //         backgroundArray.push(new BackgroundObject('img/5_background/layers/3_third_layer/1.png',  719*i*2, 0));
-  //         backgroundArray.push(new BackgroundObject('img/5_background/layers/2_second_layer/1.png',  719*i*2, 0));
-  //         backgroundArray.push(new BackgroundObject('./img/5_background/layers/1_first_layer/1.png',  719*i*2, 0));
-  //     }
-  //     return backgroundArray;
-  // }
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -65,11 +43,18 @@ class World {
 
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-      if (this.character.isColliding(enemy)) {
+      //////Collision from above
+      if(this.character.checkCollisionFromAbove(this.character, enemy) && enemy.isAlive){
+        enemy.isAlive = false;
+        this.character.speedY =  30;
+      }
+
+      if (this.character.isColliding(enemy) && enemy.isAlive) {
         this.character.hit();
         //console.log(this.character.energy);
         this.statusBar.setPercentage(this.character.energy);
       }
+      
     });
 
     // Check for collisions with items and remove collided items
@@ -84,6 +69,29 @@ class World {
       }
     }
   }
+
+/////////////////////Collision from above start
+// checkCollisionFromAbove(player, enemy) {
+//   let playerBottom = player.y + player.height - player.offset.bottom;
+//   let playerNextBottom = playerBottom + player.speedY;
+
+//   let playerLeft = player.x + player.offset.left;
+//   let playerRight = player.x + player.width - player.offset.right;
+
+//   let enemyTop = enemy.y + enemy.offset.top;
+//   let enemyLeft = enemy.x + enemy.offset.left;
+//   let enemyRight = enemy.x + enemy.width - enemy.offset.right;
+
+//   if((enemyLeft < playerLeft && playerLeft < enemyRight) ||
+//       (enemyLeft < playerRight && playerRight < enemyRight) &&
+//     (playerBottom < enemyTop ) && (playerNextBottom > enemyTop) && player.speedY < 0){
+//       return true;
+//   }
+//   return false;
+// }
+/////////////////////Collision from above END
+
+
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -124,7 +132,18 @@ class World {
     //SPACE FOR FIXED OBJECTS ON THE CANVAS /// END
 
     this.addToMap(this.character);
+
+    //////////////
     this.addObjectsToMap(this.level.enemies);
+
+  //   this.level.enemies.forEach(enemy => {
+  //     this.ctx.save();
+  //     this.ctx.translate(-this.camera_x * 0.1, 0);
+  //     this.addToMap(enemy);
+  //     this.ctx.restore();
+  // });
+  //////////////////
+
     this.addObjectsToMap(this.throwableObjects);
 
     this.ctx.translate(-this.camera_x, 0);

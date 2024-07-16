@@ -38,15 +38,15 @@ class MoveableObject extends DrawableObject {
 
 ///colliding with offsets:
 isColliding(moveableObject) {
-    const thisLeft = this.x + this.offset.left;
-    const thisRight = this.x + this.width - this.offset.right;
-    const thisTop = this.y + this.offset.top;
-    const thisBottom = this.y + this.height - this.offset.bottom;
+    let thisLeft = this.x + this.offset.left;
+    let thisRight = this.x + this.width - this.offset.right;
+    let thisTop = this.y + this.offset.top;
+    let thisBottom = this.y + this.height - this.offset.bottom;
 
-    const moveableLeft = moveableObject.x + moveableObject.offset.left;
-    const moveableRight = moveableObject.x + moveableObject.width - moveableObject.offset.right;
-    const moveableTop = moveableObject.y + moveableObject.offset.top;
-    const moveableBottom = moveableObject.y + moveableObject.height - moveableObject.offset.bottom;
+    let moveableLeft = moveableObject.x + moveableObject.offset.left;
+    let moveableRight = moveableObject.x + moveableObject.width - moveableObject.offset.right;
+    let moveableTop = moveableObject.y + moveableObject.offset.top;
+    let moveableBottom = moveableObject.y + moveableObject.height - moveableObject.offset.bottom;
 
     return (
         (moveableLeft <= thisLeft && thisLeft <= moveableRight) ||
@@ -58,6 +58,29 @@ isColliding(moveableObject) {
         (thisTop <= moveableTop && moveableTop <= thisBottom)
     );
 }
+
+checkCollisionFromAbove(player, enemy) {
+    let playerBottom = player.y + player.height - player.offset.bottom;
+    let playerNextBottom = playerBottom + player.speedY;
+  
+    let playerLeft = player.x + player.offset.left;
+    let playerRight = player.x + player.width - player.offset.right;
+  
+    let enemyTop = enemy.y + enemy.offset.top;
+    let enemyLeft = enemy.x + enemy.offset.left;
+    let enemyRight = enemy.x + enemy.width - enemy.offset.right;
+  
+    if((enemyLeft < playerLeft && playerLeft < enemyRight) ||
+        (enemyLeft < playerRight && playerRight < enemyRight) &&
+      (playerBottom < enemyTop ) && (playerNextBottom+25 > enemyTop)){
+
+        if(player.isAboveGround() && player.speedY < 0 ){
+            return true;
+        }
+    }
+    return false;
+
+  }
 
 
 hit(){

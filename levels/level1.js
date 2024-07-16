@@ -14,12 +14,12 @@ function returnLevelBackgroundArray(levelLength){
         backgroundArray.push(new BackgroundObject('./img/5_background/layers/air.png', (-719 + 719*i*2), 0, 0.97));
         backgroundArray.push(new BackgroundObject('img/5_background/layers/3_third_layer/2.png', (-719+ 719*i*2), 0, 0.97));
         backgroundArray.push(new BackgroundObject('img/5_background/layers/2_second_layer/2.png',(-719+ 719*i*2), 0, 0.91));
-        backgroundArray.push(new BackgroundObject('./img/5_background/layers/1_first_layer/2.png', (-719+ 719*i*2), 0, 0.1));
+        backgroundArray.push(new BackgroundObject('./img/5_background/layers/1_first_layer/2.png', (-719+ 719*i*2), 0, 0));
 
         backgroundArray.push(new BackgroundObject('./img/5_background/layers/air.png', 0 + 719*i*2, 0, 0.97));
         backgroundArray.push(new BackgroundObject('img/5_background/layers/3_third_layer/1.png',  0 + 719*i*2, 0, 0.97));
         backgroundArray.push(new BackgroundObject('img/5_background/layers/2_second_layer/1.png',  0 + 719*i*2, 0, 0.91));
-        backgroundArray.push(new BackgroundObject('./img/5_background/layers/1_first_layer/1.png',  0 + 719*i*2, 0, 0.1));
+        backgroundArray.push(new BackgroundObject('./img/5_background/layers/1_first_layer/1.png',  0 + 719*i*2, 0, 0));
     }
     return backgroundArray;
 }
