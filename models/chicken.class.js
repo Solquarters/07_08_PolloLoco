@@ -36,7 +36,7 @@ class Chicken extends MoveableObject{
             // console.log(this.world.character.x);
             // console.log(world.character.x);
 
-            // if(world.character.x < this.x){
+            // if(this.isAlive && this.world.character.x < this.x){
             //     this.moveLeft();
             // }
 

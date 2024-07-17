@@ -8,6 +8,8 @@ class World {
   keyboard;
   camera_x = 0;
   throwableObjects = [];
+
+  
  
 
   constructor(canvas, keyboard) {
