@@ -25,6 +25,9 @@ class World {
 
   setWorld() {
     this.character.world = this;
+    this.level.enemies.forEach((enemy) => {
+      enemy.world = this;
+      });
   }
 
   run() {
@@ -76,7 +79,6 @@ class World {
       if (this.character.isColliding(item)) {
         
     this.level.items.splice(i, 1); 
-    console.log(world.coinCounter.coinCount);
     world.coinCounter.coinCount++;
     world.coinCounter.draw(ctx);
       }
@@ -85,12 +87,10 @@ class World {
 
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
     this.ctx.translate(this.camera_x, 0);
-
-    ///////////an stelle der alten statischen Background Funktion
+   
     // this.addObjectsToMap(this.level.backgroundObjects);
-    //////////////HIER PARALLAX START
+    ///PARALLAX START
      // Draw background layers with different speed factors
      this.level.backgroundObjects.forEach(bgObject => {
         this.ctx.save();
@@ -98,7 +98,6 @@ class World {
         this.addToMap(bgObject);
         this.ctx.restore();
     });
-    ////////////// PARALLAX END
     
     this.level.clouds.forEach(cloud => {
         this.ctx.save();
@@ -106,6 +105,7 @@ class World {
         this.addToMap(cloud);
         this.ctx.restore();
     });
+    ///PARALLAX END
     // this.addObjectsToMap(this.level.clouds);
 
     this.addObjectsToMap(this.level.items);

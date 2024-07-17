@@ -1,7 +1,6 @@
 class Chicken extends MoveableObject{
+    world;
     isAlive = true;
-
-    
 
     offset = {
         top: 0,
@@ -20,30 +19,38 @@ class Chicken extends MoveableObject{
 
     constructor(){
         super().loadImage('./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
-        this.x = 750 + MoveableObject.lastChickenX + Math.random() * (2000);; 
+        this.x = 750 + MoveableObject.lastChickenX + Math.random() * (2000); 
         MoveableObject.lastChickenX += 500; 
         this.y = 350;
         this.height=80;
         this.width=80;
-
         this.loadImages(this.IMAGES_WALKING);
-
-
         this.speed = 0.2 + (Math.random() * 2);
-
         this.animate();
     }
 
 
     animate(){
-
         setInterval(() =>{
-            if(this.isAlive){
+            
+            // console.log(this.world.character.x);
+            // console.log(world.character.x);
+
+            // if(world.character.x < this.x){
+            //     this.moveLeft();
+            // }
+
+            if(this.isAlive ){
                 this.moveLeft();
             }
-            else{
-                this.speed = 0;
-            }
+            // if(this.isAlive && this.world.character.x > this.x){
+            //     this.moveRight();
+            // }
+            // else{
+            //     this.speed = 0;
+            // }
+
+           
         }, 1000/60);
         
 

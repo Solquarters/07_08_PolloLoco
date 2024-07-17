@@ -1,15 +1,11 @@
-
-
 function initLevel(){
     ////INIT WENN AUF START GEDRÜCKT WIRD
-    //let level1 = new Level(
+    //let level1 = new Level()...
 }
-
 
 function returnLevelBackgroundArray(levelLength){
     backgroundArray = [];
     
-
     for(let i = 0; i < levelLength; i++){
         backgroundArray.push(new BackgroundObject('./img/5_background/layers/air.png', (-719 + 719*i*2), 0, 0.97));
         backgroundArray.push(new BackgroundObject('img/5_background/layers/3_third_layer/2.png', (-719+ 719*i*2), 0, 0.97));
@@ -42,10 +38,8 @@ function returnChickensForLevel(chickenInputNumber){
 }
 
 
-//////Setting Level length here ! 
-//returnLevelBackgroundArray(1);
 let level1 = new Level(
-    // [new Chicken(),new Chicken(),new Chicken(),new Chicken(),new Chicken(),new Chicken(), new Endboss()],
+    // [new Chicken(),new Chicken(),new Chicken(),new Chicken(),new Chicken(),new Chicken()],
     returnChickensForLevel(20), 
     [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()],
     returnLevelBackgroundArray(6),

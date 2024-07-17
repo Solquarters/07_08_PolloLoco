@@ -1,4 +1,5 @@
 class Endboss extends MoveableObject {
+    world;
     // x = 4600;
     x = 600;
     y = 50;
@@ -60,6 +61,11 @@ class Endboss extends MoveableObject {
 
     animate(){
         setInterval(() => {
+
+
+            // console.log(world.character.x);
+            //  console.log(this.world.character.x);
+
             if(world.character.x > 350 || this.energy < 100){
                 this.isTriggered = true;
             }else{this.isTriggered = false;}
@@ -71,23 +77,14 @@ class Endboss extends MoveableObject {
                 this.oldEnergy = this.energy;
             }
 
-
             if(!this.isTriggered){
             this.playAnimation(this.IMAGES_WALKING);
             }
 
-
             if(this.isTriggered){
                 this.playAnimation(this.IMAGES_ATTACKING);
             }
-
-            
         }, 180);
-
-
-
-
-
     }
 }
 

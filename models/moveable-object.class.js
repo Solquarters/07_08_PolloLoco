@@ -1,5 +1,5 @@
 class MoveableObject extends DrawableObject {
-   
+    world;
     static lastCoinX = 0; // Make lastCoinX a static property
     static lastCloudX = 0;
     static lastChickenX = 0;
