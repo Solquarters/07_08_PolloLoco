@@ -70,6 +70,12 @@ class ThrowableObject extends MoveableObject{
                     ///animation zu ende spielen! 
                     if(!(enemy instanceof Endboss))
                     {enemy.isAlive = false;}
+
+                    if((enemy instanceof Endboss) && !this.isBroken){
+                        enemy.energy -= 20;
+                    }
+
+
                     this.isBroken = true;
                     counter++;
                     this.playAnimation(this.IMAGES_SPLASH);
