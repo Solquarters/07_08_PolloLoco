@@ -180,7 +180,7 @@ class Character extends MoveableObject{
                 
             }
 
-            this.world.camera_x = -this.x +50;
+            this.world.camera_x = -this.x +100;
         }, 1000/60)
 
 

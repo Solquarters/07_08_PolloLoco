@@ -8,6 +8,8 @@ class Endboss extends MoveableObject {
 
     isTriggered = false;
 
+    oldEnergy = 100;
+
     offset = {
         top: 170,
         bottom: 40,
@@ -37,12 +39,21 @@ class Endboss extends MoveableObject {
         './img/4_enemie_boss_chicken/3_attack/G20.png',
     ];
 
+
+    IMAGES_HURT = [
+        './img/4_enemie_boss_chicken/4_hurt/G21.png',
+        './img/4_enemie_boss_chicken/4_hurt/G22.png',
+        './img/4_enemie_boss_chicken/4_hurt/G23.png'
+    
+    ];
+
     currentImage = 0;
    
     constructor(){
         super().loadImage('./img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ATTACKING);
+        this.loadImages(this.IMAGES_HURT);
         this.animate();
        
     }
@@ -52,6 +63,13 @@ class Endboss extends MoveableObject {
             if(world.character.x > 350 || this.energy < 100){
                 this.isTriggered = true;
             }else{this.isTriggered = false;}
+
+            //&& currentTime - lastHitTime < playHitAnimationTime
+            ////Wo triggere ich die Zeitmessung nach dem Hit ?  
+            if(this.oldEnergy > this.energy ){
+                this.playAnimation(this.IMAGES_HURT);
+                this.oldEnergy = this.energy;
+            }
 
 
             if(!this.isTriggered){

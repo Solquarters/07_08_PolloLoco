@@ -36,10 +36,6 @@ class ThrowableObject extends MoveableObject{
         this.y = y;
         this.throw();
         this.animate();
-
-
-        
-        
     }
 
     animate(){
@@ -48,7 +44,7 @@ class ThrowableObject extends MoveableObject{
                 if(this.y < 360 && !this.isBroken){
                     this.playAnimation(this.IMAGES_ROTATION);
                 }
-                if(this.y >= 360 && counter < 5){
+                if(this.y >= 360 && counter < 6){
                     if(counter == 0){this.currentImage = 0;}
                     this.isBroken = true;
                     counter++;
@@ -59,15 +55,14 @@ class ThrowableObject extends MoveableObject{
                     // Clear the throw interval when the condition is met
                     if (this.throwInterval !== null) {
                         clearInterval(this.throwInterval);
-                        this.throwInterval = null; // Reset the reference
+                        this.throwInterval = null; 
                     }
                 }
 
                world.level.enemies.forEach((enemy) => {
-                if(this.isColliding(enemy) && counter < 5 && enemy.isAlive ){
+                if(this.isColliding(enemy) && counter < 6 && enemy.isAlive && !this.isBroken){
                     if(counter == 0){this.currentImage = 0;}
-                    ////Bei Collision mit Boss: flasche etwas weiterbewegen
-                    ///animation zu ende spielen! 
+                   
                     if(!(enemy instanceof Endboss))
                     {enemy.isAlive = false;}
 
@@ -75,18 +70,17 @@ class ThrowableObject extends MoveableObject{
                         enemy.energy -= 20;
                     }
 
-
                     this.isBroken = true;
                     counter++;
                     this.playAnimation(this.IMAGES_SPLASH);
                     this.speedY = 0;
                     this.speed = 0;
                     this.acceleration = 0;
-                    // Clear the throw interval when the condition is met
                     if (this.throwInterval !== null) {
                         clearInterval(this.throwInterval);
-                        this.throwInterval = null; // Reset the reference
+                        this.throwInterval = null; 
                     }
+
                 }
                   });
         }, 1000/16)
@@ -96,7 +90,10 @@ class ThrowableObject extends MoveableObject{
         this.speedY = 40;
         this.applyGravity();
         this.throwInterval = setInterval(() => {
-            this.x += 14;
+            
+                this.x += 14;
+            
+            
         }, 20);
 
     }
