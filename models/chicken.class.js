@@ -1,5 +1,5 @@
 class Chicken extends MoveableObject{
-    world;
+    // world;
     isAlive = true;
 
     offset = {

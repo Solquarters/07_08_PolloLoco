@@ -4,6 +4,7 @@ class ThrowableObject extends MoveableObject{
     width = 100;
     height= 100;
     isBroken = false;
+    thrownAlready = false;
 
     firstAnimationRound = true;
 
@@ -94,9 +95,19 @@ class ThrowableObject extends MoveableObject{
     throw(){
         this.speedY = 40;
         this.applyGravity();
+        let throwDirection = world.character.otherDirection;
         this.throwInterval = setInterval(() => {
             
-                this.x += 14;
+            if(!throwDirection)
+                {
+                    this.x += 14;
+                }
+            
+
+                if(throwDirection)
+                {
+                    this.x -= 14;
+                }
             
             
         }, 20);

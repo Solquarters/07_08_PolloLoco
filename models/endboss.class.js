@@ -1,5 +1,5 @@
 class Endboss extends MoveableObject {
-    world;
+    // world;
     // x = 4600;
     x = 600;
     y = 50;
@@ -15,7 +15,7 @@ class Endboss extends MoveableObject {
         top: 170,
         bottom: 40,
         left: 80,
-        right: 80,
+        right: 60,
     }
 
     IMAGES_WALKING = [

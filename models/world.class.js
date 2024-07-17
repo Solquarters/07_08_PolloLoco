@@ -169,4 +169,16 @@ class World {
     this.ctx.restore();
     moveableObject.x = moveableObject.x * -1;
   }
+
+
+
+
+
+
+
+
+
+
+
+
 }
