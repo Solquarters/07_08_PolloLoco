@@ -3,6 +3,7 @@ class Endboss extends MoveableObject {
     y = 50;
     height=420;
     width=280;
+    isAlive = true;
 
     IMAGES_WALKING = [
         './img/4_enemie_boss_chicken/2_alert/G5.png',
@@ -24,6 +25,7 @@ class Endboss extends MoveableObject {
 
         this.loadImages(this.IMAGES_WALKING);
         this.animate();
+       
     }
 
     animate(){

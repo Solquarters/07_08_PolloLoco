@@ -54,6 +54,8 @@ class World {
         //console.log(this.character.energy);
         this.statusBar.setPercentage(this.character.energy);
       }
+
+
       
     });
 

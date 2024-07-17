@@ -3,7 +3,14 @@ class ThrowableObject extends MoveableObject{
     speedX;
     width = 100;
     height= 100;
+    isBroken = false;
 
+    offset = {
+        top: 15,
+        bottom: 15,
+        left: 15,
+        right: 15,
+    }
 
     IMAGES_ROTATION = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -36,13 +43,14 @@ class ThrowableObject extends MoveableObject{
         let counter = 0;
         setInterval(() =>{
            
-                if(this.y < 360){
+                if(this.y < 360 && !this.isBroken){
                     this.playAnimation(this.IMAGES_ROTATION);
                 }
                 
             
                 if(this.y >= 360 && counter < 5){
                     if(counter == 0){this.currentImage = 0;}
+                    this.isBroken = true;
                     counter++;
                     this.playAnimation(this.IMAGES_SPLASH);
                     this.speedY = 0;
@@ -55,6 +63,32 @@ class ThrowableObject extends MoveableObject{
                     }
                 }
 
+               world.level.enemies.forEach((enemy) => {
+                   
+                if(this.isColliding(enemy) && counter < 5 && enemy.isAlive && !this.isBroken){
+                    if(counter == 0){this.currentImage = 0;}
+                    enemy.isAlive = false;
+                    this.isBroken = true;
+                    counter++;
+                    this.playAnimation(this.IMAGES_SPLASH);
+                    this.speedY = 0;
+                    this.speed = 0;
+                    this.acceleration = 0;
+                    this.y += 100;
+
+                    
+
+                    // Clear the throw interval when the condition is met
+                    if (this.throwInterval !== null) {
+                        clearInterval(this.throwInterval);
+                        this.throwInterval = null; // Reset the reference
+                    }
+                }
+                    
+                  });
+
+                
+
             
         }, 1000/16)
     }
@@ -66,7 +100,7 @@ class ThrowableObject extends MoveableObject{
         this.applyGravity();
         this.throwInterval = setInterval(() => {
             this.x += 14;
-        }, 25);
+        }, 20);
 
     }
 

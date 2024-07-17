@@ -38,7 +38,7 @@ function returnChickensForLevel(chickenInputNumber){
         chickenArray.push(new Chicken());
     }
     chickenArray.push(new Endboss());
-    return chickenArray ;
+    return chickenArray;
 }
 
 
