@@ -8,6 +8,7 @@ class World {
   keyboard;
   camera_x = 0;
   throwableObjects = [];
+  enemyArray = [new Chicken(),new Chicken(),new Chicken(),new Chicken(),new Chicken(),new Chicken()];
 
   constructor(canvas, keyboard) {
     this.lastThrowTime = 0;
@@ -175,6 +176,14 @@ class World {
 
 
 
+  returnChickensForLevel(chickenInputNumber){
+    chickenArray = [];
+    for(let i = 0; i < chickenInputNumber; i++){
+        chickenArray.push(new Chicken());
+    }
+    chickenArray.push(new Endboss());
+    return chickenArray;
+}
 
 
 
