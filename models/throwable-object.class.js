@@ -36,6 +36,9 @@ class ThrowableObject extends MoveableObject{
         this.y = y;
         this.throw();
         this.animate();
+
+
+        
         
     }
 
@@ -67,15 +70,12 @@ class ThrowableObject extends MoveableObject{
                     ///animation zu ende spielen! 
                     if(!(enemy instanceof Endboss))
                     {enemy.isAlive = false;}
-                    
                     this.isBroken = true;
                     counter++;
                     this.playAnimation(this.IMAGES_SPLASH);
                     this.speedY = 0;
                     this.speed = 0;
                     this.acceleration = 0;
-                    // this.y += 100;
-
                     // Clear the throw interval when the condition is met
                     if (this.throwInterval !== null) {
                         clearInterval(this.throwInterval);

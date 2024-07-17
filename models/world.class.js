@@ -12,6 +12,8 @@ class World {
   constructor(canvas, keyboard) {
     this.lastThrowTime = 0;
     this.throwCooldown = 500; // Cooldown period in milliseconds
+    this.lastBrokenBottleTime = 0;
+    this.WaitBeforeDespawnTime = 1800;
 
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
@@ -33,16 +35,26 @@ class World {
   }
 
   checkThrowObjects() {
+
     const currentTime = Date.now();
     if (this.keyboard.D || this.keyboard.DOWN) {
       if (currentTime - this.lastThrowTime >= this.throwCooldown) {
         let bottle = new ThrowableObject(this.character.x + 30, this.character.y + 50);
         this.throwableObjects.push(bottle);
         this.lastThrowTime = currentTime;
-        // this.keyboard.D = false;
-        // this.keyboard.DOWN = false;
       }
     }
+
+    if(currentTime - this.lastThrowTime >= this.WaitBeforeDespawnTime){
+      this.despawnBrokenBottles();
+    }
+
+
+
+  }
+
+  despawnBrokenBottles(){
+    this.throwableObjects = this.throwableObjects.filter((bottle) => !bottle.isBroken);
   }
 
   checkCollisions() {
