@@ -5,6 +5,8 @@ class ThrowableObject extends MoveableObject{
     height= 100;
     isBroken = false;
 
+    firstAnimationRound = true;
+
     offset = {
         top: 15,
         bottom: 15,
@@ -60,7 +62,9 @@ class ThrowableObject extends MoveableObject{
                 }
 
                world.level.enemies.forEach((enemy) => {
-                if(this.isColliding(enemy) && counter < 6 && enemy.isAlive && !this.isBroken){
+                if(this.isColliding(enemy) && counter < 6){
+                    if(this.firstAnimationRound){counter = 0};
+                    this.firstAnimationRound = false;
                     if(counter == 0){this.currentImage = 0;}
                    
                     if(!(enemy instanceof Endboss))
@@ -69,9 +73,10 @@ class ThrowableObject extends MoveableObject{
                     if((enemy instanceof Endboss) && !this.isBroken){
                         enemy.energy -= 20;
                     }
-
-                    this.isBroken = true;
                     counter++;
+                    
+                        this.isBroken = true;
+                   
                     this.playAnimation(this.IMAGES_SPLASH);
                     this.speedY = 0;
                     this.speed = 0;
