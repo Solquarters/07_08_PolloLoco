@@ -9,13 +9,11 @@ class World {
   camera_x = 0;
   throwableObjects = [];
 
-
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
     this.draw();
-
     this.setWorld();
     this.run();
   }
@@ -28,16 +26,15 @@ class World {
     setInterval(() => {
       this.checkCollisions();
       this.checkThrowObjects();
-    }, 200);
+    }, 50);
   }
 
   checkThrowObjects() {
     if (this.keyboard.D || this.keyboard.DOWN) {
-      let bottle = new ThrowableObject(
-        this.character.x + 30,
-        this.character.y + 50
-      );
+      let bottle = new ThrowableObject(this.character.x + 30,this.character.y + 50);
       this.throwableObjects.push(bottle);
+      this.keyboard.D = false;
+      this.keyboard.DOWN = false;
     }
   }
 
@@ -48,17 +45,12 @@ class World {
         enemy.isAlive = false;
         this.character.speedY =  20;
       }
-
       if (this.character.isColliding(enemy) && enemy.isAlive) {
         this.character.hit();
         //console.log(this.character.energy);
         this.statusBar.setPercentage(this.character.energy);
       }
-
-
-      
     });
-
     // Check for collisions with items and remove collided items
     for (let i = 0; i < this.level.items.length; i++) {
       let item = this.level.items[i];
@@ -72,39 +64,13 @@ class World {
     }
   }
 
-/////////////////////Collision from above start
-// checkCollisionFromAbove(player, enemy) {
-//   let playerBottom = player.y + player.height - player.offset.bottom;
-//   let playerNextBottom = playerBottom + player.speedY;
-
-//   let playerLeft = player.x + player.offset.left;
-//   let playerRight = player.x + player.width - player.offset.right;
-
-//   let enemyTop = enemy.y + enemy.offset.top;
-//   let enemyLeft = enemy.x + enemy.offset.left;
-//   let enemyRight = enemy.x + enemy.width - enemy.offset.right;
-
-//   if((enemyLeft < playerLeft && playerLeft < enemyRight) ||
-//       (enemyLeft < playerRight && playerRight < enemyRight) &&
-//     (playerBottom < enemyTop ) && (playerNextBottom > enemyTop) && player.speedY < 0){
-//       return true;
-//   }
-//   return false;
-// }
-/////////////////////Collision from above END
-
-
-
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.ctx.translate(this.camera_x, 0);
 
-
-
     ///////////an stelle der alten statischen Background Funktion
     // this.addObjectsToMap(this.level.backgroundObjects);
-
     //////////////HIER PARALLAX START
      // Draw background layers with different speed factors
      this.level.backgroundObjects.forEach(bgObject => {
@@ -137,14 +103,6 @@ class World {
 
     //////////////
     this.addObjectsToMap(this.level.enemies);
-
-  //   this.level.enemies.forEach(enemy => {
-  //     this.ctx.save();
-  //     this.ctx.translate(-this.camera_x * 0.1, 0);
-  //     this.addToMap(enemy);
-  //     this.ctx.restore();
-  // });
-  //////////////////
 
     this.addObjectsToMap(this.throwableObjects);
 

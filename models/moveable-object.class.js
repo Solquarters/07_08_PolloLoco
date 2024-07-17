@@ -36,7 +36,6 @@ class MoveableObject extends DrawableObject {
         }
     }
 
-
 ///colliding with offsets:
 isColliding(moveableObject) {
     let thisLeft = this.x + this.offset.left;
@@ -61,23 +60,10 @@ isColliding(moveableObject) {
 }
 
 checkCollisionFromAbove(player, enemy) {
-    let playerBottom = player.y + player.height - player.offset.bottom -player.offset.top;
-    let playerNextBottom = playerBottom + player.speedY;
-  
-    let playerLeft = player.x + player.offset.left;
-    let playerRight = player.x + player.width - player.offset.right;
-  
-    let enemyTop = enemy.y + enemy.offset.top;
-    let enemyLeft = enemy.x + enemy.offset.left;
-    let enemyRight = enemy.x + enemy.width - enemy.offset.right;
-  
-    if((enemyLeft < playerLeft && playerLeft < enemyRight) ||
-        (enemyLeft < playerRight && playerRight < enemyRight) &&
-      (playerBottom < enemyTop ) && (playerNextBottom > enemyTop)){
 
-        if(player.isAboveGround() && player.speedY < 0 ){
-            return true;
-        }
+
+    if(player.isColliding(enemy) && player.isAboveGround() && player.speedY < 0){
+        return true;
     }
     return false;
 
