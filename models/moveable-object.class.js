@@ -71,7 +71,7 @@ checkCollisionFromAbove(player, enemy) {
 
 
 hit(){
-    this.energy -= 5;
+    this.energy -= 1;
     document.getElementById('lifeDivId').style.width = `${this.energy}%`;
     lastInputTimer = new Date().getTime();
 

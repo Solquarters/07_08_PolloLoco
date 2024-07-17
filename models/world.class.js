@@ -10,6 +10,9 @@ class World {
   throwableObjects = [];
 
   constructor(canvas, keyboard) {
+    this.lastThrowTime = 0;
+    this.throwCooldown = 500; // Cooldown period in milliseconds
+
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
     this.keyboard = keyboard;
@@ -30,18 +33,22 @@ class World {
   }
 
   checkThrowObjects() {
+    const currentTime = Date.now();
     if (this.keyboard.D || this.keyboard.DOWN) {
-      let bottle = new ThrowableObject(this.character.x + 30,this.character.y + 50);
-      this.throwableObjects.push(bottle);
-      this.keyboard.D = false;
-      this.keyboard.DOWN = false;
+      if (currentTime - this.lastThrowTime >= this.throwCooldown) {
+        let bottle = new ThrowableObject(this.character.x + 30, this.character.y + 50);
+        this.throwableObjects.push(bottle);
+        this.lastThrowTime = currentTime;
+        // this.keyboard.D = false;
+        // this.keyboard.DOWN = false;
+      }
     }
   }
 
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       //////Collision from above
-      if(this.character.checkCollisionFromAbove(this.character, enemy) && enemy.isAlive){
+      if(this.character.checkCollisionFromAbove(this.character, enemy) && enemy.isAlive && !(enemy instanceof Endboss) ){
         enemy.isAlive = false;
         this.character.speedY =  20;
       }

@@ -42,12 +42,9 @@ class ThrowableObject extends MoveableObject{
     animate(){
         let counter = 0;
         setInterval(() =>{
-           
                 if(this.y < 360 && !this.isBroken){
                     this.playAnimation(this.IMAGES_ROTATION);
                 }
-                
-            
                 if(this.y >= 360 && counter < 5){
                     if(counter == 0){this.currentImage = 0;}
                     this.isBroken = true;
@@ -64,19 +61,20 @@ class ThrowableObject extends MoveableObject{
                 }
 
                world.level.enemies.forEach((enemy) => {
-                   
-                if(this.isColliding(enemy) && counter < 5 && enemy.isAlive && !this.isBroken){
+                if(this.isColliding(enemy) && counter < 5 && enemy.isAlive ){
                     if(counter == 0){this.currentImage = 0;}
-                    enemy.isAlive = false;
+                    ////Bei Collision mit Boss: flasche etwas weiterbewegen
+                    ///animation zu ende spielen! 
+                    if(!(enemy instanceof Endboss))
+                    {enemy.isAlive = false;}
+                    
                     this.isBroken = true;
                     counter++;
                     this.playAnimation(this.IMAGES_SPLASH);
                     this.speedY = 0;
                     this.speed = 0;
                     this.acceleration = 0;
-                    this.y += 100;
-
-                    
+                    // this.y += 100;
 
                     // Clear the throw interval when the condition is met
                     if (this.throwInterval !== null) {
@@ -84,16 +82,9 @@ class ThrowableObject extends MoveableObject{
                         this.throwInterval = null; // Reset the reference
                     }
                 }
-                    
                   });
-
-                
-
-            
         }, 1000/16)
     }
-
-
 
     throw(){
         this.speedY = 40;
@@ -103,7 +94,4 @@ class ThrowableObject extends MoveableObject{
         }, 20);
 
     }
-
-
-
 }
