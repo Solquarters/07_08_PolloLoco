@@ -90,21 +90,26 @@ class Endboss extends MoveableObject {
 
         this.lastJumpTimer = new Date().getTime();
 
-        setInterval(() => {
-
+        setTimeout(() => {
+        setStoppableInterval(() => {
             if(this.isDead()){
                 if(this.deadAnimationFrame == 0){this.currentImage = 0;}
-                if(this.deadAnimationFrame == this.IMAGES_DEAD.length-1){this.y = 100; return;}
+                if(this.deadAnimationFrame == this.IMAGES_DEAD.length-1)
+                {this.y = 100; 
+                setTimeout(() =>{stopGame()}, 400);
+                return;
+                }
                     
                 this.deadAnimationFrame++;
                 this.playAnimation(this.IMAGES_DEAD);
+                document.getElementById('bossBarDivId').style.display = "none";
                 return;
             }    
             if(this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);
                 return;
             }
-            if(this.x - this.world.character.x <= 280 || this.energy < 100){
+            if(this.x - this.world.character.x <= 320 || this.energy < 100){
                 this.isTriggered = true;
                 document.getElementById('bossBarDivId').style.display = "block";
             }else{this.isTriggered = false;}
@@ -124,11 +129,12 @@ class Endboss extends MoveableObject {
                 this.playAnimation(this.IMAGES_ATTACKING);
                 this.moveRight();
             }
-
         }, 1000/8);
+    }, 150);
 
 
-        setInterval(() => { 
+        setTimeout(() => {
+        setStoppableInterval(() => { 
             if(this.isTriggered && this.world.character.x <= this.x && !this.isDead()){
                 this.moveLeft();
                 
@@ -154,6 +160,7 @@ class Endboss extends MoveableObject {
 
 
         }, 1000/60);
+    }, 150);
     }
 }
 

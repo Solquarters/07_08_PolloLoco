@@ -67,5 +67,6 @@ function setStoppableInterval(fn, time) {
 
 function stopGame(){
   intervalIds.forEach(clearInterval);
+  document.getElementById('gameStopOverlayId').style.display = "flex";
 }
 

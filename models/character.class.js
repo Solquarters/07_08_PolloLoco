@@ -154,7 +154,8 @@ class Character extends MoveableObject{
     }
 
     animate(){
-        setInterval(() =>{
+        
+        setStoppableInterval(() =>{
             this.walking_sound.pause();
 
             if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){
@@ -184,7 +185,7 @@ class Character extends MoveableObject{
         }, 1000/60)
 
 
-        setInterval(() => {
+        setStoppableInterval(() => {
             if(this.isDead() && (this.deadAnimationFrame < 12)){
                 if(this.deadAnimationFrame == 0){
                     this.currentImage = 0;
@@ -194,6 +195,7 @@ class Character extends MoveableObject{
                 if(this.deadAnimationFrame ==12){
                 ////HIER BLOCK ALL MOVEMENT UND PLAY AGAIN SCREEN
                 ///Block sleep idle
+                stopGame();
                 }
                 return;
             }

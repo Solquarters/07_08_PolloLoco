@@ -33,7 +33,7 @@ class Chicken extends MoveableObject{
     animate(){
 
         setTimeout(() => {
-        setInterval(() =>{
+            setStoppableInterval(() =>{
             
             // console.log(this.world.character.x);
             // console.log(world.character.x);
@@ -49,9 +49,10 @@ class Chicken extends MoveableObject{
 
            
         }, 1000/60);
-    }, 100);
+    }, 150);
 
-        setInterval(() => {
+    setTimeout(() => {
+        setStoppableInterval(() => {
             if(this.isAlive){
                 this.playAnimation(this.IMAGES_WALKING);
             }
@@ -59,7 +60,7 @@ class Chicken extends MoveableObject{
                 this.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
             }
            
-        }, 180 - (this.speed*40));
-    
+        }, 140);
+    }, 150);
     }
 }

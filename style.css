@@ -64,6 +64,26 @@ canvas {
     transition: width 100ms ease;
 }
 
+.endScreenDivClass{
+    position: absolute;
+    top:0;
+    right:0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.688);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.endScreenContentDivClass{
+    
+    width: 80%;
+    height: 80%;
+    background-color: #994509;
+    border-radius: 16px;
+}
 
 
 @media only screen and (min-width: 1201px){

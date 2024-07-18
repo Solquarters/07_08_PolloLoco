@@ -36,7 +36,7 @@ class World {
   }
 
   run() {
-    setInterval(() => {
+    setStoppableInterval(() => {
       this.checkCollisions();
       this.checkThrowObjects();
     }, 50);
@@ -83,7 +83,8 @@ class World {
       if (this.character.isColliding(enemy) && enemy.isAlive) {
         this.character.hit();
         //console.log(this.character.energy);
-        this.statusBar.setPercentage(this.character.energy);
+        // this.statusBar.setPercentage(this.character.energy);
+        
       }
     });
     // Check for collisions with items and remove collided items
@@ -142,13 +143,14 @@ class World {
     this.ctx.translate(this.camera_x, 0);
     //SPACE FOR FIXED OBJECTS ON THE CANVAS /// END
 
-    this.addToMap(this.character);
+    
 
     //////////////
     this.addObjectsToMap(this.level.enemies);
 
     this.addObjectsToMap(this.throwableObjects);
 
+    this.addToMap(this.character);
     this.ctx.translate(-this.camera_x, 0);
 
     ////Wird asynchron ausgeführt , nachdem alle Objecte oberhalb gerendert wurden.

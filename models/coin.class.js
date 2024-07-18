@@ -21,19 +21,13 @@ class Coin extends MoveableObject {
         this.frequency = 1; // Frequency of the sine wave
     }
 
-
     animate(){
-        setInterval(() =>{
-
+    setTimeout(() => {
+        setStoppableInterval(() =>{
         this.time += 0.1; // Increment time to create continuous movement
         this.y =  this.y + this.amplitude * Math.sin(this.frequency * this.time);
+        }, 1000/20)
+    }, 150);
 
-
-    }, 1000/20)
     }
-
-
-
-
-
 }
