@@ -76,7 +76,8 @@ class ThrowableObject extends MoveableObject{
                         }
                     }
 
-                    if(enemy.isAlive){
+                    /////Wie collision verhindern, wenn Enemy bereits tot ist ? 
+                    if(enemy.isAlive || counter < 6){
                         counter++;
                         this.isBroken = true;
                         this.playAnimation(this.IMAGES_SPLASH);
