@@ -88,16 +88,16 @@ class Character extends MoveableObject{
     ];
 
     IMAGES_JUMPING = [
+        
         'img/2_character_pepe/3_jump/J-31.png',
         'img/2_character_pepe/3_jump/J-31.png',
-        'img/2_character_pepe/3_jump/J-31.png',
+        
         'img/2_character_pepe/3_jump/J-32.png',
         'img/2_character_pepe/3_jump/J-32.png',
-        'img/2_character_pepe/3_jump/J-32.png',
+        
         'img/2_character_pepe/3_jump/J-33.png',
         'img/2_character_pepe/3_jump/J-33.png',
-        'img/2_character_pepe/3_jump/J-33.png',
-        'img/2_character_pepe/3_jump/J-34.png',
+        
         'img/2_character_pepe/3_jump/J-34.png',
         'img/2_character_pepe/3_jump/J-34.png',
         'img/2_character_pepe/3_jump/J-35.png',
@@ -165,7 +165,7 @@ class Character extends MoveableObject{
                 }
             }
 
-            if(this.world.keyboard.LEFT && this.x > 100 ){
+            if(this.world.keyboard.LEFT && this.x > 120 ){
                this.moveLeft();
                this.otherDirection = true;
                 if(!this.isAboveGround()){

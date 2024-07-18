@@ -34,7 +34,7 @@ class DrawableObject {
         ctx.rect(this.x +this.offset.right,this.y + this.offset.top,this.width -this.offset.right -this.offset.left,this.height-this.offset.top- this.offset.bottom);
         ctx.stroke();
         }
-        if(this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject){
+        if(this instanceof Character || this instanceof Chicken || this instanceof ThrowableObject ){
                 ctx.beginPath();
                 ctx.lineWidth = '2';
                 ctx.strokeStyle= 'blue';

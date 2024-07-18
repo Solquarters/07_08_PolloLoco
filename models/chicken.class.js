@@ -31,11 +31,12 @@ class Chicken extends MoveableObject{
 
 
     animate(){
+
+        setTimeout(() => {
         setInterval(() =>{
             
             // console.log(this.world.character.x);
             // console.log(world.character.x);
-
             if(this.isAlive && this.world.character.x < this.x){
                 this.moveLeft();
                 this.otherDirection = false;
@@ -46,16 +47,9 @@ class Chicken extends MoveableObject{
                 this.otherDirection = true;
             }
 
-              // if(this.isAlive ){
-            //     this.moveLeft();
-            // }
-            // else{
-            //     this.speed = 0;
-            // }
-
            
         }, 1000/60);
-        
+    }, 100);
 
         setInterval(() => {
             if(this.isAlive){

@@ -31,8 +31,11 @@ class MoveableObject extends DrawableObject {
 
     isAboveGround(){
         if(this instanceof ThrowableObject){return true;}
-        else{
+        else if(!(this instanceof Endboss)){
             return this.y < 170;
+        }
+        else if((this instanceof Endboss)){
+            return this.y < 50;
         }
     }
 
@@ -60,13 +63,11 @@ isColliding(moveableObject) {
 }
 
 checkCollisionFromAbove(player, enemy) {
-
-
     if(player.isColliding(enemy) && player.isAboveGround() && player.speedY < 0){
+        player.currentImage = 5;
         return true;
     }
     return false;
-
   }
 
 
@@ -78,10 +79,7 @@ hit(){
     }
     
     if(this instanceof Endboss){
-        // this.energy -= 20;
-        // console.log('Boss HP: ',this.energy )
-        //HIER STATUS BAR VON BOSS EDITIEREN
-        // document.getElementById('lifeDivId').style.width = `${this.energy}%`;
+
     }
     
 
@@ -113,7 +111,7 @@ isDead(){
         this.currentImage = 0; 
         this.justDied = false;
     }
-    return this.energy == 0;
+    return this.energy <= 0;
 }
 
 

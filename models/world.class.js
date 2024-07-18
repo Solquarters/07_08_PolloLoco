@@ -68,7 +68,9 @@ class World {
       //////Collision from above
       if(this.character.checkCollisionFromAbove(this.character, enemy) && enemy.isAlive && !(enemy instanceof Endboss) ){
         enemy.isAlive = false;
-        this.character.speedY =  20;
+        this.character.speedY =  35;
+
+        ////PLAY JUMP ANIM GEHT NICHT
       }
       if (this.character.isColliding(enemy) && enemy.isAlive) {
         this.character.hit();

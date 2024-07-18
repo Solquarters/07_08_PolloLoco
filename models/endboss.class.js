@@ -1,14 +1,18 @@
 class Endboss extends MoveableObject {
     // world;
     // x = 4600;
+    isAlive = true;
     x = 600;
     y = 50;
     height=420;
     width=280;
     isAlive = true;
-    speed = 8;
+    speed = 3;
     isTriggered = false;
     deadAnimationFrame = 0;
+
+    lastJumpTimer = 0;
+    newTimeAfterJump = 0;
 
     oldEnergy = 100;
 
@@ -67,16 +71,26 @@ class Endboss extends MoveableObject {
         this.loadImages(this.IMAGES_ATTACKING);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
+
+        this.applyGravity();
         this.animate();
        
     }
 
+    jump(){
+        this.speedY = 25 + Math.random() * (20); 
+        this.x = this.x + (Math.random()* 70);
+        }
+
+     
+
     animate(){
+        //added little delay before accessing character attributes to catch access error
+
+        this.lastJumpTimer = new Date().getTime();
+
         setInterval(() => {
 
-
-            // console.log(world.character.x);
-            //  console.log(this.world.character.x);
             if(this.isDead()){
                 if(this.deadAnimationFrame == 0){this.currentImage = 0;}
                 if(this.deadAnimationFrame == this.IMAGES_DEAD.length-1){this.y = 100; return;}
@@ -100,32 +114,41 @@ class Endboss extends MoveableObject {
             if(this.isTriggered && this.world.character.x < this.x){
                 this.otherDirection = false;
                 this.playAnimation(this.IMAGES_ATTACKING);
-                this.moveLeft();
+                // this.moveLeft();
             }
 
-            if(this.isTriggered && this.world.character.x > this.x){
+            if(this.isTriggered && this.world.character.x >= this.x){
                 this.otherDirection = true;
                 this.playAnimation(this.IMAGES_ATTACKING);
                 this.moveRight();
             }
 
-
-
-
-
-
-
-            //&& currentTime - lastHitTime < playHitAnimationTime
-            ////Wo triggere ich die Zeitmessung nach dem Hit ?  
-            // if(this.oldEnergy > this.energy ){
-            //     this.playAnimation(this.IMAGES_HURT);
-            //     this.oldEnergy = this.energy;
-            // }
-
         }, 1000/8);
 
 
         setInterval(() => { 
+            if(this.isTriggered && this.world.character.x <= this.x && !this.isDead()){
+                this.moveLeft();
+                
+                this.newTimeAfterJump = new Date().getTime();
+
+                if(this.newTimeAfterJump - this.lastJumpTimer > 1600){
+                    this.jump();
+                    this.newTimeAfterJump = new Date().getTime();
+                    this.lastJumpTimer = new Date().getTime();
+                }
+            }
+            if(this.isTriggered && this.world.character.x > this.x && !this.isDead()){
+                this.moveRight();
+                this.newTimeAfterJump = new Date().getTime();
+
+                if(this.newTimeAfterJump - this.lastJumpTimer > 1600){
+                    this.jump();
+                    this.newTimeAfterJump = new Date().getTime();
+                    this.lastJumpTimer = new Date().getTime();
+                }
+            }
+
 
 
         }, 1000/60);
