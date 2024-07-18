@@ -77,7 +77,7 @@ checkCollisionFromAbove(player, enemy) {
 hit(){
 
     if(this instanceof Character){
-        this.energy -= 1;
+        this.energy -= 2;
         document.getElementById('lifeDivId').style.width = `${this.energy}%`;
     }
     

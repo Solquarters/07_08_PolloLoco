@@ -1,6 +1,13 @@
 class Bottle extends MoveableObject {
     time;
 
+    offset = {
+        top: 10,
+        bottom: 5,
+        left: 20,
+        right: 20,
+    }
+
     constructor(){
         super();
         if (Math.random() < 0.5) {

@@ -17,8 +17,8 @@ class Character extends MoveableObject{
     offset = {
         top: 100,
         bottom: 10,
-        left: 25,
-        right: 15,
+        left: 28,
+        right: 20,
     }
     
     IMAGES_IDLE = [
@@ -196,6 +196,7 @@ class Character extends MoveableObject{
                 ////HIER BLOCK ALL MOVEMENT UND PLAY AGAIN SCREEN
                 ///Block sleep idle
                 stopGame();
+                document.getElementById('gameLostOverlayDivId').style.display = "flex";
                 }
                 return;
             }

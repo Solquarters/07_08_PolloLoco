@@ -96,7 +96,11 @@ class Endboss extends MoveableObject {
                 if(this.deadAnimationFrame == 0){this.currentImage = 0;}
                 if(this.deadAnimationFrame == this.IMAGES_DEAD.length-1)
                 {this.y = 100; 
-                setTimeout(() =>{stopGame()}, 400);
+                setTimeout(() =>{
+                    stopGame();
+                    document.getElementById('gameWonOverlayDivId').style.display = "flex";
+
+                }, 400);
                 return;
                 }
                     

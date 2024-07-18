@@ -29,8 +29,17 @@
 
         <div class="endScreenDivClass" id="gameStopOverlayId" style="display: none;">
 
-            <div class="endScreenContentDivClass" id="gameWonOverlayDivId"></div>
-            <!-- <div class="endScreenContentDivClass" id="gameLostOverlayDivId"></div> -->
+            <div class="endScreenContentDivClass" id="gameWonOverlayDivId" style="display: none;">
+                <span>¡Asombroso!</span>
+                <span>! YOU WON !</span><br>
+                <button onclick=" location.reload()">Restart Game</button>
+            </div>
+
+            <div class="endScreenContentDivClass" id="gameLostOverlayDivId" style="display: none;">
+                <span>¡ Ay, caramba !</span>
+                <span>YOU LOST</span><br>
+                <button onclick=" location.reload()">Restart Game</button>
+            </div>
 
         </div>
         

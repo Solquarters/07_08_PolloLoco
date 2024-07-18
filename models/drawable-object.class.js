@@ -27,7 +27,7 @@ class DrawableObject {
 
     //draw frame with offsets in mind
     drawFrame(ctx){
-        if(this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof ThrowableObject){
+        if(this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof ThrowableObject || this instanceof Coin  || this instanceof Bottle ){
         ctx.beginPath();
         ctx.lineWidth = '2';
         ctx.strokeStyle= 'red';
