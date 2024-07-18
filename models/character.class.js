@@ -180,7 +180,7 @@ class Character extends MoveableObject{
                 
             }
 
-            this.world.camera_x = -this.x +100;
+            this.world.camera_x = -this.x +120;
         }, 1000/60)
 
 
@@ -191,9 +191,6 @@ class Character extends MoveableObject{
                 }
                 this.playAnimation(this.IMAGES_DEAD);
                 this.deadAnimationFrame++;
-
-                
-
                 if(this.deadAnimationFrame ==12){
                 ////HIER BLOCK ALL MOVEMENT UND PLAY AGAIN SCREEN
                 ///Block sleep idle
@@ -214,7 +211,6 @@ class Character extends MoveableObject{
 
             let timePassed = new Date().getTime() - lastInputTimer;
             
-
             if((timePassed/1000) > 4){
                 this.playAnimation(this.IMAGES_IDLE_LONG);
             }

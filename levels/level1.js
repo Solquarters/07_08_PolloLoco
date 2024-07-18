@@ -43,6 +43,6 @@ let level1 = new Level(
     returnChickensForLevel(20), 
     
     [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()],
-    returnLevelBackgroundArray(6),
+    returnLevelBackgroundArray(7),
     returnCoinsForLevel(12)
 );

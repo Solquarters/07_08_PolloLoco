@@ -71,8 +71,21 @@ checkCollisionFromAbove(player, enemy) {
 
 
 hit(){
-    this.energy -= 1;
-    document.getElementById('lifeDivId').style.width = `${this.energy}%`;
+
+    if(this instanceof Character){
+        this.energy -= 1;
+        document.getElementById('lifeDivId').style.width = `${this.energy}%`;
+    }
+    
+    if(this instanceof Endboss){
+        // this.energy -= 20;
+        // console.log('Boss HP: ',this.energy )
+        //HIER STATUS BAR VON BOSS EDITIEREN
+        // document.getElementById('lifeDivId').style.width = `${this.energy}%`;
+    }
+    
+
+
     lastInputTimer = new Date().getTime();
 
     if(this.energy < 0){

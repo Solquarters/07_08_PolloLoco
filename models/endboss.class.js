@@ -6,13 +6,14 @@ class Endboss extends MoveableObject {
     height=420;
     width=280;
     isAlive = true;
-
+    speed = 8;
     isTriggered = false;
+    deadAnimationFrame = 0;
 
     oldEnergy = 100;
 
     offset = {
-        top: 170,
+        top: 120,
         bottom: 40,
         left: 80,
         right: 60,
@@ -48,6 +49,16 @@ class Endboss extends MoveableObject {
     
     ];
 
+    IMAGES_DEAD = [
+        './img/4_enemie_boss_chicken/5_dead/G24.png',
+        './img/4_enemie_boss_chicken/5_dead/G24.png',
+        './img/4_enemie_boss_chicken/5_dead/G25.png',
+        './img/4_enemie_boss_chicken/5_dead/G25.png',
+        './img/4_enemie_boss_chicken/5_dead/G26.png',
+        './img/4_enemie_boss_chicken/5_dead/G26.png',
+
+    ];
+
     currentImage = 0;
    
     constructor(){
@@ -55,6 +66,7 @@ class Endboss extends MoveableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ATTACKING);
         this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_DEAD);
         this.animate();
        
     }
@@ -65,26 +77,58 @@ class Endboss extends MoveableObject {
 
             // console.log(world.character.x);
             //  console.log(this.world.character.x);
-
-            if(world.character.x > 350 || this.energy < 100){
+            if(this.isDead()){
+                if(this.deadAnimationFrame == 0){this.currentImage = 0;}
+                if(this.deadAnimationFrame == this.IMAGES_DEAD.length-1){this.y = 100; return;}
+                    
+                this.deadAnimationFrame++;
+                this.playAnimation(this.IMAGES_DEAD);
+                return;
+            }    
+            if(this.isHurt()){
+                this.playAnimation(this.IMAGES_HURT);
+                return;
+            }
+            if(this.world.character.x > 350 || this.energy < 100){
                 this.isTriggered = true;
             }else{this.isTriggered = false;}
 
+            if(!this.isTriggered){
+                this.playAnimation(this.IMAGES_WALKING);
+                }
+
+            if(this.isTriggered && this.world.character.x < this.x){
+                this.otherDirection = false;
+                this.playAnimation(this.IMAGES_ATTACKING);
+                this.moveLeft();
+            }
+
+            if(this.isTriggered && this.world.character.x > this.x){
+                this.otherDirection = true;
+                this.playAnimation(this.IMAGES_ATTACKING);
+                this.moveRight();
+            }
+
+
+
+
+
+
+
             //&& currentTime - lastHitTime < playHitAnimationTime
             ////Wo triggere ich die Zeitmessung nach dem Hit ?  
-            if(this.oldEnergy > this.energy ){
-                this.playAnimation(this.IMAGES_HURT);
-                this.oldEnergy = this.energy;
-            }
+            // if(this.oldEnergy > this.energy ){
+            //     this.playAnimation(this.IMAGES_HURT);
+            //     this.oldEnergy = this.energy;
+            // }
 
-            if(!this.isTriggered){
-            this.playAnimation(this.IMAGES_WALKING);
-            }
+        }, 1000/8);
 
-            if(this.isTriggered){
-                this.playAnimation(this.IMAGES_ATTACKING);
-            }
-        }, 180);
+
+        setInterval(() => { 
+
+
+        }, 1000/60);
     }
 }
 

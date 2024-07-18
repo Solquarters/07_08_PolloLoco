@@ -73,9 +73,10 @@ class ThrowableObject extends MoveableObject{
 
                     if((enemy instanceof Endboss) && !this.isBroken){
                         enemy.energy -= 20;
+                        enemy.hit();
+                        console.log('Boss HP: ',enemy.energy )
                     }
                     counter++;
-                    
                         this.isBroken = true;
                    
                     this.playAnimation(this.IMAGES_SPLASH);
