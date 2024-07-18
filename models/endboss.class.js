@@ -1,8 +1,9 @@
 class Endboss extends MoveableObject {
-    // world;
-    // x = 4600;
+   
+    x = 7800;
+    
     isAlive = true;
-    x = 600;
+   
     y = 50;
     height=420;
     width=280;
@@ -103,8 +104,9 @@ class Endboss extends MoveableObject {
                 this.playAnimation(this.IMAGES_HURT);
                 return;
             }
-            if(this.world.character.x > 350 || this.energy < 100){
+            if(this.world.character.x > 7480 || this.energy < 100){
                 this.isTriggered = true;
+                document.getElementById('bossBarDivId').style.display = "block";
             }else{this.isTriggered = false;}
 
             if(!this.isTriggered){

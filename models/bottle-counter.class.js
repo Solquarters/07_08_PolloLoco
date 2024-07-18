@@ -1,16 +1,16 @@
-class Coincounter extends DrawableObject {
-    coinCount = 0;
-    // img = url('img/8_coin/coin_1.png');
+class Bottlecounter extends DrawableObject {
+    bottleCount = 3;
+    // img = url('./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
 
     // percentage = 100;
 
     constructor(){
-        super().loadImage('./img/8_coin/coin_2.png');
+        super().loadImage('./img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png');
         // this.loadImage(this.img);
-        this.x = 530;
-        this.y = 7;
-        this.width = 80;
-        this.height = 80;
+        this.x = 620;
+        this.y = 20;
+        this.width = 50;
+        this.height = 50;
         
     }
 
@@ -30,6 +30,6 @@ class Coincounter extends DrawableObject {
         ctx.fillStyle = "white";
         
         // Draw the coin count next to the coin image
-        ctx.fillText(this.coinCount, this.x + 66, this.y + this.height / 2 +11);
+        ctx.fillText(this.bottleCount, this.x + 46, this.y + this.height-12);
     }
 }

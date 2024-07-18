@@ -1,8 +1,8 @@
 class ThrowableObject extends MoveableObject{
     speedY;
     speedX;
-    width = 100;
-    height= 100;
+    width = 80;
+    height= 80;
     isBroken = false;
     thrownAlready = false;
 
@@ -105,7 +105,7 @@ class ThrowableObject extends MoveableObject{
             
             if(!throwDirection)
                 {
-                    this.x += 14;
+                    this.x += 13;
                 }
             
 

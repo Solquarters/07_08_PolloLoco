@@ -20,12 +20,15 @@ function returnLevelBackgroundArray(levelLength){
     return backgroundArray;
 }
 
-function returnCoinsForLevel(coinInputNumber){
-    coinArray = [];
+function returnCoinsAndBottlesForLevel(coinInputNumber, bottleInputNumber){
+    let itemArray = [];
     for(let i = 0; i < coinInputNumber; i++){
-        coinArray.push(new Coin());
+        itemArray.push(new Coin());
     }
-    return coinArray;
+    for(let i = 0; i < bottleInputNumber; i++){
+        itemArray.push(new Bottle());
+    }
+    return itemArray;
 }
 
 function returnChickensForLevel(chickenInputNumber){
@@ -44,5 +47,5 @@ let level1 = new Level(
     
     [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()],
     returnLevelBackgroundArray(7),
-    returnCoinsForLevel(12)
+    returnCoinsAndBottlesForLevel(12, 30)
 );

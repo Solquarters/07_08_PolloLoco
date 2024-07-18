@@ -1,7 +1,9 @@
 class World {
   character = new Character();
   statusBar = new StatusBar();
+  // bossStatusBar = new BossStatusBar();
   coinCounter = new Coincounter();
+  bottleCounter = new Bottlecounter();
   level = level1;
   canvas;
   ctx;
@@ -44,9 +46,15 @@ class World {
 
     const currentTime = Date.now();
     if (this.keyboard.D || this.keyboard.DOWN) {
-      if (currentTime - this.lastThrowTime >= this.throwCooldown) {
+      if(world.bottleCounter.bottleCount <= 0){
+        //PLAY DRAGGY SOUND, NO BOTTLES TO THROW! 
+      }
+
+
+      if (currentTime - this.lastThrowTime >= this.throwCooldown && world.bottleCounter.bottleCount > 0) {
         let bottle = new ThrowableObject(this.character.x + 30, this.character.y + 50);
         this.throwableObjects.push(bottle);
+        world.bottleCounter.bottleCount--;
         this.lastThrowTime = currentTime;
       }
     }
@@ -84,8 +92,17 @@ class World {
       if (this.character.isColliding(item)) {
         
     this.level.items.splice(i, 1); 
-    world.coinCounter.coinCount++;
-    world.coinCounter.draw(ctx);
+
+    if(item instanceof Coin){
+      world.coinCounter.coinCount++;
+      world.coinCounter.draw(ctx);
+    }
+    if(item instanceof Bottle){
+      
+      world.bottleCounter.bottleCount++;
+      world.bottleCounter.draw(ctx);
+    }
+    
       }
     }
   }
@@ -118,8 +135,10 @@ class World {
     ///Was genau passiert hier ,damit die Status Bar an der selben Stelle bleibt ?
     //SPACE FOR FIXED OBJECTS ON THE CANVAS /// START
     this.ctx.translate(-this.camera_x, 0);
-    this.addToMap(this.statusBar);
+    // this.addToMap(this.statusBar);
+    // this.addToMap(this.bossStatusBar);
     this.addToMap(this.coinCounter);
+    this.addToMap(this.bottleCounter);
     this.ctx.translate(this.camera_x, 0);
     //SPACE FOR FIXED OBJECTS ON THE CANVAS /// END
 

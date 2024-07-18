@@ -32,19 +32,46 @@ canvas {
     left: 5%;
     width: 30%;
     height:4%;
-    background-color: rgb(255, 255, 255);
+    background-color: #ADD3E3;
     border-radius: 16px;
-    border: 2px solid white;
+    /* border: 2px solid #C3DAE6; */
     overflow: hidden;
 }
-
 .lifePercentDivClass{
     width: 100%;
     height: 100%;
     border-radius: 16px;
-    background-color: red;
+    background-color: #e13412;
     transition: width 100ms ease;
 }
+
+.lifeDivClass2{
+    position: absolute;
+    top: 18%;
+    right: 5%;
+    width: 30%;
+    height:4%;
+    background-color: #ADD3E3;
+    border-radius: 16px;
+    /* border: 2px solid white; */
+    overflow: hidden;
+}
+.lifePercentDivClass2{
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    background-color: #f40000;
+    transition: width 100ms ease;
+}
+
+
+
+@media only screen and (min-width: 1201px){
+    .canvas-container{
+        width: 65%;
+    }
+}
+
 
 
 @media only screen and (max-width: 1200px){
