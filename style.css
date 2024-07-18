@@ -34,7 +34,7 @@ canvas {
     height:4%;
     background-color: #ADD3E3;
     border-radius: 16px;
-    /* border: 2px solid #C3DAE6; */
+    border: 1px solid #C3DAE6;
     overflow: hidden;
 }
 .lifePercentDivClass{
@@ -53,7 +53,7 @@ canvas {
     height:4%;
     background-color: #ADD3E3;
     border-radius: 16px;
-    /* border: 2px solid white; */
+    border: 1px solid #C3DAE6;
     overflow: hidden;
 }
 .lifePercentDivClass2{
@@ -85,7 +85,7 @@ canvas {
     border-radius: 16px;
 
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
 
@@ -98,6 +98,8 @@ canvas {
 .endScreenContentDivClass button{
     width: 50%;
     height:20%;
+    position: relative;
+    top: -20px;
     background-color: #000000ae;
     font-size: 32px;
     color: #ffffff;
@@ -105,6 +107,11 @@ canvas {
     font-weight: 900;
     border-radius: 12px;
     border: 4px solid rgb(255, 255, 255);
+    cursor: pointer;
+}
+
+.endScreenContentDivClass button:hover{
+    background-color: #a1a1a1ae;
 }
 
 #gameWonOverlayDivId{
@@ -146,6 +153,10 @@ canvas {
         font-size: 54px;
         -webkit-text-stroke: 4px #000000;
     }
+
+    .endScreenContentDivClass button{
+        width: 70%;
+    }
 }
 
 
@@ -160,6 +171,11 @@ canvas {
         font-size: 40px;
         -webkit-text-stroke: 2px #000000;
     }
+
+    .endScreenContentDivClass button{
+        width: 80%;
+        height: 30%
+    }
 }
 
 @media only screen and (max-height: 480px){
@@ -169,9 +185,21 @@ canvas {
     #titleHeaderId{ display: none};
 }
 
+@media only screen and (max-width: 400px){
+    .endScreenContentDivClass button{
+        width: 80%;
+        height: 40%;
+        font-size: 24px;
+    }
+}
+
 @media only screen and (max-width: 360px){
     .endScreenContentDivClass{
         font-size: 32px;
         -webkit-text-stroke: 2px #000000;
+    }
+
+    .endScreenContentDivClass button{
+        width: 70%;
     }
 }

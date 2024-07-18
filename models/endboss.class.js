@@ -100,7 +100,7 @@ class Endboss extends MoveableObject {
                     stopGame();
                     document.getElementById('gameWonOverlayDivId').style.display = "flex";
 
-                }, 400);
+                }, 800);
                 return;
                 }
                     
