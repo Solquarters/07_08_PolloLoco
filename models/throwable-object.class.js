@@ -68,29 +68,29 @@ class ThrowableObject extends MoveableObject{
                     this.firstAnimationRound = false;
                     if(counter == 0){this.currentImage = 0;}
                    
-                    if(!(enemy instanceof Endboss))
-                    {enemy.isAlive = false;}
-
                     if((enemy instanceof Endboss) && !this.isBroken){
                         enemy.energy -= 20;
                         enemy.hit();
                         if(enemy.energy <= 0){
-                            enemy.isDead();
                             enemy.isAlive = false;
                         }
                     }
-                    counter++;
+
+                    if(enemy.isAlive){
+                        counter++;
                         this.isBroken = true;
-                   
-                    this.playAnimation(this.IMAGES_SPLASH);
-                    this.speedY = 0;
-                    this.speed = 0;
-                    this.acceleration = 0;
-                    if (this.throwInterval !== null) {
-                        clearInterval(this.throwInterval);
-                        this.throwInterval = null; 
+                        this.playAnimation(this.IMAGES_SPLASH);
+                        this.speedY = 0;
+                        this.speed = 0;
+                        this.acceleration = 0;
+                        if (this.throwInterval !== null) {
+                            clearInterval(this.throwInterval);
+                            this.throwInterval = null; 
+                        }
                     }
 
+                    if(!(enemy instanceof Endboss))
+                        {enemy.isAlive = false;}
                 }
                   });
         }, 1000/16)
