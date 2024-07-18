@@ -2,33 +2,16 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let lastInputTimer = new Date().getTime();
-
-
-
-
+let intervalIds = [];
 
 function init(){
-   
     canvas = document.getElementById('canvasId');
-
     world = new World(canvas, keyboard);
     ctx = canvas.getContext('2d');
-    
-
-    // console.log("My Character is", world.character);
-    
     setTimeout(() => {
         world.draw();
       }, "15");
-
-  
 }
-
-
-
-
-
-
 
 window.addEventListener("keydown", (event) => {
   if(event.keyCode == 39){
@@ -51,7 +34,6 @@ window.addEventListener("keydown", (event) => {
   }
   lastInputTimer = new Date().getTime();
 });
-
 
 window.addEventListener("keyup", (event) => {
 
@@ -76,10 +58,14 @@ window.addEventListener("keyup", (event) => {
   if(event.keyCode == 68){
     keyboard.D = false;
   }
-
-
-  
-  
-  
 });
+
+function setStoppableInterval(fn, time) {
+  let id = setInterval(fn, time);
+  intervalIds.push(id);
+}
+
+function stopGame(){
+  intervalIds.forEach(clearInterval);
+}
 

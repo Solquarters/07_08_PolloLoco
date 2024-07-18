@@ -104,7 +104,7 @@ class Endboss extends MoveableObject {
                 this.playAnimation(this.IMAGES_HURT);
                 return;
             }
-            if(this.world.character.x > 7480 || this.energy < 100){
+            if(this.x - this.world.character.x <= 280 || this.energy < 100){
                 this.isTriggered = true;
                 document.getElementById('bossBarDivId').style.display = "block";
             }else{this.isTriggered = false;}
