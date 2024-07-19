@@ -64,6 +64,36 @@ canvas {
     transition: width 100ms ease;
 }
 
+.startScreenMainDivClass{
+    position: absolute;
+    z-index: 11;
+    top:0;
+    right:0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./img/9_intro_outro_screens/start/startscreen_1.png');
+    background-size: cover; /* This ensures the background image covers the entire div */
+    background-position: center; /* This centers the background image */
+    background-repeat: no-repeat; /* This prevents the background image from repeating */
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+}
+.startScreenMainDivClass button{
+    width: 50%;
+    height: 16%;
+    margin: 28px 0px 0px 0px;
+    border-radius: 16px;
+    background-color: #00000023;
+    font-size: 24px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-text-stroke: 3px #F8C568;
+    font-size: 24px;
+    color: #0D9FC9;
+    border: 2px solid #F8C568 ;
+    cursor: pointer;
+}
+
 .endScreenDivClass{
     position: absolute;
     top:0;

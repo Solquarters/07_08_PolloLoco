@@ -1,73 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en" translate="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pollo Loco</title>
-    <link rel="icon" type="image/x-icon" href="./img/icons8-sombrero-48.png">
-    <link rel="stylesheet" href="./style.css">
-
-    
-    
-    
-    
-</head>
-<body onload="init()">
+    <link rel="icon" type="image/x-icon" href="./img/icons8-sombrero-48.png" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
     <h1 id="titleHeaderId">El pollo loco</h1>
 
-
     <div class="canvas-container" id="canvasContainerId">
-        <img src="./img/icons8-vollbild-30.png" alt="" id="fullscreenImgId" onclick="toggleFullscreen()">
-        <div class="mobileControlsMainDivClass" id="mobileMainDivId" style="display: none;">
+      <div class="startScreenMainDivClass" id="startScreenMainDivId">
+        <button onclick="init()">START GAME</button>
+      </div>
 
-            <div class="mobileChildContainer1Class">
-                <img src="./img/icons8-quadrat-links-50.png" alt="" id="leftArrowId">
-                <img src="./img/icons8-quadrat-rechts-50.png" alt="" id="rightArrowId">
-            </div>
-            
-            <div class="mobileChildContainer1Class">
-                <img src="./img/icons8-pfeil-nach-oben-64.png" alt="" id="jumpButtonId">
-                 <img src="./img/icons8-shoot-64.png" alt="" id="shootButtonId">
-            </div>
-            
+      <img
+        src="./img/icons8-vollbild-30.png"
+        alt=""
+        id="fullscreenImgId"
+        onclick="toggleFullscreen()"
+      />
+      <div
+        class="mobileControlsMainDivClass"
+        id="mobileMainDivId"
+        style="display: none"
+      >
+        <div class="mobileChildContainer1Class">
+          <img
+            src="./img/icons8-quadrat-links-50.png"
+            alt=""
+            id="leftArrowId"
+          />
+          <img
+            src="./img/icons8-quadrat-rechts-50.png"
+            alt=""
+            id="rightArrowId"
+          />
         </div>
 
+        <div class="mobileChildContainer1Class">
+          <img
+            src="./img/icons8-pfeil-nach-oben-64.png"
+            alt=""
+            id="jumpButtonId"
+          />
+          <img src="./img/icons8-shoot-64.png" alt="" id="shootButtonId" />
+        </div>
+      </div>
 
-        <canvas width="720px" height="480px" id="canvasId"></canvas>
+      <canvas width="720px" height="480px" id="canvasId"></canvas>
 
-        <div class="lifeDivClass" >
-            <div class="lifePercentDivClass" id="lifeDivId"></div>
+      <div class="lifeDivClass">
+        <div class="lifePercentDivClass" id="lifeDivId"></div>
+      </div>
+
+      <div class="lifeDivClass2" style="display: none" id="bossBarDivId">
+        <div class="lifePercentDivClass2" id="bossLifeDivId"></div>
+      </div>
+
+      <div
+        class="endScreenDivClass"
+        id="gameStopOverlayId"
+        style="display: none"
+      >
+        <div
+          class="endScreenContentDivClass"
+          id="gameWonOverlayDivId"
+          style="display: none"
+        >
+          <span>¡Asombroso!</span>
+          <span>! YOU WON !</span><br />
+          <button onclick=" location.reload()">Restart Game</button>
         </div>
 
-        <div class="lifeDivClass2" style="display: none;" id="bossBarDivId">
-            <div class="lifePercentDivClass2" id="bossLifeDivId"></div>
+        <div
+          class="endScreenContentDivClass"
+          id="gameLostOverlayDivId"
+          style="display: none"
+        >
+          <span>¡ Ay, caramba !</span>
+          <span>YOU LOST</span><br />
+          <button onclick=" location.reload()">Restart Game</button>
         </div>
-
-        <div class="endScreenDivClass" id="gameStopOverlayId" style="display: none;">
-
-            <div class="endScreenContentDivClass" id="gameWonOverlayDivId" style="display: none;">
-                <span>¡Asombroso!</span>
-                <span>! YOU WON !</span><br>
-                <button onclick=" location.reload()">Restart Game</button>
-            </div>
-
-            <div class="endScreenContentDivClass" id="gameLostOverlayDivId" style="display: none;">
-                <span>¡ Ay, caramba !</span>
-                <span>YOU LOST</span><br>
-                <button onclick=" location.reload()">Restart Game</button>
-            </div>
-
-        </div>
-        
+      </div>
     </div>
 
-   
-    
-
-
-
-
-    
     <script src="./models/drawable-object.class.js" defer></script>
     <script src="./models/moveable-object.class.js" defer></script>
     <script src="./models/character.class.js" defer></script>
@@ -86,5 +104,5 @@
     <script src="./levels/level1.js" defer></script>
     <script src="./models/world.class.js" defer></script>
     <script src="./js/game.js" defer></script>
-</body>
+  </body>
 </html>

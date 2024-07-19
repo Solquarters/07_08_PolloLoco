@@ -1,144 +1,133 @@
 class MoveableObject extends DrawableObject {
-    world;
-    static lastCoinX = 0; // Make lastCoinX a static property
-    static lastCloudX = 0;
-    static lastChickenX = 0;
-    static lastBottleX = 0;
+  world;
+  static lastCoinX = 0; // Make lastCoinX a static property
+  static lastCloudX = 0;
+  static lastChickenX = 0;
+  static lastBottleX = 0;
 
-    speed = 0.15;
-    otherDirection = false;
-    onCollisionCourse = true;
-    speedY = 0;
-    acceleration = 6;
-    energy = 100;
-    lastHit = 0;
-    justDied=true;
+  speed = 0.15;
+  otherDirection = false;
+  onCollisionCourse = true;
+  speedY = 0;
+  acceleration = 6;
+  energy = 100;
+  lastHit = 0;
+  justDied = true;
 
-    offset = {
-        top: 0,
-        left:0,
-        right:0,
-        bottom:0
-    }
+  offset = {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  };
 
-    applyGravity(){
-        setTimeout(() => {
-        setStoppableInterval(() =>{
-            if(this.isAboveGround() || this.speedY > 0){
-                this.y -= this.speedY;
-                this.speedY -= this.acceleration;
-            }
-        }, 1000 / 25);
+  applyGravity() {
+    setTimeout(() => {
+      setStoppableInterval(() => {
+        if (this.isAboveGround() || this.speedY > 0) {
+          this.y -= this.speedY;
+          this.speedY -= this.acceleration;
+        }
+      }, 1000 / 25);
     }, 50);
-    }
+  }
 
-    isAboveGround(){
-        if(this instanceof ThrowableObject){return true;}
-        else if(!(this instanceof Endboss)){
-            return this.y < 170;
-        }
-        else if((this instanceof Endboss)){
-            return this.y < 50;
-        }
+  isAboveGround() {
+    if (this instanceof ThrowableObject) {
+      return true;
+    } else if (!(this instanceof Endboss)) {
+      return this.y < 170;
+    } else if (this instanceof Endboss) {
+      return this.y < 50;
     }
+  }
 
-///colliding with offsets:
-isColliding(moveableObject) {
+  ///colliding with offsets:
+  isColliding(moveableObject) {
     let thisLeft = this.x + this.offset.left;
     let thisRight = this.x + this.width - this.offset.right;
     let thisTop = this.y + this.offset.top;
     let thisBottom = this.y + this.height - this.offset.bottom;
 
     let moveableLeft = moveableObject.x + moveableObject.offset.left;
-    let moveableRight = moveableObject.x + moveableObject.width - moveableObject.offset.right;
+    let moveableRight =
+      moveableObject.x + moveableObject.width - moveableObject.offset.right;
     let moveableTop = moveableObject.y + moveableObject.offset.top;
-    let moveableBottom = moveableObject.y + moveableObject.height - moveableObject.offset.bottom;
+    let moveableBottom =
+      moveableObject.y + moveableObject.height - moveableObject.offset.bottom;
 
     return (
-        (moveableLeft <= thisLeft && thisLeft <= moveableRight) ||
+      ((moveableLeft <= thisLeft && thisLeft <= moveableRight) ||
         (moveableLeft <= thisRight && thisRight <= moveableRight) ||
-        (thisLeft <= moveableLeft && moveableLeft <= thisRight)
-    ) && (
-        (moveableTop <= thisTop && thisTop <= moveableBottom) ||
+        (thisLeft <= moveableLeft && moveableLeft <= thisRight)) &&
+      ((moveableTop <= thisTop && thisTop <= moveableBottom) ||
         (moveableTop <= thisBottom && thisBottom <= moveableBottom) ||
-        (thisTop <= moveableTop && moveableTop <= thisBottom)
+        (thisTop <= moveableTop && moveableTop <= thisBottom))
     );
-}
+  }
 
-checkCollisionFromAbove(player, enemy) {
-    if(player.isColliding(enemy) && player.isAboveGround() && player.speedY < 0){
-        player.currentImage = 5;
-        return true;
+  checkCollisionFromAbove(player, enemy) {
+    if (
+      player.isColliding(enemy) &&
+      player.isAboveGround() &&
+      player.speedY < 0
+    ) {
+      player.currentImage = 5;
+      return true;
     }
     return false;
   }
 
-
-hit(){
-
-    if(this instanceof Character){
-        this.energy -= 2;
-        document.getElementById('lifeDivId').style.width = `${this.energy}%`;
+  hit() {
+    if (this instanceof Character) {
+      this.energy -= 2;
+      document.getElementById("lifeDivId").style.width = `${this.energy}%`;
     }
-    
-    if(this instanceof Endboss){
-        document.getElementById('bossLifeDivId').style.width = `${this.energy}%`;
-    }
-    
 
+    if (this instanceof Endboss) {
+      document.getElementById("bossLifeDivId").style.width = `${this.energy}%`;
+    }
 
     lastInputTimer = new Date().getTime();
 
-    if(this.energy < 0){
-        
-        this.energy = 0;
-        
+    if (this.energy < 0) {
+      this.energy = 0;
+    } else {
+      this.lastHit = new Date().getTime();
     }
-    else{
-        this.lastHit = new Date().getTime();
-    }
-}
+  }
 
-
-
-isHurt(){
+  isHurt() {
     //Difference in millisecs
     let timePassed = new Date().getTime() - this.lastHit;
-    // lastInputTimer = new Date().getTime();
     //difference in secs
     return timePassed < 400; //wehen last hit was not longer than 3 secs ago return true
-}
+  }
 
-isDead(){
-    if(this.justDied){
-        this.currentImage = 0; 
-        this.justDied = false;
+  isDead() {
+    if (this.justDied) {
+      this.currentImage = 0;
+      this.justDied = false;
     }
     return this.energy <= 0;
-}
+  }
 
-
-playAnimation(images){
+  playAnimation(images) {
     let i = this.currentImage % images.length;
-    let path =  images[i];
+    let path = images[i];
     this.img = this.imageCache[path];
     this.currentImage++;
-    }
+  }
 
-moveRight(){
+  moveRight() {
     this.x += this.speed;
-        
-        
-    }
+  }
 
-moveLeft(){
+  moveLeft() {
     this.x -= this.speed;
-    }
+  }
 
-
-
-jump(){
+  jump() {
     this.speedY = 47;
-    }
-
+  }
 }

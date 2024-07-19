@@ -3,8 +3,10 @@ class World {
   statusBar = new StatusBar();
   // bossStatusBar = new BossStatusBar();
   coinCounter = new Coincounter();
-  coin_sound = new Audio('./sounds/Pollo Loco Sound/moneysound.ogg');
-  bottle_sound = new Audio('./sounds/Pollo Loco Sound/fully_trimmed_Sound_effect-bottle_cork.mp3');
+  coin_sound = new Audio("./sounds/Pollo Loco Sound/moneysound.ogg");
+  bottle_sound = new Audio(
+    "./sounds/Pollo Loco Sound/fully_trimmed_Sound_effect-bottle_cork.mp3"
+  );
   bottleCounter = new Bottlecounter();
   level = level1;
   canvas;
@@ -12,9 +14,9 @@ class World {
   keyboard;
   camera_x = 0;
   throwableObjects = [];
-  levelAmbience = new Audio('./sounds/Pollo Loco Sound/desertAmbienceTrimmed.ogg');
-  
- 
+  levelAmbience = new Audio(
+    "./sounds/Pollo Loco Sound/desertAmbienceTrimmed.ogg"
+  );
 
   constructor(canvas, keyboard) {
     this.lastThrowTime = 0;
@@ -35,7 +37,7 @@ class World {
     this.character.world = this;
     this.level.enemies.forEach((enemy) => {
       enemy.world = this;
-      });
+    });
   }
 
   run() {
@@ -46,41 +48,47 @@ class World {
   }
 
   checkThrowObjects() {
-
     const currentTime = Date.now();
     if (this.keyboard.D || this.keyboard.DOWN) {
-      if(world.bottleCounter.bottleCount <= 0){
-        //PLAY DRAGGY SOUND, NO BOTTLES TO THROW! 
+      if (world.bottleCounter.bottleCount <= 0) {
+        //PLAY DRAGGY SOUND, NO BOTTLES TO THROW!
       }
 
-
-      if (currentTime - this.lastThrowTime >= this.throwCooldown && world.bottleCounter.bottleCount > 0) {
-        let bottle = new ThrowableObject(this.character.x + 30, this.character.y + 50);
+      if (
+        currentTime - this.lastThrowTime >= this.throwCooldown &&
+        world.bottleCounter.bottleCount > 0
+      ) {
+        let bottle = new ThrowableObject(
+          this.character.x + 30,
+          this.character.y + 50
+        );
         this.throwableObjects.push(bottle);
         world.bottleCounter.bottleCount--;
         this.lastThrowTime = currentTime;
       }
     }
 
-    if(currentTime - this.lastThrowTime >= this.WaitBeforeDespawnTime){
+    if (currentTime - this.lastThrowTime >= this.WaitBeforeDespawnTime) {
       this.despawnBrokenBottles();
     }
-
-
-
   }
 
-  despawnBrokenBottles(){
-    this.throwableObjects = this.throwableObjects.filter((bottle) => !bottle.isBroken);
+  despawnBrokenBottles() {
+    this.throwableObjects = this.throwableObjects.filter(
+      (bottle) => !bottle.isBroken
+    );
   }
 
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       //////Collision from above
-      if(this.character.checkCollisionFromAbove(this.character, enemy) && enemy.isAlive && !(enemy instanceof Endboss) ){
-
+      if (
+        this.character.checkCollisionFromAbove(this.character, enemy) &&
+        enemy.isAlive &&
+        !(enemy instanceof Endboss)
+      ) {
         enemy.isAlive = false;
-        this.character.speedY =  35;
+        this.character.speedY = 35;
 
         ////PLAY JUMP ANIM GEHT NICHT
       }
@@ -88,29 +96,27 @@ class World {
         this.character.hit();
         //console.log(this.character.energy);
         // this.statusBar.setPercentage(this.character.energy);
-        
       }
-      if(this.character.isDead())
-        { this.levelAmbience.pause();}
+      if (this.character.isDead()) {
+        this.levelAmbience.pause();
+      }
     });
     // Check for collisions with items and remove collided items
     for (let i = 0; i < this.level.items.length; i++) {
       let item = this.level.items[i];
       if (this.character.isColliding(item)) {
-        
-    this.level.items.splice(i, 1); 
+        this.level.items.splice(i, 1);
 
-    if(item instanceof Coin){
-      this.coin_sound.play();
-      world.coinCounter.coinCount++;
-      world.coinCounter.draw(ctx);
-    }
-    if(item instanceof Bottle){
-      this.bottle_sound.play();
-      world.bottleCounter.bottleCount++;
-      world.bottleCounter.draw(ctx);
-    }
-    
+        if (item instanceof Coin) {
+          this.coin_sound.play();
+          world.coinCounter.coinCount++;
+          world.coinCounter.draw(ctx);
+        }
+        if (item instanceof Bottle) {
+          this.bottle_sound.play();
+          world.bottleCounter.bottleCount++;
+          world.bottleCounter.draw(ctx);
+        }
       }
     }
   }
@@ -118,41 +124,33 @@ class World {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
-   
+
     // this.addObjectsToMap(this.level.backgroundObjects);
     ///PARALLAX START
-     // Draw background layers with different speed factors
-     this.level.backgroundObjects.forEach(bgObject => {
-        this.ctx.save();
-        this.ctx.translate(-this.camera_x * bgObject.speedFactor, 0);
-        this.addToMap(bgObject);
-        this.ctx.restore();
+    // Draw background layers with different speed factors
+    this.level.backgroundObjects.forEach((bgObject) => {
+      this.ctx.save();
+      this.ctx.translate(-this.camera_x * bgObject.speedFactor, 0);
+      this.addToMap(bgObject);
+      this.ctx.restore();
     });
-    
-    this.level.clouds.forEach(cloud => {
-        this.ctx.save();
-        this.ctx.translate(-this.camera_x * 0.98, 0);
-        this.addToMap(cloud);
-        this.ctx.restore();
+
+    this.level.clouds.forEach((cloud) => {
+      this.ctx.save();
+      this.ctx.translate(-this.camera_x * 0.98, 0);
+      this.addToMap(cloud);
+      this.ctx.restore();
     });
     ///PARALLAX END
-    // this.addObjectsToMap(this.level.clouds);
 
     this.addObjectsToMap(this.level.items);
-
-    ///Was genau passiert hier ,damit die Status Bar an der selben Stelle bleibt ?
     //SPACE FOR FIXED OBJECTS ON THE CANVAS /// START
     this.ctx.translate(-this.camera_x, 0);
-    // this.addToMap(this.statusBar);
-    // this.addToMap(this.bossStatusBar);
     this.addToMap(this.coinCounter);
     this.addToMap(this.bottleCounter);
     this.ctx.translate(this.camera_x, 0);
     //SPACE FOR FIXED OBJECTS ON THE CANVAS /// END
 
-    
-
-    //////////////
     this.addObjectsToMap(this.level.enemies);
 
     this.addObjectsToMap(this.throwableObjects);
@@ -202,15 +200,4 @@ class World {
     this.ctx.restore();
     moveableObject.x = moveableObject.x * -1;
   }
-
-
-
-
-
-
-
-
-
-
-
 }
