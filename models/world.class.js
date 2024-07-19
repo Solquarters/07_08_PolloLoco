@@ -3,6 +3,8 @@ class World {
   statusBar = new StatusBar();
   // bossStatusBar = new BossStatusBar();
   coinCounter = new Coincounter();
+  coin_sound = new Audio('./sounds/Pollo Loco Sound/moneysound.ogg');
+  bottle_sound = new Audio('./sounds/Pollo Loco Sound/fully_trimmed_Sound_effect-bottle_cork.mp3');
   bottleCounter = new Bottlecounter();
   level = level1;
   canvas;
@@ -10,7 +12,7 @@ class World {
   keyboard;
   camera_x = 0;
   throwableObjects = [];
-
+  levelAmbience = new Audio('./sounds/Pollo Loco Sound/desertAmbienceTrimmed.ogg');
   
  
 
@@ -26,6 +28,7 @@ class World {
     this.draw();
     this.setWorld();
     this.run();
+    this.levelAmbience.play();
   }
 
   setWorld() {
@@ -75,6 +78,7 @@ class World {
     this.level.enemies.forEach((enemy) => {
       //////Collision from above
       if(this.character.checkCollisionFromAbove(this.character, enemy) && enemy.isAlive && !(enemy instanceof Endboss) ){
+
         enemy.isAlive = false;
         this.character.speedY =  35;
 
@@ -86,6 +90,8 @@ class World {
         // this.statusBar.setPercentage(this.character.energy);
         
       }
+      if(this.character.isDead())
+        { this.levelAmbience.pause();}
     });
     // Check for collisions with items and remove collided items
     for (let i = 0; i < this.level.items.length; i++) {
@@ -95,11 +101,12 @@ class World {
     this.level.items.splice(i, 1); 
 
     if(item instanceof Coin){
+      this.coin_sound.play();
       world.coinCounter.coinCount++;
       world.coinCounter.draw(ctx);
     }
     if(item instanceof Bottle){
-      
+      this.bottle_sound.play();
       world.bottleCounter.bottleCount++;
       world.bottleCounter.draw(ctx);
     }

@@ -1,5 +1,8 @@
 class Endboss extends MoveableObject {
-   
+    angry_sound = new Audio('./sounds/Pollo Loco Sound/angrychicken.ogg');
+    hitBoss_sound = new Audio('./sounds/Pollo Loco Sound/bosshit.ogg');
+    bossDead_sound = new Audio('./sounds/Pollo Loco Sound/chickenfunny.ogg');
+    bossHit_sound = new Audio('./sounds/Pollo Loco Sound/bosshit.ogg');
     x = 7800;
     
     isAlive = true;
@@ -98,6 +101,7 @@ class Endboss extends MoveableObject {
                 {this.y = 100; 
                 setTimeout(() =>{
                     stopGame();
+                    this.world.levelAmbience.pause();
                     document.getElementById('gameWonOverlayDivId').style.display = "flex";
 
                 }, 800);
@@ -111,6 +115,7 @@ class Endboss extends MoveableObject {
             }    
             if(this.isHurt()){
                 this.playAnimation(this.IMAGES_HURT);
+                this.bossHit_sound.play(); 
                 return;
             }
             if(this.x - this.world.character.x <= 320 || this.energy < 100){
@@ -139,7 +144,18 @@ class Endboss extends MoveableObject {
 
         setTimeout(() => {
         setStoppableInterval(() => { 
+
+
+            if(this.x - this.world.character.x < 800 && !this.isDead()){
+                this.angry_sound.play();
+            }
+            else if(this.isDead()){
+                this.angry_sound.pause();
+                this.bossDead_sound.play();
+            }
+
             if(this.isTriggered && this.world.character.x <= this.x && !this.isDead()){
+               
                 this.moveLeft();
                 
                 this.newTimeAfterJump = new Date().getTime();
@@ -164,7 +180,7 @@ class Endboss extends MoveableObject {
 
 
         }, 1000/60);
-    }, 150);
+    }, 300);
     }
 }
 

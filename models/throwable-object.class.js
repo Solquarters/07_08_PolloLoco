@@ -5,8 +5,13 @@ class ThrowableObject extends MoveableObject{
     height= 80;
     isBroken = false;
     thrownAlready = false;
-
     firstAnimationRound = true;
+
+    breaking_sound1 = new Audio('./sounds/Pollo Loco Sound/bottle_break1.ogg');
+    breaking_sound2 = new Audio('./sounds/Pollo Loco Sound/bottle_break2.ogg');
+    breaking_sound3 = new Audio('./sounds/Pollo Loco Sound/bottle_break3.ogg');
+    // breakingSounds = [breaking_sound1, breaking_sound2, breaking_sound3];
+    throw_sound = new Audio('./sounds/Pollo Loco Sound/Cartoon throw away sound effect (peww).mp3');
 
     offset = {
         top: 15,
@@ -41,6 +46,11 @@ class ThrowableObject extends MoveableObject{
         this.animate();
     }
 
+    playRandomBreakingSound() {
+        let randomIndex = Math.floor(Math.random() * breakingSounds.length);
+        breakingSounds[randomIndex].play();
+    }
+
     animate(){
         let counter = 0;
         setInterval(() =>{
@@ -60,6 +70,8 @@ class ThrowableObject extends MoveableObject{
                         clearInterval(this.throwInterval);
                         this.throwInterval = null; 
                     }
+                    // this.playRandomBreakingSound();
+                    this.breaking_sound1.play();
                 }
 
                world.level.enemies.forEach((enemy) => {
@@ -88,6 +100,7 @@ class ThrowableObject extends MoveableObject{
                             clearInterval(this.throwInterval);
                             this.throwInterval = null; 
                         }
+                        this.breaking_sound2.play();
                     }
 
                     if(!(enemy instanceof Endboss))
@@ -98,6 +111,7 @@ class ThrowableObject extends MoveableObject{
     }
 
     throw(){
+        this.throw_sound.play();
         this.speedY = 40;
         this.applyGravity();
         let throwDirection = world.character.otherDirection;

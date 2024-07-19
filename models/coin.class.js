@@ -1,7 +1,6 @@
 class Coin extends MoveableObject {
     time;
 
-    
     offset = {
         top: 35,
         bottom: 35,

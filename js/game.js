@@ -3,6 +3,7 @@ let world;
 let keyboard = new Keyboard();
 let lastInputTimer = new Date().getTime();
 let intervalIds = [];
+let gameEndSound = new Audio('./sounds/Pollo Loco Sound/El Jarabe Tapatio-The Mexican Hat Dance.mp3');
 
 function init(){
     canvas = document.getElementById('canvasId');
@@ -68,5 +69,41 @@ function setStoppableInterval(fn, time) {
 function stopGame(){
   intervalIds.forEach(clearInterval);
   document.getElementById('gameStopOverlayId').style.display = "flex";
+  gameEndSound.play();
+ 
 }
 
+
+// function fullscreen(){
+//   let fullscreenContainer = document.getElementById('canvasContainerId');
+//   enterFullscreen(fullscreenContainer);
+// }
+
+
+function toggleFullscreen(){
+  let fullscreenContainer = document.getElementById('canvasContainerId');
+  if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+    enterFullscreen(fullscreenContainer);
+  } else {
+    exitFullscreen();
+  }
+}
+function enterFullscreen(element){
+  if(element.requestFullscreen){
+    element.requestFullscreen();
+  }
+  else if(element.msRequestFullscreen){
+    element.msRequestFullscreen();
+  }
+  else if(element.webkitRequestFullscreen){
+    element.webkitRequestFullscreen();
+  }
+}
+
+function exitFullscreen(){
+  if(document.exitFullscreen){
+    document.exitFullscreen();
+  }else if(document.webkitRequestFullscreen){
+    document.webkitRequestFullscreen();
+  }
+}

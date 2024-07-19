@@ -1,7 +1,8 @@
 class Chicken extends MoveableObject{
     // world;
     isAlive = true;
-
+    splat_sound= new Audio('./sounds/Pollo Loco Sound/splat.ogg');
+    playedSplatAlready = false;
     offset = {
         top: 0,
         bottom: 0,
@@ -49,7 +50,7 @@ class Chicken extends MoveableObject{
 
            
         }, 1000/60);
-    }, 150);
+    }, 250);
 
     setTimeout(() => {
         setStoppableInterval(() => {
@@ -57,10 +58,15 @@ class Chicken extends MoveableObject{
                 this.playAnimation(this.IMAGES_WALKING);
             }
             else{
+                if(!this.playedSplatAlready){
+                    this.splat_sound.play();
+                    this.playedSplatAlready=true;
+                }
+                
                 this.loadImage('img/3_enemies_chicken/chicken_normal/2_dead/dead.png');
             }
            
         }, 140);
-    }, 150);
+    }, 250);
     }
 }

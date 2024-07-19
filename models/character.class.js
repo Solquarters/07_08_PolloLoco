@@ -5,7 +5,12 @@ class Character extends MoveableObject{
     y = 20;
     currentImage = 0;
     world;
-    walking_sound = new Audio('./sounds/running_steps.mp3');
+    walking_sound = new Audio('./sounds/Pollo Loco Sound/steps.ogg');
+    inpain_sound = new Audio('./sounds/Pollo Loco Sound/PepeGrunt.ogg');
+    snoring_sound = new Audio('./sounds/Pollo Loco Sound/pepe_snoring.ogg');
+    jump_sound = new Audio('./sounds/Pollo Loco Sound/jumpbounce.ogg');
+    characterDeath_sound = new Audio('./sounds/Pollo Loco Sound/wilhelmscream.ogg');
+    
     jumpAlreadyTriggered = false;
     deadAnimationFrame=0;
     idleTimer = 0;
@@ -157,6 +162,7 @@ class Character extends MoveableObject{
         
         setStoppableInterval(() =>{
             this.walking_sound.pause();
+            
 
             if(this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x){
                 this.moveRight();
@@ -175,6 +181,7 @@ class Character extends MoveableObject{
             }
 
             if((this.world.keyboard.UP || this.world.keyboard.SPACE) && !this.isAboveGround() && !this.jumpAlreadyTriggered){
+                this.jump_sound.play();
                 this.jumpAlreadyTriggered = true;
                 this.currentImage = 9;
                 this.jump();
@@ -186,7 +193,10 @@ class Character extends MoveableObject{
 
 
         setStoppableInterval(() => {
+            
+
             if(this.isDead() && (this.deadAnimationFrame < 12)){
+                this.characterDeath_sound.play();
                 if(this.deadAnimationFrame == 0){
                     this.currentImage = 0;
                 }
@@ -201,13 +211,18 @@ class Character extends MoveableObject{
                 return;
             }
             else if(this.isHurt()){
+                this.snoring_sound.pause();
                 this.playAnimation(this.IMAGES_HURT);
+                
+                this.inpain_sound.play();
             }
             else if(this.isAboveGround()){
+                this.snoring_sound.pause();
                 this.playAnimation(this.IMAGES_JUMPING);
             }
             else{
                 if(this.world.keyboard.RIGHT || this.world.keyboard.LEFT){
+                    this.snoring_sound.pause();
                     this.playAnimation(this.IMAGES_WALKING);
                  }
             }
@@ -216,8 +231,10 @@ class Character extends MoveableObject{
             
             if((timePassed/1000) > 4){
                 this.playAnimation(this.IMAGES_IDLE_LONG);
+                this.snoring_sound.play();
             }
             else if(!this.isAboveGround() && !this.isDead() && !this.isHurt() && !(this.world.keyboard.RIGHT || this.world.keyboard.LEFT)){
+                this.snoring_sound.pause();
                 this.playAnimation(this.IMAGES_IDLE);
             }
 
