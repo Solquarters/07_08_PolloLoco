@@ -50,7 +50,7 @@ class Chicken extends MoveableObject{
 
            
         }, 1000/60);
-    }, 250);
+    }, 300);
 
     setTimeout(() => {
         setStoppableInterval(() => {
@@ -67,6 +67,6 @@ class Chicken extends MoveableObject{
             }
            
         }, 140);
-    }, 250);
+    }, 300);
     }
 }

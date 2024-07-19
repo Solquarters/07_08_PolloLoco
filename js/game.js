@@ -12,6 +12,10 @@ function init(){
     setTimeout(() => {
         world.draw();
       }, "15");
+
+      if(window.innerWidth < 1025){
+        document.getElementById('mobileMainDivId').style.display = "flex";
+      }
 }
 
 window.addEventListener("keydown", (event) => {
@@ -74,12 +78,6 @@ function stopGame(){
 }
 
 
-// function fullscreen(){
-//   let fullscreenContainer = document.getElementById('canvasContainerId');
-//   enterFullscreen(fullscreenContainer);
-// }
-
-
 function toggleFullscreen(){
   let fullscreenContainer = document.getElementById('canvasContainerId');
   if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
@@ -107,3 +105,64 @@ function exitFullscreen(){
     document.webkitRequestFullscreen();
   }
 }
+
+
+
+//////////////MOBILE CONTROLS
+document.getElementById('rightArrowId').addEventListener('touchstart', (event) => {
+  event.preventDefault();
+  keyboard.RIGHT = true;
+});
+
+document.getElementById('rightArrowId').addEventListener('touchend', (event) => {
+  event.preventDefault();
+  keyboard.RIGHT = false;
+});
+
+document.getElementById('leftArrowId').addEventListener('touchstart', (event) => {
+  event.preventDefault();
+  keyboard.LEFT = true;
+});
+
+document.getElementById('leftArrowId').addEventListener('touchend', (event) => {
+  event.preventDefault();
+  keyboard.LEFT = false;
+});
+
+
+
+document.getElementById('shootButtonId').addEventListener('touchstart', (event) => {
+  event.preventDefault();
+  keyboard.DOWN = true;
+});
+
+
+document.getElementById('shootButtonId').addEventListener('touchend', (event) => {
+  event.preventDefault();
+  keyboard.DOWN = false;
+});
+
+
+
+
+document.getElementById('shootButtonId').addEventListener('touchstart', (event) => {
+  event.preventDefault();
+  keyboard.D = true;
+});
+
+document.getElementById('shootButtonId').addEventListener('touchend', (event) => {
+  event.preventDefault();
+  keyboard.D = false;
+});
+
+document.getElementById('jumpButtonId').addEventListener('touchstart', (event) => {
+  event.preventDefault();
+  keyboard.SPACE = true;
+});
+
+document.getElementById('jumpButtonId').addEventListener('touchend', (event) => {
+  event.preventDefault();
+  keyboard.SPACE = false;
+});
+
+
