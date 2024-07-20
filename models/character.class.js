@@ -157,6 +157,7 @@ class Character extends MoveableObject {
       this.walking_sound.pause();
 
       if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+        lastInputTimer = new Date().getTime();
         this.moveRight();
         this.otherDirection = false;
         if (!this.isAboveGround()) {
@@ -165,6 +166,7 @@ class Character extends MoveableObject {
       }
 
       if (this.world.keyboard.LEFT && this.x > 120) {
+        lastInputTimer = new Date().getTime();
         this.moveLeft();
         this.otherDirection = true;
         if (!this.isAboveGround()) {
@@ -177,6 +179,7 @@ class Character extends MoveableObject {
         !this.isAboveGround() &&
         !this.jumpAlreadyTriggered
       ) {
+        lastInputTimer = new Date().getTime();
         this.jump_sound.play();
         this.jumpAlreadyTriggered = true;
         this.currentImage = 9;

@@ -150,25 +150,26 @@ document
     keyboard.DOWN = false;
   });
 
-document
-  .getElementById("shootButtonId")
-  .addEventListener("touchstart", (event) => {
-    event.preventDefault();
-    keyboard.D = true;
-  });
+// document
+//   .getElementById("shootButtonId")
+//   .addEventListener("touchstart", (event) => {
+//     event.preventDefault();
+//     keyboard.D = true;
+//   });
 
-document
-  .getElementById("shootButtonId")
-  .addEventListener("touchend", (event) => {
-    event.preventDefault();
-    keyboard.D = false;
-  });
+// document
+//   .getElementById("shootButtonId")
+//   .addEventListener("touchend", (event) => {
+//     event.preventDefault();
+//     keyboard.D = false;
+//   });
 
 document
   .getElementById("jumpButtonId")
   .addEventListener("touchstart", (event) => {
     event.preventDefault();
     keyboard.SPACE = true;
+    
   });
 
 document
@@ -176,4 +177,5 @@ document
   .addEventListener("touchend", (event) => {
     event.preventDefault();
     keyboard.SPACE = false;
+    world.character.jumpAlreadyTriggered = false;
   });
