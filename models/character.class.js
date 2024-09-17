@@ -5,13 +5,12 @@ class Character extends MoveableObject {
   y = 20;
   currentImage = 0;
   world;
+
   walking_sound = new Audio("./sounds/Pollo Loco Sound/steps.ogg");
   inpain_sound = new Audio("./sounds/Pollo Loco Sound/PepeGrunt.ogg");
   snoring_sound = new Audio("./sounds/Pollo Loco Sound/pepe_snoring.ogg");
   jump_sound = new Audio("./sounds/Pollo Loco Sound/jumpbounce.ogg");
-  characterDeath_sound = new Audio(
-    "./sounds/Pollo Loco Sound/wilhelmscream.ogg"
-  );
+  characterDeath_sound = new Audio("./sounds/Pollo Loco Sound/wilhelmscream.ogg");
 
   jumpAlreadyTriggered = false;
   deadAnimationFrame = 0;
@@ -150,6 +149,18 @@ class Character extends MoveableObject {
     this.applyGravity();
     this.animate();
     this.x = 300;
+
+    this.addAudioToGlobalArray();
+  }
+
+  addAudioToGlobalArray() {
+    globalAudioArray.push(
+      this.walking_sound,
+      this.inpain_sound,
+      this.snoring_sound,
+      this.jump_sound,
+      this.characterDeath_sound
+    );
   }
 
   animate() {

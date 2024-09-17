@@ -3,9 +3,35 @@ let world;
 let keyboard = new Keyboard();
 let lastInputTimer = new Date().getTime();
 let intervalIds = [];
-let gameEndSound = new Audio(
-  "./sounds/Pollo Loco Sound/El Jarabe Tapatio-The Mexican Hat Dance.mp3"
-);
+
+let globalAudioArray = [ ];
+
+
+
+
+let gameEndSound = new Audio("./sounds/Pollo Loco Sound/El Jarabe Tapatio-The Mexican Hat Dance.mp3");
+globalAudioArray.push(gameEndSound);
+
+
+
+
+////AUDIO MUTING 
+
+
+
+function toggleAllAudio(){
+  globalAudioArray.forEach(audio => {
+    audio.muted = !audio.muted;
+});
+
+}
+
+////AUDIO MUTING END
+
+
+
+
+
 
 function init() {
   document.getElementById("startScreenMainDivId").style.display = "none";
@@ -150,20 +176,6 @@ document
     keyboard.DOWN = false;
   });
 
-// document
-//   .getElementById("shootButtonId")
-//   .addEventListener("touchstart", (event) => {
-//     event.preventDefault();
-//     keyboard.D = true;
-//   });
-
-// document
-//   .getElementById("shootButtonId")
-//   .addEventListener("touchend", (event) => {
-//     event.preventDefault();
-//     keyboard.D = false;
-//   });
-
 document
   .getElementById("jumpButtonId")
   .addEventListener("touchstart", (event) => {
@@ -179,3 +191,28 @@ document
     keyboard.SPACE = false;
     world.character.jumpAlreadyTriggered = false;
   });
+
+
+
+
+
+
+  function checkOrientation() {
+    // Check if the device is in portrait mode
+    if (window.innerHeight > window.innerWidth && window.innerWidth < 800) {
+        document.getElementById('turnMessageOverlayId').style.display = 'flex'; // Show overlay
+    } else {
+        document.getElementById('turnMessageOverlayId').style.display = 'none'; // Hide overlay
+    }
+}
+
+// Add event listener for when the window is resized or orientation changes
+window.addEventListener("resize", checkOrientation);
+window.addEventListener("orientationchange", checkOrientation);
+
+// Initial check on page load
+window.onload = checkOrientation;
+
+
+
+

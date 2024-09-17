@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <!-- Mobile Overlay Message to Turn device to landscape mode -->
+    <div id="turnMessageOverlayId">Turn device to play
+      <img src="./img/rotatePhoneIcons8 (2).png" alt="">
+    </div>
+
     <h1 id="titleHeaderId">El pollo loco</h1>
 
     <div class="canvas-container" id="canvasContainerId">
@@ -21,6 +26,13 @@
         id="fullscreenImgId"
         onclick="toggleFullscreen()"
       />
+      <img
+        src="./img/icons8-kein-ton-48.png"
+        alt=""
+        id="fullscreenImgId2"
+        onclick="toggleAllAudio()"
+      />
+
       <div
         class="mobileControlsMainDivClass"
         id="mobileMainDivId"

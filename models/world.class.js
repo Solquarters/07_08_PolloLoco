@@ -3,10 +3,17 @@ class World {
   statusBar = new StatusBar();
   // bossStatusBar = new BossStatusBar();
   coinCounter = new Coincounter();
+
+  
   coin_sound = new Audio("./sounds/Pollo Loco Sound/moneysound.ogg");
-  bottle_sound = new Audio(
-    "./sounds/Pollo Loco Sound/fully_trimmed_Sound_effect-bottle_cork.mp3"
-  );
+  bottle_sound = new Audio("./sounds/Pollo Loco Sound/fully_trimmed_Sound_effect-bottle_cork.mp3");
+  levelAmbience = new Audio("./sounds/Pollo Loco Sound/desertAmbienceTrimmed.ogg");
+
+
+  
+
+
+
   bottleCounter = new Bottlecounter();
   level = level1;
   canvas;
@@ -14,9 +21,7 @@ class World {
   keyboard;
   camera_x = 0;
   throwableObjects = [];
-  levelAmbience = new Audio(
-    "./sounds/Pollo Loco Sound/desertAmbienceTrimmed.ogg"
-  );
+  
 
   constructor(canvas, keyboard) {
     this.lastThrowTime = 0;
@@ -31,7 +36,18 @@ class World {
     this.setWorld();
     this.run();
     this.levelAmbience.play();
+
+
+
+
+    this.addAudioToGlobalArray();  
+    
   }
+
+ // Function to add all audio to the global array
+ addAudioToGlobalArray() {
+  globalAudioArray.push(this.coin_sound, this.bottle_sound, this.levelAmbience);
+}
 
   setWorld() {
     this.character.world = this;
