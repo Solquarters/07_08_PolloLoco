@@ -75,7 +75,19 @@ class Endboss extends MoveableObject {
 
     this.applyGravity();
     this.animate();
+
+    this.addAudioToGlobalArray();
   }
+
+addAudioToGlobalArray() {
+globalAudioArray.push(
+  this.angry_sound,
+  this.hitBoss_sound,
+  this.bossDead_sound,
+  this.bossHit_sound
+);
+}
+
 
   jump() {
     this.speedY = 25 + Math.random() * 20;

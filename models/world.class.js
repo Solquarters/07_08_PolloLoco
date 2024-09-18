@@ -74,13 +74,15 @@ class World {
         currentTime - this.lastThrowTime >= this.throwCooldown &&
         world.bottleCounter.bottleCount > 0
       ) {
-        let bottle = new ThrowableObject(
-          this.character.x + 30,
-          this.character.y + 50
-        );
+
+        /////PLAY THROW SOUND HERE INSTEAD OF INSIDE THE THROWABLE OBJECT CLASS ! 
+        
+        
+        let bottle = new ThrowableObject(this.character.x + 30,this.character.y + 50);
         this.throwableObjects.push(bottle);
         world.bottleCounter.bottleCount--;
         this.lastThrowTime = currentTime;
+        // this.throw_sound.play();
       }
     }
 
@@ -106,12 +108,11 @@ class World {
         enemy.isAlive = false;
         this.character.speedY = 35;
 
-        ////PLAY JUMP ANIM GEHT NICHT
+       
       }
       if (this.character.isColliding(enemy) && enemy.isAlive) {
         this.character.hit();
-        //console.log(this.character.energy);
-        // this.statusBar.setPercentage(this.character.energy);
+       
       }
       if (this.character.isDead()) {
         this.levelAmbience.pause();

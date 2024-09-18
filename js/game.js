@@ -5,6 +5,7 @@ let lastInputTimer = new Date().getTime();
 let intervalIds = [];
 
 let globalAudioArray = [ ];
+let allAudioMutedBool = false;
 
 
 
@@ -21,9 +22,10 @@ globalAudioArray.push(gameEndSound);
 
 function toggleAllAudio(){
   globalAudioArray.forEach(audio => {
+    // audio.pause();
     audio.muted = !audio.muted;
 });
-
+allAudioMutedBool = !allAudioMutedBool;
 }
 
 ////AUDIO MUTING END
@@ -117,6 +119,24 @@ function toggleFullscreen() {
     exitFullscreen();
   }
 }
+// function enterFullscreen(element) {
+//   if (element.requestFullscreen) {
+//     element.requestFullscreen();
+//   } else if (element.msRequestFullscreen) {
+//     element.msRequestFullscreen();
+//   } else if (element.webkitRequestFullscreen) {
+//     element.webkitRequestFullscreen();
+//   }
+// }
+
+// function exitFullscreen() {
+//   if (document.exitFullscreen) {
+//     document.exitFullscreen();
+//   } else if (document.webkitRequestFullscreen) {
+//     document.webkitRequestFullscreen();
+//   }
+// }
+
 function enterFullscreen(element) {
   if (element.requestFullscreen) {
     element.requestFullscreen();
@@ -124,16 +144,42 @@ function enterFullscreen(element) {
     element.msRequestFullscreen();
   } else if (element.webkitRequestFullscreen) {
     element.webkitRequestFullscreen();
+  } else if (element.mozRequestFullScreen) {
+    element.mozRequestFullScreen(); // For Firefox
   }
 }
 
 function exitFullscreen() {
   if (document.exitFullscreen) {
     document.exitFullscreen();
-  } else if (document.webkitRequestFullscreen) {
-    document.webkitRequestFullscreen();
+  } else if (document.msExitFullscreen) {
+    document.msExitFullscreen();
+  } else if (document.webkitExitFullscreen) {
+    document.webkitExitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    document.mozCancelFullScreen(); // For Firefox
   }
 }
+
+///Prevent context menu popup on mobile devices
+document.getElementById('canvasId').addEventListener('contextmenu', function(event) {
+  event.preventDefault();
+});
+document.body.addEventListener('contextmenu', function(event) {
+  event.preventDefault();
+});
+
+
+
+
+///TEST POINTERDOWN EVENT
+///IMPLEMENT CUSTOM LONG PRESS FUNCTIONALITY TO PREVENT CONTEXTMENU POPUP
+
+
+
+
+
+
 
 //////////////MOBILE CONTROLS
 document

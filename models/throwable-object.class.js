@@ -10,10 +10,7 @@ class ThrowableObject extends MoveableObject {
   breaking_sound1 = new Audio("./sounds/Pollo Loco Sound/bottle_break1.ogg");
   breaking_sound2 = new Audio("./sounds/Pollo Loco Sound/bottle_break2.ogg");
   breaking_sound3 = new Audio("./sounds/Pollo Loco Sound/bottle_break3.ogg");
-  // breakingSounds = [breaking_sound1, breaking_sound2, breaking_sound3];
-  throw_sound = new Audio(
-    "./sounds/Pollo Loco Sound/Cartoon throw away sound effect (peww).mp3"
-  );
+  throw_sound = new Audio("./sounds/Pollo Loco Sound/Cartoon throw away sound effect (peww).mp3");
 
   offset = {
     top: 15,
@@ -39,19 +36,31 @@ class ThrowableObject extends MoveableObject {
   ];
 
   constructor(x, y) {
+   
     super().loadImage("./img/6_salsa_bottle/salsa_bottle.png");
     this.loadImages(this.IMAGES_ROTATION);
     this.loadImages(this.IMAGES_SPLASH);
+    
     this.x = x;
     this.y = y;
+
+
     this.throw();
     this.animate();
+
+    this.addAudioToGlobalArray();
+
   }
 
-  playRandomBreakingSound() {
-    let randomIndex = Math.floor(Math.random() * breakingSounds.length);
-    breakingSounds[randomIndex].play();
-  }
+
+addAudioToGlobalArray() {
+globalAudioArray.push(
+  this.breaking_sound1,
+  this.breaking_sound2,
+  this.breaking_sound3,
+  this.throw_sound
+);
+}
 
   animate() {
     let counter = 0;
@@ -75,7 +84,10 @@ class ThrowableObject extends MoveableObject {
           this.throwInterval = null;
         }
         // this.playRandomBreakingSound();
-        this.breaking_sound1.play();
+        if(!allAudioMutedBool){
+          this.breaking_sound1.play();
+        }
+       
       }
 
       world.level.enemies.forEach((enemy) => {
@@ -108,7 +120,11 @@ class ThrowableObject extends MoveableObject {
               clearInterval(this.throwInterval);
               this.throwInterval = null;
             }
-            this.breaking_sound2.play();
+            
+            if(!allAudioMutedBool){
+              this.breaking_sound2.play();
+            }
+           
           }
 
           if (!(enemy instanceof Endboss)) {
@@ -120,7 +136,10 @@ class ThrowableObject extends MoveableObject {
   }
 
   throw() {
-    this.throw_sound.play();
+    if(!allAudioMutedBool){
+      this.throw_sound.play();
+    }
+    
     this.speedY = 40;
     this.applyGravity();
     let throwDirection = world.character.otherDirection;
