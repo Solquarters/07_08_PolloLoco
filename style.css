@@ -6,7 +6,11 @@ html, body {
     user-select: none; /* Standard */
   }
 
-
+img{
+    -webkit-user-select: none; /* Chrome/Safari */
+    -ms-user-select: none; /* IE */
+    user-select: none; /* Standard */
+}
 
 body{ 
     display: flex;

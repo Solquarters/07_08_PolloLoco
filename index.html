@@ -20,24 +20,29 @@
         <button onclick="init()">START GAME</button>
       </div>
 
-      <img
+      <div onclick="toggleFullscreen()" >
+        <img
         src="./img/icons8-vollbild-30.png"
         alt=""
         id="fullscreenImgId"
-        onclick="toggleFullscreen()" 
-        onpointerup="toggleFullscreen()" 
+        
+
+      
         
       />
-      <img
-        src="./img/icons8-kein-ton-48.png"
-        alt=""
-        id="fullscreenImgId2"
-        onclick="toggleAllAudio()"
-       
-       
-        onpointerup="toggleAllAudio()"
+    </div>
+      
 
-      />
+<div onclick="toggleAllAudio()">
+  <img
+  src="./img/icons8-kein-ton-48.png"
+  alt=""
+  id="fullscreenImgId2"
+  
+  
+
+/></div>
+      
 
       <div
         class="mobileControlsMainDivClass"
