@@ -177,6 +177,10 @@ td {
 position: relative;
 left: 94%;
 bottom: 20%;
+cursor: pointer;
+}
+#closeInfoOverlayId:hover{
+    filter: invert(0.3);
 }
 
 #fullscreenImgId{
@@ -495,6 +499,19 @@ justify-content: space-around;
 }
 
 
+
+/* ///////////TRYING TO ADJUST TO MOBILE BROWSER BEHAVIOUR WITH MENU //////////////// */
+/* @media only screen and (max-width: 600px){
+    body{
+        height: 100svh; 
+        width: 100svw;
+    }
+    
+
+} */
+
+
+
 @media only screen and (max-height: 600px){
     
     #titleHeaderId{ display: none};
@@ -527,3 +544,5 @@ justify-content: space-around;
         width: 70%;
     }
 }
+
+
