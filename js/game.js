@@ -292,3 +292,8 @@ window.onload = checkOrientation;
 
 
 
+
+////Trying to prevent google chrome context popup when holding control buttons:
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault(); // Disable right-click menu
+}, false);

@@ -5,6 +5,34 @@
     font-style: normal;
 }
 
+
+/* Prevent user select or menu or context popup  */
+html, body {
+    -webkit-user-select: none; /* Chrome/Safari */
+    -ms-user-select: none; /* IE */
+    user-select: none; /* Standard */
+    touch-action: none; /* Prevent touch interactions */
+}
+  
+
+
+
+  body { 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'TEXAS', sans-serif;
+    font-size: 24px;
+    color: #000000;
+    background-image: url('./img/backgroundImageDalle.webp');
+    background-size: cover; /* Cover the entire background while maintaining aspect ratio */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-attachment: fixed; /* Keep the background fixed during scroll */
+    margin: 0;
+}
+
 .gradient-text {
     /* position: absolute;
     top: 40%; */
@@ -76,30 +104,7 @@
 
 
 
-/* Prevent user select or menu or context popup  */
-html, body {
-    -webkit-user-select: none; /* Chrome/Safari */
-    -ms-user-select: none; /* IE */
-    user-select: none; /* Standard */
-  }
 
-
-
-  body { 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-family: 'TEXAS', sans-serif;
-    font-size: 24px;
-    color: #000000;
-    background-image: url('./img/backgroundImageDalle.webp');
-    background-size: cover; /* Cover the entire background while maintaining aspect ratio */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    background-attachment: fixed; /* Keep the background fixed during scroll */
-    margin: 0;
-}
 
 #titleHeaderId{
     color: #15A2CA;
