@@ -41,8 +41,23 @@ class World {
 
 
     this.addAudioToGlobalArray();  
+    this.checkAudioBoolForGlobalMute();
     
   }
+
+
+
+  checkAudioBoolForGlobalMute(){
+    if(allAudioMutedBool){
+      globalAudioArray.forEach(audio => {
+        // audio.pause();
+        audio.muted = true;
+    });
+    }
+    
+  
+  
+}
 
  // Function to add all audio to the global array
  addAudioToGlobalArray() {
@@ -82,7 +97,7 @@ class World {
         this.throwableObjects.push(bottle);
         world.bottleCounter.bottleCount--;
         this.lastThrowTime = currentTime;
-        // this.throw_sound.play();
+   
       }
     }
 

@@ -25,17 +25,36 @@ function toggleAllAudio(){
     // audio.pause();
     audio.muted = !audio.muted;
 });
+
+if(allAudioMutedBool){
+  document.getElementById('toggleAudioImgId').src = './img/icons8-lautsprecher-48.png';
+}
+else{
+  document.getElementById('toggleAudioImgId').src = './img/icons8-kein-ton-48.png';
+}
+
 allAudioMutedBool = !allAudioMutedBool;
+
+console.log(allAudioMutedBool);
+
+
+
 }
 
 ////AUDIO MUTING END
 
+function toggleInfoOverlay(){
 
 
 
 
+}
 
-function init() {
+
+
+
+function init(event) {
+  event.preventDefault();
   document.getElementById("startScreenMainDivId").style.display = "none";
   canvas = document.getElementById("canvasId");
   initLevel();
@@ -48,6 +67,8 @@ function init() {
   if (window.innerWidth < 1025) {
     document.getElementById("mobileMainDivId").style.display = "flex";
   }
+
+
 }
 
 window.addEventListener("keydown", (event) => {
@@ -184,10 +205,7 @@ document.body.addEventListener('contextmenu', function(event) {
 //////////////MOBILE CONTROLS
 document
   .getElementById("rightArrowId")
-  .addEventListener("touchstart", (event) => {
-    event.preventDefault();
-    keyboard.RIGHT = true;
-  });
+  .addEventListener("touchstart", (event) => {event.preventDefault(); keyboard.RIGHT = true;});
 
 document
   .getElementById("rightArrowId")

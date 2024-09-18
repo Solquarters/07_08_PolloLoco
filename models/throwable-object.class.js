@@ -48,19 +48,9 @@ class ThrowableObject extends MoveableObject {
     this.throw();
     this.animate();
 
-    this.addAudioToGlobalArray();
 
   }
 
-
-addAudioToGlobalArray() {
-globalAudioArray.push(
-  this.breaking_sound1,
-  this.breaking_sound2,
-  this.breaking_sound3,
-  this.throw_sound
-);
-}
 
   animate() {
     let counter = 0;

@@ -17,7 +17,11 @@
 
     <div class="canvas-container" id="canvasContainerId">
       <div class="startScreenMainDivClass" id="startScreenMainDivId">
-        <button onclick="init()">START GAME</button>
+
+        <!-- <button onclick="init(event)">START GAME</button> -->
+         <div class="gradient-textParent"> <div  onclick="init(event)" class="gradient-text">START GAME</div></div>
+       
+
       </div>
 
       <div onclick="toggleFullscreen()" >
@@ -25,10 +29,6 @@
         src="./img/icons8-vollbild-30.png"
         alt=""
         id="fullscreenImgId"
-        
-
-      
-        
       />
     </div>
       
@@ -37,11 +37,18 @@
   <img
   src="./img/icons8-kein-ton-48.png"
   alt=""
-  id="fullscreenImgId2"
-  
+  id="toggleAudioImgId"/>
+
+</div>
+
+<div onclick="toggleInfoOverlay()"><img
+  src="./img/icons8-info-48.png"
+  alt=""
+  id="toggleInfoOverlayId"/></div>
   
 
-/></div>
+      
+
       
 
       <div
@@ -72,7 +79,10 @@
         </div>
       </div>
 
-      <canvas width="720px" height="480px" id="canvasId"></canvas>
+      <canvas width="720px" height="480px" id="canvasId">
+
+        
+      </canvas>
 
       <div class="lifeDivClass">
         <div class="lifePercentDivClass" id="lifeDivId"></div>
@@ -92,9 +102,10 @@
           id="gameWonOverlayDivId"
           style="display: none"
         >
-          <span>¡Asombroso!</span>
-          <span>! YOU WON !</span><br />
-          <button onclick=" location.reload()">Restart Game</button>
+          <span>Asombroso</span>
+          <span>YOU WON !</span><br />
+          <!-- <button onclick=" location.reload()">Restart Game</button> -->
+          <div class="gradient-textParent"> <div  onclick=" location.reload()" class="gradient-text">PLAY AGAIN</div></div>
         </div>
 
         <div
@@ -102,9 +113,10 @@
           id="gameLostOverlayDivId"
           style="display: none"
         >
-          <span>¡ Ay, caramba !</span>
-          <span>YOU LOST</span><br />
-          <button onclick=" location.reload()">Restart Game</button>
+          <span>Ay caramba </span>
+          <span>YOU LOST !</span><br />
+          <!-- <button onclick=" location.reload()">Restart Game</button> -->
+          <div class="gradient-textParent"> <div  onclick=" location.reload()" class="gradient-textGameOver">RESTART</div></div>
         </div>
       </div>
     </div>
