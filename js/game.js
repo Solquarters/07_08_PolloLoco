@@ -45,9 +45,21 @@ console.log(allAudioMutedBool);
 
 function toggleInfoOverlay(){
 
-
-
-
+  let overlay = document.getElementById('mainInfoOverlayId');
+  if (overlay.style.display === 'flex') {
+    // Fade out
+    overlay.style.opacity = '0';
+    // Wait for the opacity transition to finish before setting display to 'none'
+    setTimeout(function() {
+        overlay.style.display = 'none';
+    }, 500); // Match this time with the CSS transition duration
+} else {
+    // Set display to flex and then fade in
+    overlay.style.display = 'flex';
+    // Trigger a reflow to ensure the transition starts
+    overlay.offsetHeight; // Forces a repaint to ensure the next step applies
+    overlay.style.opacity = '1';
+}
 }
 
 

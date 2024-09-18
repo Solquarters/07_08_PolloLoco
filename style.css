@@ -107,6 +107,50 @@ html, body {
     margin: 24px;
 }
 
+#mainInfoOverlayId{
+    position: absolute;
+    z-index: 20;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    border-radius: 16px;
+    background-image: url('img/5_background/layers/air.png');
+    background-size: cover; 
+    background-position: center; 
+    gap: 8px;
+    padding: 32px;
+    border: 2px solid black;
+
+    opacity: 0;
+    transition: opacity 0.5s ease; 
+
+  /* width: 600px;
+  height: 400px; */
+}
+
+#mainInfoOverlayId img{
+    width: 24px;
+    height: 24px;
+    
+}
+
+.infoOverlayChild1{
+    font-size: 16px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+#closeInfoOverlayId{
+position: relative;
+left: 100%;
+bottom: 20%;
+}
+
 canvas { 
     position: relative;
     background-color: black;
@@ -382,7 +426,18 @@ justify-content: space-around;
     .endScreenContentDivClass button{
         width: 70%;
     }
+
+    #mainInfoOverlayId{
+        width: 80%;
+        height: 60%;
+    }
+    
+    
 }
+
+
+
+
 
 
 @media only screen and (max-width: 720px){
