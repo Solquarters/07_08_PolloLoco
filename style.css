@@ -113,11 +113,11 @@ html, body {
 }
 
 #mainInfoOverlayId{
-    position: absolute;
+    position: fixed;
     z-index: 20;
     top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: none;
     flex-direction: column;
     justify-content: center;
@@ -135,6 +135,8 @@ html, body {
 
   /* width: 600px;
   height: 400px; */
+  width: auto;
+  height: auto;
 }
 
 #mainInfoOverlayId img{
@@ -143,11 +145,32 @@ html, body {
     
 }
 
-.infoOverlayChild1{
+/* .infoOverlayChild1{
     font-size: 16px;
     display: flex;
     gap: 8px;
     align-items: center;
+
+} */
+.infoOverlayChild1 {
+    font-size: 16px;
+    gap: 8px;
+    align-items: center;
+}
+
+td {
+    padding: 8px;
+}
+
+.action-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adjust this to change the spacing between the images and the "or" */
+}
+
+.action-cell span {
+    display: inline-block;
+    margin: 0 4px; /* Adjust this for spacing around the "or" text */
 }
 
 #closeInfoOverlayId{
