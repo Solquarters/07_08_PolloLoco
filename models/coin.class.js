@@ -11,8 +11,8 @@ class Coin extends MoveableObject {
   constructor() {
     super().loadImage("./img/8_coin/coin_1.png");
 
-    this.x = 500 + MoveableObject.lastCoinX; // Use the static property for x coordinate
-    MoveableObject.lastCoinX += 200; // Update the static property
+    this.x = 500 + MoveableObject.lastCoinX; // Use the class overarching property for x coordinate
+    MoveableObject.lastCoinX += 200; 
     if (MoveableObject.lastCoinX % 800) {
       MoveableObject.lastCoinX += 200;
     }
@@ -24,8 +24,8 @@ class Coin extends MoveableObject {
     this.speed = 0.4;
 
     this.time = MoveableObject.lastCoinX; // Time variable to create a continuous movement
-    this.amplitude = 2; // Amplitude of the sine wave
-    this.frequency = 1; // Frequency of the sine wave
+    this.amplitude = 2; // Amplitude of the sine wave movement
+    this.frequency = 1; // Frequency of the sine wave movement
   }
 
   animate() {

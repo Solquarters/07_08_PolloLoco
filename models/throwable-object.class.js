@@ -98,7 +98,6 @@ class ThrowableObject extends MoveableObject {
             }
           }
 
-          /////Wie collision verhindern, wenn Enemy bereits tot ist ?
           if (enemy.isAlive || counter < 6) {
             counter++;
             this.isBroken = true;

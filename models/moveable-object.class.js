@@ -42,7 +42,7 @@ class MoveableObject extends DrawableObject {
     }
   }
 
-  ///colliding with offsets:
+  ///Colliding with offsets:
   isColliding(moveableObject) {
     let thisLeft = this.x + this.offset.left;
     let thisRight = this.x + this.width - this.offset.right;

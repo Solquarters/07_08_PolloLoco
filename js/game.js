@@ -3,48 +3,29 @@ let world;
 let keyboard = new Keyboard();
 let lastInputTimer = new Date().getTime();
 let intervalIds = [];
-
 let globalAudioArray = [ ];
 let allAudioMutedBool = false;
-
-
-
 
 let gameEndSound = new Audio("./sounds/Pollo Loco Sound/El Jarabe Tapatio-The Mexican Hat Dance.mp3");
 globalAudioArray.push(gameEndSound);
 
-
-
-
 ////AUDIO MUTING 
-
-
-
 function toggleAllAudio(){
   globalAudioArray.forEach(audio => {
     // audio.pause();
     audio.muted = !audio.muted;
 });
-
 if(allAudioMutedBool){
   document.getElementById('toggleAudioImgId').src = './img/icons8-lautsprecher-48.png';
 }
 else{
   document.getElementById('toggleAudioImgId').src = './img/icons8-kein-ton-48.png';
 }
-
 allAudioMutedBool = !allAudioMutedBool;
-
-console.log(allAudioMutedBool);
-
-
-
 }
 
-////AUDIO MUTING END
 
 function toggleInfoOverlay(){
-
   let overlay = document.getElementById('mainInfoOverlayId');
   if (overlay.style.display === 'flex') {
     // Fade out
@@ -52,17 +33,14 @@ function toggleInfoOverlay(){
     // Wait for the opacity transition to finish before setting display to 'none'
     setTimeout(function() {
         overlay.style.display = 'none';
-    }, 500); // Match this time with the CSS transition duration
+    }, 500); 
 } else {
     // Set display to flex and then fade in
     overlay.style.display = 'flex';
-    // Trigger a reflow to ensure the transition starts
     overlay.offsetHeight; // Forces a repaint to ensure the next step applies
     overlay.style.opacity = '1';
 }
 }
-
-
 
 
 function init(event) {
@@ -79,8 +57,6 @@ function init(event) {
   if (window.innerWidth < 1025) {
     document.getElementById("mobileMainDivId").style.display = "flex";
   }
-
-
 }
 
 window.addEventListener("keydown", (event) => {
@@ -102,6 +78,7 @@ window.addEventListener("keydown", (event) => {
   if (event.keyCode == 68) {
     keyboard.D = true;
   }
+  ///Using a timer to prevent spamming the controls
   lastInputTimer = new Date().getTime();
 });
 
@@ -152,23 +129,6 @@ function toggleFullscreen() {
     exitFullscreen();
   }
 }
-// function enterFullscreen(element) {
-//   if (element.requestFullscreen) {
-//     element.requestFullscreen();
-//   } else if (element.msRequestFullscreen) {
-//     element.msRequestFullscreen();
-//   } else if (element.webkitRequestFullscreen) {
-//     element.webkitRequestFullscreen();
-//   }
-// }
-
-// function exitFullscreen() {
-//   if (document.exitFullscreen) {
-//     document.exitFullscreen();
-//   } else if (document.webkitRequestFullscreen) {
-//     document.webkitRequestFullscreen();
-//   }
-// }
 
 function enterFullscreen(element) {
   if (element.requestFullscreen) {
@@ -203,18 +163,7 @@ document.body.addEventListener('contextmenu', function(event) {
 });
 
 
-
-
-///TEST POINTERDOWN EVENT
-///IMPLEMENT CUSTOM LONG PRESS FUNCTIONALITY TO PREVENT CONTEXTMENU POPUP
-
-
-
-
-
-
-
-//////////////MOBILE CONTROLS
+///MOBILE CONTROLS
 document
   .getElementById("rightArrowId")
   .addEventListener("touchstart", (event) => {event.preventDefault(); keyboard.RIGHT = true;});
@@ -269,11 +218,7 @@ document
   });
 
 
-
-
-
-
-  function checkOrientation() {
+function checkOrientation() {
     // Check if the device is in portrait mode
     if (window.innerHeight > window.innerWidth && window.innerWidth < 800) {
         document.getElementById('turnMessageOverlayId').style.display = 'flex'; // Show overlay
@@ -289,11 +234,7 @@ window.addEventListener("orientationchange", checkOrientation);
 // Initial check on page load
 window.onload = checkOrientation;
 
-
-
-
-
-////Trying to prevent google chrome context popup when holding control buttons:
+//Trying to prevent google chrome context popup when holding control buttons:
 document.addEventListener('contextmenu', function(e) {
   e.preventDefault(); // Disable right-click menu
 }, false);

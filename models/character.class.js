@@ -91,13 +91,10 @@ class Character extends MoveableObject {
   IMAGES_JUMPING = [
     "img/2_character_pepe/3_jump/J-31.png",
     "img/2_character_pepe/3_jump/J-31.png",
-
     "img/2_character_pepe/3_jump/J-32.png",
     "img/2_character_pepe/3_jump/J-32.png",
-
     "img/2_character_pepe/3_jump/J-33.png",
     "img/2_character_pepe/3_jump/J-33.png",
-
     "img/2_character_pepe/3_jump/J-34.png",
     "img/2_character_pepe/3_jump/J-34.png",
     "img/2_character_pepe/3_jump/J-35.png",
@@ -196,7 +193,6 @@ class Character extends MoveableObject {
         this.currentImage = 9;
         this.jump();
       }
-
       this.world.camera_x = -this.x + 120;
     }, 1000 / 60);
 
@@ -209,8 +205,7 @@ class Character extends MoveableObject {
         this.playAnimation(this.IMAGES_DEAD);
         this.deadAnimationFrame++;
         if (this.deadAnimationFrame == 12) {
-          ////HIER BLOCK ALL MOVEMENT UND PLAY AGAIN SCREEN
-          ///Block sleep idle
+          //If dead animation reaches end, display end screen
           stopGame();
           document.getElementById("gameLostOverlayDivId").style.display =
             "flex";

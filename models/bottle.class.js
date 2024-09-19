@@ -15,7 +15,7 @@ class Bottle extends MoveableObject {
     } else {
       super.loadImage("./img/6_salsa_bottle/1_salsa_bottle_on_ground.png");
     }
-    this.x = 100 + MoveableObject.lastBottleX; // Use the static property for x coordinate
+    this.x = 100 + MoveableObject.lastBottleX; // Use the class overarching property for x coordinate
     MoveableObject.lastBottleX += 100 + Math.random() * 400;
 
     this.y = 340 + Math.random() * 10;

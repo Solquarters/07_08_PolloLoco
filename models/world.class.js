@@ -1,18 +1,11 @@
 class World {
   character = new Character();
   statusBar = new StatusBar();
-  // bossStatusBar = new BossStatusBar();
   coinCounter = new Coincounter();
 
-  
   coin_sound = new Audio("./sounds/Pollo Loco Sound/moneysound.ogg");
   bottle_sound = new Audio("./sounds/Pollo Loco Sound/fully_trimmed_Sound_effect-bottle_cork.mp3");
   levelAmbience = new Audio("./sounds/Pollo Loco Sound/desertAmbienceTrimmed.ogg");
-
-
-  
-
-
 
   bottleCounter = new Bottlecounter();
   level = level1;
@@ -36,30 +29,19 @@ class World {
     this.setWorld();
     this.run();
     this.levelAmbience.play();
-
-
-
-
     this.addAudioToGlobalArray();  
     this.checkAudioBoolForGlobalMute();
-    
   }
-
-
 
   checkAudioBoolForGlobalMute(){
     if(allAudioMutedBool){
       globalAudioArray.forEach(audio => {
-        // audio.pause();
         audio.muted = true;
     });
     }
-    
-  
-  
 }
 
- // Function to add all audio to the global array
+ //Function to add all audio to the global array for collecive muting
  addAudioToGlobalArray() {
   globalAudioArray.push(this.coin_sound, this.bottle_sound, this.levelAmbience);
 }
@@ -81,26 +63,18 @@ class World {
   checkThrowObjects() {
     const currentTime = Date.now();
     if (this.keyboard.D || this.keyboard.DOWN) {
-      if (world.bottleCounter.bottleCount <= 0) {
-        //PLAY DRAGGY SOUND, NO BOTTLES TO THROW!
-      }
-
+      // if (world.bottleCounter.bottleCount <= 0) {
+      // }
       if (
         currentTime - this.lastThrowTime >= this.throwCooldown &&
         world.bottleCounter.bottleCount > 0
       ) {
-
-        /////PLAY THROW SOUND HERE INSTEAD OF INSIDE THE THROWABLE OBJECT CLASS ! 
-        
-        
         let bottle = new ThrowableObject(this.character.x + 30,this.character.y + 50);
         this.throwableObjects.push(bottle);
         world.bottleCounter.bottleCount--;
         this.lastThrowTime = currentTime;
-   
       }
     }
-
     if (currentTime - this.lastThrowTime >= this.WaitBeforeDespawnTime) {
       this.despawnBrokenBottles();
     }
@@ -114,7 +88,6 @@ class World {
 
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
-      //////Collision from above
       if (
         this.character.checkCollisionFromAbove(this.character, enemy) &&
         enemy.isAlive &&
@@ -122,12 +95,9 @@ class World {
       ) {
         enemy.isAlive = false;
         this.character.speedY = 35;
-
-       
       }
       if (this.character.isColliding(enemy) && enemy.isAlive) {
         this.character.hit();
-       
       }
       if (this.character.isDead()) {
         this.levelAmbience.pause();
@@ -138,7 +108,6 @@ class World {
       let item = this.level.items[i];
       if (this.character.isColliding(item)) {
         this.level.items.splice(i, 1);
-
         if (item instanceof Coin) {
           this.coin_sound.play();
           world.coinCounter.coinCount++;
@@ -157,7 +126,6 @@ class World {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
 
-    // this.addObjectsToMap(this.level.backgroundObjects);
     ///PARALLAX START
     // Draw background layers with different speed factors
     this.level.backgroundObjects.forEach((bgObject) => {
@@ -184,9 +152,7 @@ class World {
     //SPACE FOR FIXED OBJECTS ON THE CANVAS /// END
 
     this.addObjectsToMap(this.level.enemies);
-
     this.addObjectsToMap(this.throwableObjects);
-
     this.addToMap(this.character);
     this.ctx.translate(-this.camera_x, 0);
 
@@ -207,15 +173,12 @@ class World {
   }
 
   addToMap(moveableObject) {
-    ///Spiegelung der Bilder bei linksseitiger Bewegung
+    ///Mirror images/animation when moving left
     if (moveableObject.otherDirection) {
       this.flipImage(moveableObject);
     }
-
     moveableObject.draw(this.ctx);
-
     moveableObject.drawFrame(this.ctx);
-
     if (moveableObject.otherDirection) {
       this.flipImageBack(moveableObject);
     }

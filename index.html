@@ -20,36 +20,6 @@
       <div class="infoOverlayChild1">Move left <img src="./img/icons8-quadrat-links-50.png" alt=""></div>
       <div class="infoOverlayChild1">Jump <img src="./img/icons8-pfeil-nach-oben-64.png" alt=""> or <img src="./img/icons8-leertaste-50.png" alt=""> </div> -->
 
-      <!-- <table class="infoOverlayChild1" >
-        <tr>
-          <td>Throw bottle</td>
-          <td>
-            &nbsp;<img src="./img/icons8-shoot-64.png" alt="">
-           or
-            <img src="./img/icons8-d-taste-50.png" alt="">
-          </td>
-        </tr>
-        <tr>
-          <td>Move right</td>
-          <td>
-            &nbsp;<img src="./img/icons8-quadrat-rechts-50.png" alt="">
-          </td>
-        </tr>
-        <tr>
-          <td>Move left</td>
-          <td>
-            &nbsp;<img src="./img/icons8-quadrat-links-50.png" alt="">
-          </td>
-        </tr>
-        <tr>
-          <td>Jump</td>
-          <td>
-            &nbsp;<img src="./img/icons8-pfeil-nach-oben-64.png" alt="">
-            or
-            <img src="./img/icons8-leertaste-50.png" alt="">
-          </td>
-        </tr>
-      </table> -->
       <table class="infoOverlayChild1">
         <tr>
           <td>Throw bottle</td>
@@ -80,12 +50,9 @@
           </td>
         </tr>
       </table>
-      
-      
       <br>
       <br>
 
-      
 <a  href="https://roman-kabucov.de/legal-notice" style="font-size: 16px; text-decoration: none; " target=”_blank”>Legal notice</a>
 
     </div>
@@ -93,77 +60,39 @@
     <div id="turnMessageOverlayId">Turn device to play
       <img src="./img/rotatePhoneIcons8 (2).png" alt="">
     </div>
-
     <h1 id="titleHeaderId">El pollo loco</h1>
-
     <div class="canvas-container" id="canvasContainerId">
       <div class="startScreenMainDivClass" id="startScreenMainDivId">
-
         <!-- <button onclick="init(event)">START GAME</button> -->
          <div class="gradient-textParent"> <div  onclick="init(event)" class="gradient-text">START GAME</div></div>
-       
-
       </div>
-
       <div id="fullscreenImgId" onclick="toggleFullscreen()" >
-        <img
-        src="./img/icons8-vollbild-30.png"
-        alt=""
-        
-      />
+        <img src="./img/icons8-vollbild-30.png" alt=""/>
     </div>
       
-
 <div  id="toggleAudioImgId" onclick="toggleAllAudio()">
-  <img
-  src="./img/icons8-kein-ton-48.png"
-  alt=""
- />
-
+  <img src="./img/icons8-kein-ton-48.png" alt="" />
 </div>
-
 <div  id="toggleInfoOverlayId" onclick="toggleInfoOverlay()"><img
   src="./img/icons8-info-48.png"
   alt=""
   /></div>
-  
-
-      
-
-      
-
-      <div
-        class="mobileControlsMainDivClass"
-        id="mobileMainDivId"
-        style="display: none"
-      >
+      <div class="mobileControlsMainDivClass" id="mobileMainDivId" style="display: none">
         <div class="mobileChildContainer1Class">
-          <img
-            src="./img/icons8-quadrat-links-50.png"
-            alt=""
-            id="leftArrowId"
-          />
-          <img
-            src="./img/icons8-quadrat-rechts-50.png"
-            alt=""
-            id="rightArrowId"
-          />
+          <img src="./img/icons8-quadrat-links-50.png" alt="" id="leftArrowId" />
+          <img src="./img/icons8-quadrat-rechts-50.png" alt="" id="rightArrowId"/>
         </div>
 
         <div class="mobileChildContainer1Class">
-          <img
-            src="./img/icons8-pfeil-nach-oben-64.png"
-            alt=""
-            id="jumpButtonId"
-          />
+          <img src="./img/icons8-pfeil-nach-oben-64.png" alt="" id="jumpButtonId" />
           <img src="./img/icons8-shoot-64.png" alt="" id="shootButtonId" />
         </div>
       </div>
 
+      <!-- //CANVAS// -->
       <canvas width="720px" height="480px" id="canvasId">
-
-        
       </canvas>
+      <!-- //CANVAS// -->
 
       <div class="lifeDivClass">
         <div class="lifePercentDivClass" id="lifeDivId"></div>
@@ -185,7 +114,6 @@
         >
           <span>Asombroso</span>
           <span>YOU WON !</span><br />
-          <!-- <button onclick=" location.reload()">Restart Game</button> -->
           <div class="gradient-textParent"> <div  onclick=" location.reload()" class="gradient-text">PLAY AGAIN</div></div>
         </div>
 
@@ -196,7 +124,6 @@
         >
           <span>Ay caramba </span>
           <span>YOU LOST !</span><br />
-          <!-- <button onclick=" location.reload()">Restart Game</button> -->
           <div class="gradient-textParent"> <div  onclick=" location.reload()" class="gradient-textGameOver">RESTART</div></div>
         </div>
       </div>
