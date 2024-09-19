@@ -1,5 +1,11 @@
 let level1;
 
+
+/**
+ * Returns an array of background objects for the level based on its length.
+ * @param {number} levelLength - The number of background layers for the level.
+ * @returns {BackgroundObject[]} An array of background objects.
+ */
 function returnLevelBackgroundArray(levelLength) {
   backgroundArray = [];
 
@@ -73,6 +79,13 @@ function returnLevelBackgroundArray(levelLength) {
   return backgroundArray;
 }
 
+
+/**
+ * Returns an array of coin and bottle objects for the level.
+ * @param {number} coinInputNumber - The number of coins to add to the level.
+ * @param {number} bottleInputNumber - The number of bottles to add to the level.
+ * @returns {Array} An array containing Coin and Bottle objects.
+ */
 function returnCoinsAndBottlesForLevel(coinInputNumber, bottleInputNumber) {
   let itemArray = [];
   for (let i = 0; i < coinInputNumber; i++) {
@@ -84,6 +97,12 @@ function returnCoinsAndBottlesForLevel(coinInputNumber, bottleInputNumber) {
   return itemArray;
 }
 
+
+/**
+ * Returns an array of chicken enemies and the end boss for the level.
+ * @param {number} chickenInputNumber - The number of chickens to add to the level.
+ * @returns {Array} An array containing Chicken objects and the Endboss.
+ */
 function returnChickensForLevel(chickenInputNumber) {
   chickenArray = [];
   for (let i = 0; i < chickenInputNumber; i++) {
@@ -93,6 +112,10 @@ function returnChickensForLevel(chickenInputNumber) {
   return chickenArray;
 }
 
+
+/**
+ * Initializes the level by setting up enemies, clouds, backgrounds, coins, and bottles.
+ */
 function initLevel() {
   level1 = new Level(
     returnChickensForLevel(20),

@@ -9,7 +9,32 @@ let allAudioMutedBool = false;
 let gameEndSound = new Audio("./sounds/Pollo Loco Sound/El Jarabe Tapatio-The Mexican Hat Dance.mp3");
 globalAudioArray.push(gameEndSound);
 
-////AUDIO MUTING 
+
+
+/**
+ * Initializes the game world, hides the start screen, and sets up the canvas.
+ * @param {Event} event - The event triggered by the form submission.
+ */
+function init(event) {
+  event.preventDefault();
+  document.getElementById("startScreenMainDivId").style.display = "none";
+  canvas = document.getElementById("canvasId");
+  initLevel();
+  world = new World(canvas, keyboard);
+  ctx = canvas.getContext("2d");
+  setTimeout(() => {
+    world.draw();
+  }, "15");
+
+  if (window.innerWidth < 1025) {
+    document.getElementById("mobileMainDivId").style.display = "flex";
+  }
+}
+
+
+/**
+ * Toggles the mute status of all audio in the global audio array and updates the UI icon.
+ */
 function toggleAllAudio(){
   globalAudioArray.forEach(audio => {
     // audio.pause();
@@ -25,6 +50,9 @@ allAudioMutedBool = !allAudioMutedBool;
 }
 
 
+/**
+ * Toggles the visibility of the information overlay with a fade-in/out animation.
+ */
 function toggleInfoOverlay(){
   let overlay = document.getElementById('mainInfoOverlayId');
   if (overlay.style.display === 'flex') {
@@ -42,22 +70,6 @@ function toggleInfoOverlay(){
 }
 }
 
-
-function init(event) {
-  event.preventDefault();
-  document.getElementById("startScreenMainDivId").style.display = "none";
-  canvas = document.getElementById("canvasId");
-  initLevel();
-  world = new World(canvas, keyboard);
-  ctx = canvas.getContext("2d");
-  setTimeout(() => {
-    world.draw();
-  }, "15");
-
-  if (window.innerWidth < 1025) {
-    document.getElementById("mobileMainDivId").style.display = "flex";
-  }
-}
 
 window.addEventListener("keydown", (event) => {
   if (event.keyCode == 39) {
@@ -106,17 +118,31 @@ window.addEventListener("keyup", (event) => {
   }
 });
 
+
+/**
+ * Sets an interval and stores the interval ID to allow later stopping of the game.
+ * @param {Function} fn - The function to execute repeatedly.
+ * @param {number} time - The interval time in milliseconds.
+ */
 function setStoppableInterval(fn, time) {
   let id = setInterval(fn, time);
   intervalIds.push(id);
 }
 
+
+/**
+ * Stops all intervals, shows the game stop overlay, and plays the game-end sound.
+ */
 function stopGame() {
   intervalIds.forEach(clearInterval);
   document.getElementById("gameStopOverlayId").style.display = "flex";
   gameEndSound.play();
 }
 
+
+/**
+ * Toggles between fullscreen and windowed mode for the canvas container.
+ */
 function toggleFullscreen() {
   let fullscreenContainer = document.getElementById("canvasContainerId");
   if (
@@ -130,6 +156,11 @@ function toggleFullscreen() {
   }
 }
 
+
+/**
+ * Enters fullscreen mode for the provided element.
+ * @param {HTMLElement} element - The DOM element to display in fullscreen.
+ */
 function enterFullscreen(element) {
   if (element.requestFullscreen) {
     element.requestFullscreen();
@@ -142,6 +173,10 @@ function enterFullscreen(element) {
   }
 }
 
+
+/**
+ * Exits fullscreen mode.
+ */
 function exitFullscreen() {
   if (document.exitFullscreen) {
     document.exitFullscreen();
@@ -152,6 +187,19 @@ function exitFullscreen() {
   } else if (document.mozCancelFullScreen) {
     document.mozCancelFullScreen(); // For Firefox
   }
+}
+
+
+  /**
+ * Checks if the device is in portrait mode and shows or hides an overlay accordingly.
+ */
+  function checkOrientation() {
+    // Check if the device is in portrait mode
+    if (window.innerHeight > window.innerWidth && window.innerWidth < 800) {
+        document.getElementById('turnMessageOverlayId').style.display = 'flex'; // Show overlay
+    } else {
+        document.getElementById('turnMessageOverlayId').style.display = 'none'; // Hide overlay
+    }
 }
 
 ///Prevent context menu popup on mobile devices
@@ -218,14 +266,7 @@ document
   });
 
 
-function checkOrientation() {
-    // Check if the device is in portrait mode
-    if (window.innerHeight > window.innerWidth && window.innerWidth < 800) {
-        document.getElementById('turnMessageOverlayId').style.display = 'flex'; // Show overlay
-    } else {
-        document.getElementById('turnMessageOverlayId').style.display = 'none'; // Hide overlay
-    }
-}
+
 
 // Add event listener for when the window is resized or orientation changes
 window.addEventListener("resize", checkOrientation);
