@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: models/moveable-object.class.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: models/moveable-object.class.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * Class representing a moveable object in the game.
  * 
  * @extends DrawableObject
@@ -65,9 +93,9 @@ class MoveableObject extends DrawableObject {
     if (this instanceof ThrowableObject) {
       return true;
     } else if (!(this instanceof Endboss)) {
-      return this.y < 170;
+      return this.y &lt; 170;
     } else if (this instanceof Endboss) {
-      return this.y < 50;
+      return this.y &lt; 50;
     }
   }
 
@@ -91,12 +119,12 @@ class MoveableObject extends DrawableObject {
       moveableObject.y + moveableObject.height - moveableObject.offset.bottom;
 
     return (
-      ((moveableLeft <= thisLeft && thisLeft <= moveableRight) ||
-        (moveableLeft <= thisRight && thisRight <= moveableRight) ||
-        (thisLeft <= moveableLeft && moveableLeft <= thisRight)) &&
-      ((moveableTop <= thisTop && thisTop <= moveableBottom) ||
-        (moveableTop <= thisBottom && thisBottom <= moveableBottom) ||
-        (thisTop <= moveableTop && moveableTop <= thisBottom))
+      ((moveableLeft &lt;= thisLeft &amp;&amp; thisLeft &lt;= moveableRight) ||
+        (moveableLeft &lt;= thisRight &amp;&amp; thisRight &lt;= moveableRight) ||
+        (thisLeft &lt;= moveableLeft &amp;&amp; moveableLeft &lt;= thisRight)) &amp;&amp;
+      ((moveableTop &lt;= thisTop &amp;&amp; thisTop &lt;= moveableBottom) ||
+        (moveableTop &lt;= thisBottom &amp;&amp; thisBottom &lt;= moveableBottom) ||
+        (thisTop &lt;= moveableTop &amp;&amp; moveableTop &lt;= thisBottom))
     );
   }
 
@@ -110,9 +138,9 @@ class MoveableObject extends DrawableObject {
    */
   checkCollisionFromAbove(player, enemy) {
     if (
-      player.isColliding(enemy) &&
-      player.isAboveGround() &&
-      player.speedY < 0
+      player.isColliding(enemy) &amp;&amp;
+      player.isAboveGround() &amp;&amp;
+      player.speedY &lt; 0
     ) {
       player.currentImage = 5;
       return true;
@@ -136,7 +164,7 @@ class MoveableObject extends DrawableObject {
 
     lastInputTimer = new Date().getTime();
 
-    if (this.energy < 0) {
+    if (this.energy &lt; 0) {
       this.energy = 0;
     } else {
       this.lastHit = new Date().getTime();
@@ -153,7 +181,7 @@ class MoveableObject extends DrawableObject {
     //Difference in millisecs
     let timePassed = new Date().getTime() - this.lastHit;
     //difference in secs
-    return timePassed < 400; //wehen last hit was not longer than 3 secs ago return true
+    return timePassed &lt; 400; //wehen last hit was not longer than 3 secs ago return true
   }
 
   /**
@@ -166,14 +194,14 @@ class MoveableObject extends DrawableObject {
       this.currentImage = 0;
       this.justDied = false;
     }
-    return this.energy <= 0;
+    return this.energy &lt;= 0;
   }
 
 
   /**
    * Plays an animation using a set of images.
    * 
-   * @param {Array<string>} images - An array of image paths to loop through for the animation.
+   * @param {Array&lt;string>} images - An array of image paths to loop through for the animation.
    */
   playAnimation(images) {
     let i = this.currentImage % images.length;
@@ -203,3 +231,26 @@ class MoveableObject extends DrawableObject {
     this.speedY = 47;
   }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Character.html">Character</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="Level.html">Level</a></li><li><a href="MoveableObject.html">MoveableObject</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkOrientation">checkOrientation</a></li><li><a href="global.html#enterFullscreen">enterFullscreen</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initLevel">initLevel</a></li><li><a href="global.html#returnChickensForLevel">returnChickensForLevel</a></li><li><a href="global.html#returnCoinsAndBottlesForLevel">returnCoinsAndBottlesForLevel</a></li><li><a href="global.html#returnLevelBackgroundArray">returnLevelBackgroundArray</a></li><li><a href="global.html#setStoppableInterval">setStoppableInterval</a></li><li><a href="global.html#stopGame">stopGame</a></li><li><a href="global.html#toggleAllAudio">toggleAllAudio</a></li><li><a href="global.html#toggleFullscreen">toggleFullscreen</a></li><li><a href="global.html#toggleInfoOverlay">toggleInfoOverlay</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Sep 19 2024 20:43:06 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

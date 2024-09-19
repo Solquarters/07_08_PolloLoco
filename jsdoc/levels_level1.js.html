@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: levels/level1.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: levels/level1.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>let level1;
+
+
+/**
+ * Returns an array of background objects for the level based on its length.
+ * @param {number} levelLength - The number of background layers for the level.
+ * @returns {BackgroundObject[]} An array of background objects.
+ */
+function returnLevelBackgroundArray(levelLength) {
+  backgroundArray = [];
+
+  for (let i = 0; i &lt; levelLength; i++) {
+    backgroundArray.push(
+      new BackgroundObject(
+        "./img/5_background/layers/air.png",
+        -719 + 719 * i * 2,
+        0,
+        0.97
+      )
+    );
+    backgroundArray.push(
+      new BackgroundObject(
+        "img/5_background/layers/3_third_layer/2.png",
+        -719 + 719 * i * 2,
+        0,
+        0.97
+      )
+    );
+    backgroundArray.push(
+      new BackgroundObject(
+        "img/5_background/layers/2_second_layer/2.png",
+        -719 + 719 * i * 2,
+        0,
+        0.91
+      )
+    );
+    backgroundArray.push(
+      new BackgroundObject(
+        "./img/5_background/layers/1_first_layer/2.png",
+        -719 + 719 * i * 2,
+        0,
+        0
+      )
+    );
+
+    backgroundArray.push(
+      new BackgroundObject(
+        "./img/5_background/layers/air.png",
+        0 + 719 * i * 2,
+        0,
+        0.97
+      )
+    );
+    backgroundArray.push(
+      new BackgroundObject(
+        "img/5_background/layers/3_third_layer/1.png",
+        0 + 719 * i * 2,
+        0,
+        0.97
+      )
+    );
+    backgroundArray.push(
+      new BackgroundObject(
+        "img/5_background/layers/2_second_layer/1.png",
+        0 + 719 * i * 2,
+        0,
+        0.91
+      )
+    );
+    backgroundArray.push(
+      new BackgroundObject(
+        "./img/5_background/layers/1_first_layer/1.png",
+        0 + 719 * i * 2,
+        0,
+        0
+      )
+    );
+  }
+  return backgroundArray;
+}
+
+
+/**
+ * Returns an array of coin and bottle objects for the level.
+ * @param {number} coinInputNumber - The number of coins to add to the level.
+ * @param {number} bottleInputNumber - The number of bottles to add to the level.
+ * @returns {Array} An array containing Coin and Bottle objects.
+ */
+function returnCoinsAndBottlesForLevel(coinInputNumber, bottleInputNumber) {
+  let itemArray = [];
+  for (let i = 0; i &lt; coinInputNumber; i++) {
+    itemArray.push(new Coin());
+  }
+  for (let i = 0; i &lt; bottleInputNumber; i++) {
+    itemArray.push(new Bottle());
+  }
+  return itemArray;
+}
+
+
+/**
+ * Returns an array of chicken enemies and the end boss for the level.
+ * @param {number} chickenInputNumber - The number of chickens to add to the level.
+ * @returns {Array} An array containing Chicken objects and the Endboss.
+ */
+function returnChickensForLevel(chickenInputNumber) {
+  chickenArray = [];
+  for (let i = 0; i &lt; chickenInputNumber; i++) {
+    chickenArray.push(new Chicken());
+  }
+  chickenArray.push(new Endboss());
+  return chickenArray;
+}
+
+
+/**
+ * Initializes the level by setting up enemies, clouds, backgrounds, coins, and bottles.
+ */
+function initLevel() {
+  level1 = new Level(
+    returnChickensForLevel(20),
+    [new Cloud(), new Cloud(), new Cloud(), new Cloud(), new Cloud()],
+    returnLevelBackgroundArray(7),
+    returnCoinsAndBottlesForLevel(12, 30)
+  );
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Character.html">Character</a></li><li><a href="Endboss.html">Endboss</a></li><li><a href="Level.html">Level</a></li><li><a href="MoveableObject.html">MoveableObject</a></li><li><a href="ThrowableObject.html">ThrowableObject</a></li><li><a href="World.html">World</a></li></ul><h3>Global</h3><ul><li><a href="global.html#checkOrientation">checkOrientation</a></li><li><a href="global.html#enterFullscreen">enterFullscreen</a></li><li><a href="global.html#exitFullscreen">exitFullscreen</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initLevel">initLevel</a></li><li><a href="global.html#returnChickensForLevel">returnChickensForLevel</a></li><li><a href="global.html#returnCoinsAndBottlesForLevel">returnCoinsAndBottlesForLevel</a></li><li><a href="global.html#returnLevelBackgroundArray">returnLevelBackgroundArray</a></li><li><a href="global.html#setStoppableInterval">setStoppableInterval</a></li><li><a href="global.html#stopGame">stopGame</a></li><li><a href="global.html#toggleAllAudio">toggleAllAudio</a></li><li><a href="global.html#toggleFullscreen">toggleFullscreen</a></li><li><a href="global.html#toggleInfoOverlay">toggleInfoOverlay</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Sep 19 2024 20:43:06 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

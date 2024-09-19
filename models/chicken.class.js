@@ -1,3 +1,15 @@
+/**
+ * Class representing a chicken enemy in the game.
+ * 
+ * @extends MoveableObject
+ * 
+ * @property {boolean} isAlive - Indicates if the chicken is still alive.
+ * @property {Audio} splat_sound - The sound played when the chicken dies.
+ * @property {boolean} playedSplatAlready - Ensures the splat sound is played only once when the chicken dies.
+ * @property {object} offset - The collision offset values for the chicken.
+ * @property {Array<string>} IMAGES_WALKING - Array of image paths for the chicken's walking animation.
+ * @property {number} currentImage - Index of the current image being displayed for the animation.
+ */
 class Chicken extends MoveableObject {
   // world;
   isAlive = true;
