@@ -79,6 +79,10 @@ class Endboss extends MoveableObject {
     this.addAudioToGlobalArray();
   }
 
+
+  /**
+ * Adds end boss audio objects to the global audio array for collective muting.
+ */
 addAudioToGlobalArray() {
 globalAudioArray.push(
   this.angry_sound,
@@ -88,43 +92,63 @@ globalAudioArray.push(
 );
 }
 
-
+/**
+ * Makes the boss jump, randomizing the jump height and horizontal displacement.
+ */
   jump() {
     this.speedY = 25 + Math.random() * 20;
     this.x = this.x + Math.random() * 70;
   }
 
+
+  /**
+ * Animates the end boss' movement, attack, and other states, handling conditions for death, hurt, or triggering boss behavior.
+ * Runs at intervals to simulate continuous animation.
+ */
   animate() {
     //added little delay before accessing character attributes to catch access error
     this.lastJumpTimer = new Date().getTime();
 
+    //Handle animation and states
     setTimeout(() => {
       setStoppableInterval(() => {
+
+
+
         if (this.isDead()) {
+
+          //Handle beginning of death animation
           if (this.deadAnimationFrame == 0) {
             this.currentImage = 0;
           }
+          //Handle end of death animation 
           if (this.deadAnimationFrame == this.IMAGES_DEAD.length - 1) {
-            this.y = 100;
-            setTimeout(() => {
-              stopGame();
-              this.world.levelAmbience.pause();
-              document.getElementById("gameWonOverlayDivId").style.display =
-                "flex";
-            }, 800);
+            // this.y = 100;
+            // setTimeout(() => {
+            //   stopGame();
+            //   this.world.levelAmbience.pause();
+            //   document.getElementById("gameWonOverlayDivId").style.display =
+            //     "flex";
+            // }, 800);
+            this.handleGameWon();
             return;
           }
 
-          this.deadAnimationFrame++;
-          this.playAnimation(this.IMAGES_DEAD);
-          document.getElementById("bossBarDivId").style.display = "none";
+          // this.deadAnimationFrame++;
+          // this.playAnimation(this.IMAGES_DEAD);
+          // document.getElementById("bossBarDivId").style.display = "none";
+          this.continueDeathAnimation();
           return;
         }
+
+
+
         if (this.isHurt()) {
           this.playAnimation(this.IMAGES_HURT);
           this.bossHit_sound.play();
           return;
         }
+
         if (this.x - this.world.character.x <= 320 || this.energy < 100) {
           this.isTriggered = true;
           document.getElementById("bossBarDivId").style.display = "block";
@@ -136,59 +160,183 @@ globalAudioArray.push(
           this.playAnimation(this.IMAGES_WALKING);
         }
 
-        if (this.isTriggered && this.world.character.x < this.x) {
-          this.otherDirection = false;
-          this.playAnimation(this.IMAGES_ATTACKING);
-          // this.moveLeft();
-        }
+        // if (this.isTriggered && this.world.character.x < this.x) {
+        //   this.otherDirection = false;
+        //   this.playAnimation(this.IMAGES_ATTACKING);
+        //   // this.moveLeft();
+        // }
 
-        if (this.isTriggered && this.world.character.x >= this.x) {
-          this.otherDirection = true;
-          this.playAnimation(this.IMAGES_ATTACKING);
-          this.moveRight();
-        }
+        // if (this.isTriggered && this.world.character.x >= this.x) {
+        //   this.otherDirection = true;
+        //   this.playAnimation(this.IMAGES_ATTACKING);
+        //   this.moveRight();
+        // }
+        this.handleTriggeredMovement();
+
       }, 1000 / 8);
     }, 150);
 
+
+    //Handle movement and sound
     setTimeout(() => {
       setStoppableInterval(() => {
-        if (this.x - this.world.character.x < 800 && !this.isDead()) {
-          this.angry_sound.play();
-        } else if (this.isDead()) {
-          this.angry_sound.pause();
-          this.bossDead_sound.play();
-        }
 
-        if (
-          this.isTriggered &&
-          this.world.character.x <= this.x &&
-          !this.isDead()
-        ) {
-          this.moveLeft();
 
-          this.newTimeAfterJump = new Date().getTime();
 
-          if (this.newTimeAfterJump - this.lastJumpTimer > 1600) {
-            this.jump();
-            this.newTimeAfterJump = new Date().getTime();
-            this.lastJumpTimer = new Date().getTime();
-          }
-        }
-        if (
-          this.isTriggered &&
-          this.world.character.x > this.x &&
-          !this.isDead()
-        ) {
-          this.moveRight();
-          this.newTimeAfterJump = new Date().getTime();
+        // if (this.x - this.world.character.x < 800 && !this.isDead()) {
+        //   this.angry_sound.play();
+        // } else if (this.isDead()) {
+        //   this.angry_sound.pause();
+        //   this.bossDead_sound.play();
+        // }
+        this.handleNearbyOrDeathSound();
 
-          if (this.newTimeAfterJump - this.lastJumpTimer > 1600) {
-            this.jump();
-            this.newTimeAfterJump = new Date().getTime();
-            this.lastJumpTimer = new Date().getTime();
-          }
-        }
+
+        // if (
+        //   this.isTriggered &&
+        //   this.world.character.x <= this.x &&
+        //   !this.isDead()
+        // ) {
+        //   this.moveLeft();
+
+        //   this.newTimeAfterJump = new Date().getTime();
+
+        //   if (this.newTimeAfterJump - this.lastJumpTimer > 1600) {
+        //     this.jump();
+        //     this.newTimeAfterJump = new Date().getTime();
+        //     this.lastJumpTimer = new Date().getTime();
+        //   }
+        // }
+this.handleMoveLeftIfConditionIsTrue();
+
+
+        // if (
+        //   this.isTriggered &&
+        //   this.world.character.x > this.x &&
+        //   !this.isDead()
+        // ) {
+        //   this.moveRight();
+        //   this.newTimeAfterJump = new Date().getTime();
+
+        //   if (this.newTimeAfterJump - this.lastJumpTimer > 1600) {
+        //     this.jump();
+        //     this.newTimeAfterJump = new Date().getTime();
+        //     this.lastJumpTimer = new Date().getTime();
+        //   }
+        // }
+        this.handleMoveRightIfConditionIsTrue();
+
+
+
       }, 1000 / 60);
     }, 300);
   }
+
+
+  /**
+ * Handles boss movement to the right if the character is to the right of the boss, including jump logic if conditions are met.
+ */
+  handleMoveRightIfConditionIsTrue(){
+    if (
+      this.isTriggered &&
+      this.world.character.x > this.x &&
+      !this.isDead()
+    ) {
+      this.moveRight();
+      this.newTimeAfterJump = new Date().getTime();
+
+      if (this.newTimeAfterJump - this.lastJumpTimer > 1600) {
+        this.jump();
+        this.newTimeAfterJump = new Date().getTime();
+        this.lastJumpTimer = new Date().getTime();
+      }
+    }
+  }
+
+
+  /**
+ * Handles boss movement to the left if the character is to the left of the boss, including jump logic if conditions are met.
+ */
+  handleMoveLeftIfConditionIsTrue(){
+    if (
+      this.isTriggered &&
+      this.world.character.x <= this.x &&
+      !this.isDead()
+    ) {
+      this.moveLeft();
+
+      this.newTimeAfterJump = new Date().getTime();
+
+      if (this.newTimeAfterJump - this.lastJumpTimer > 1600) {
+        this.jump();
+        this.newTimeAfterJump = new Date().getTime();
+        this.lastJumpTimer = new Date().getTime();
+      }
+    }
+
+  }
+
+/**
+ * Plays the angry sound when the player is nearby and plays the boss' death sound when the boss dies.
+ */
+  handleNearbyOrDeathSound(){
+    if (this.x - this.world.character.x < 800 && !this.isDead()) {
+      this.angry_sound.play();
+    } else if (this.isDead()) {
+      this.angry_sound.pause();
+      this.bossDead_sound.play();
+    }
+  }
+
+  /**
+ * Displays the game won screen after the boss dies, pauses background sound, and stops the game.
+ */
+  handleGameWon(){
+    this.y = 100;
+    setTimeout(() => {
+      stopGame();
+      this.world.levelAmbience.pause();
+      document.getElementById("gameWonOverlayDivId").style.display =
+        "flex";
+    }, 800);
+
+  }
+
+  /**
+ * Continues the boss' death animation and hides the boss' health bar.
+ */
+  continueDeathAnimation(){
+    this.deadAnimationFrame++;
+          this.playAnimation(this.IMAGES_DEAD);
+          document.getElementById("bossBarDivId").style.display = "none";
+  }
+
+/**
+ * Manages the boss' attack and movement based on the player's position when the boss is triggered.
+ * Handles animation for attack sequences.
+ */
+  handleTriggeredMovement(){
+    if (this.isTriggered && this.world.character.x < this.x) {
+      this.otherDirection = false;
+      this.playAnimation(this.IMAGES_ATTACKING);
+      // this.moveLeft();
+    }
+
+    if (this.isTriggered && this.world.character.x >= this.x) {
+      this.otherDirection = true;
+      this.playAnimation(this.IMAGES_ATTACKING);
+      this.moveRight();
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
 }

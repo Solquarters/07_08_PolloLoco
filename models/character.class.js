@@ -150,6 +150,10 @@ class Character extends MoveableObject {
     this.addAudioToGlobalArray();
   }
 
+
+  /**
+ * Adds character-specific audio objects to the global audio array for global mute control.
+ */
   addAudioToGlobalArray() {
     globalAudioArray.push(
       this.walking_sound,
@@ -160,75 +164,29 @@ class Character extends MoveableObject {
     );
   }
 
+
+  /**
+ * Probably too long animation function that handles character movement, camera positioning, and animation frames.
+ * Runs at a fixed interval to simulate continuous movement.
+ */
   animate() {
+    //Handle movement
     setStoppableInterval(() => {
       this.walking_sound.pause();
-
-      // if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-      //   lastInputTimer = new Date().getTime();
-      //   this.moveRight();
-      //   this.otherDirection = false;
-      //   if (!this.isAboveGround()) {
-      //     this.walking_sound.play();
-      //   }
-      // }
       this.moveRightIfConditionTrue();
-
-     
-
-      // if (this.world.keyboard.LEFT && this.x > 120) {
-      //   lastInputTimer = new Date().getTime();
-      //   this.moveLeft();
-      //   this.otherDirection = true;
-      //   if (!this.isAboveGround()) {
-      //     this.walking_sound.play();
-      //   }
-      // }
-
       this.moveLeftIfConditionTrue();
-
-      // if ((this.world.keyboard.UP || this.world.keyboard.SPACE) &&!this.isAboveGround() && !this.jumpAlreadyTriggered) 
-      //   {
-      //   lastInputTimer = new Date().getTime();
-      //   this.jump_sound.play();
-      //   this.jumpAlreadyTriggered = true;
-      //   this.currentImage = 9;
-      //   this.jump();
-      // }
       this.jumpIfConditionTrue();
-
       this.world.camera_x = -this.x + 120;
-
     }, 1000 / 60);
 
-
-   
-
+    //Handle animations
     setStoppableInterval(() => {
       if (this.isDead() && this.deadAnimationFrame < 12) {
-        // this.characterDeath_sound.play();
-        // if (this.deadAnimationFrame == 0) {
-        //   this.currentImage = 0;
-        // }
-        // this.playAnimation(this.IMAGES_DEAD);
-        // this.deadAnimationFrame++;
-        // if (this.deadAnimationFrame == 12) {
-        //   //If dead animation reaches end, display end screen
-        //   stopGame();
-        //   document.getElementById("gameLostOverlayDivId").style.display =
-        //     "flex";
-        // }
         this.handleDeathCondition();
         return;
       } 
-      
-
       if (this.isHurt()) {
-        // this.snoring_sound.pause();
-        // this.playAnimation(this.IMAGES_HURT);
-        // this.inpain_sound.play();
         this.handleIsHurt();
-
       } else if (this.isAboveGround()) {
         this.snoring_sound.pause();
         this.playAnimation(this.IMAGES_JUMPING);
@@ -238,33 +196,17 @@ class Character extends MoveableObject {
           this.playAnimation(this.IMAGES_WALKING);
         }
       }
-
-
-      // let timePassed = new Date().getTime() - lastInputTimer;
-
-      // if (timePassed / 1000 > 4) {
-      //   this.playAnimation(this.IMAGES_IDLE_LONG);
-      //   this.snoring_sound.play();
-      // } else if (
-      //   !this.isAboveGround() &&
-      //   !this.isDead() &&
-      //   !this.isHurt() &&
-      //   !(this.world.keyboard.RIGHT || this.world.keyboard.LEFT)
-      // ) {
-      //   this.snoring_sound.pause();
-      //   this.playAnimation(this.IMAGES_IDLE);
-      // }
       this.handleShortAndLongIdleAnimation();
-
-
     }, 1000 / 20);
+
   }
 
 
 
-
-
-
+  /**
+ * Moves the character to the right if the right key is pressed and the condition is met.
+ * Plays walking sound if the character is not in the air.
+ */
   moveRightIfConditionTrue(){
     if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
       lastInputTimer = new Date().getTime();
@@ -276,6 +218,10 @@ class Character extends MoveableObject {
     }
   }
 
+  /**
+ * Moves the character to the left if the left key is pressed and the condition is met.
+ * Plays walking sound if the character is not in the air.
+ */
   moveLeftIfConditionTrue(){
     if (this.world.keyboard.LEFT && this.x > 120) {
       lastInputTimer = new Date().getTime();
@@ -288,7 +234,10 @@ class Character extends MoveableObject {
 
   }
 
-
+  /**
+ * Makes the character jump if the up or space key is pressed, and the character is on the ground.
+ * Plays the jump sound and sets the jump state.
+ */
 jumpIfConditionTrue(){
   if ((this.world.keyboard.UP || this.world.keyboard.SPACE) &&!this.isAboveGround() && !this.jumpAlreadyTriggered) 
     {
@@ -300,6 +249,10 @@ jumpIfConditionTrue(){
   }
 }
 
+/**
+ * Handles the character's death animation and triggers the game over screen after completion.
+ * Plays the death sound during the animation.
+ */
 handleDeathCondition(){
     this.characterDeath_sound.play();
     if (this.deadAnimationFrame == 0) {
@@ -315,15 +268,22 @@ handleDeathCondition(){
     }
 }
 
+/**
+ * Handles the animation and sound when the character is hurt.
+ * Plays the hurt sound and pauses other sounds.
+ */
 handleIsHurt(){
   this.snoring_sound.pause();
   this.playAnimation(this.IMAGES_HURT);
   this.inpain_sound.play();
 }
 
+/**
+ * Controls the character's idle animations based on the time since the last input.
+ * Plays the snoring sound if the character has been idle for a certain period.
+ */
 handleShortAndLongIdleAnimation(){
   let timePassed = new Date().getTime() - lastInputTimer;
-
   if (timePassed / 1000 > 4) {
     this.playAnimation(this.IMAGES_IDLE_LONG);
     this.snoring_sound.play();
@@ -336,8 +296,6 @@ handleShortAndLongIdleAnimation(){
     this.snoring_sound.pause();
     this.playAnimation(this.IMAGES_IDLE);
   }
-
 }
-
 
 }

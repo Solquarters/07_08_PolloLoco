@@ -32,7 +32,7 @@ class Coin extends MoveableObject {
     setTimeout(() => {
       setStoppableInterval(() => {
         this.time += 0.1; // Increment time to create continuous movement
-        this.y = this.y + this.amplitude * Math.sin(this.frequency * this.time);
+        this.y = this.y + this.amplitude * Math.sin(this.frequency * this.time); //sinusoidal movement
       }, 1000 / 20);
     }, 150);
   }

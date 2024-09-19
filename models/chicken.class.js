@@ -27,7 +27,6 @@ class Chicken extends MoveableObject {
     this.loadImages(this.IMAGES_WALKING);
     this.speed = 0.2 + Math.random() * 2;
     this.animate();
-
     this.addAudioToGlobalArray();
   }
 
@@ -39,6 +38,8 @@ addAudioToGlobalArray() {
 }
 
   animate() {
+
+    //Handle movement
     setTimeout(() => {
       setStoppableInterval(() => {
         if (this.isAlive && this.world.character.x < this.x) {
@@ -52,6 +53,7 @@ addAudioToGlobalArray() {
       }, 1000 / 60);
     }, 300);
 
+    //Handle animation and sound
     setTimeout(() => {
       setStoppableInterval(() => {
         if (this.isAlive) {
@@ -69,4 +71,9 @@ addAudioToGlobalArray() {
       }, 140);
     }, 300);
   }
+
+
+
+
+
 }
