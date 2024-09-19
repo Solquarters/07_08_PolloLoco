@@ -1,3 +1,9 @@
+/**
+ * Represents a throwable object, such as a bottle, with animations, sounds, and collision logic.
+ * @constructor
+ * @param {number} x - The initial x-coordinate of the throwable object.
+ * @param {number} y - The initial y-coordinate of the throwable object.
+ */
 class ThrowableObject extends MoveableObject {
   throwInterval;
   speedY;
@@ -52,7 +58,9 @@ class ThrowableObject extends MoveableObject {
 
   }
 
-
+ /**
+   * Handles the animation for the throwable object, including rotation during flight and the breaking animation upon collision with the ground or enemies.
+   */
   animate() {
     let counter = 0;
     setInterval(() => {
@@ -82,6 +90,10 @@ class ThrowableObject extends MoveableObject {
     }, 1000 / 16);
   }
 
+
+  /**
+   * Initiates the throw of the object, applying gravity and determining the direction based on the character's orientation.
+   */
   throw() {
     if(!allAudioMutedBool){
       this.throw_sound.play();
@@ -99,7 +111,11 @@ class ThrowableObject extends MoveableObject {
     }, 20);
   }
 
-
+ /**
+   * Manages the breaking animation and sound effects when the bottle hits the ground or an enemy.
+   * @param {number} counter - Tracks the frames of the breaking animation.
+   * @returns {number} Updated counter after processing the animation and sound.
+   */
 handleBottleBreakAnimationAndSound(counter){
         this.isBroken = true;
         counter++;
@@ -118,6 +134,11 @@ handleBottleBreakAnimationAndSound(counter){
         return counter;
 }
 
+/**
+   * Applies damage to the end boss if the bottle collides with it.
+   * Reduces the boss's energy and marks it as dead if energy falls below zero.
+   * @param {Endboss} enemy - The enemy object (end boss) that the bottle collides with.
+   */
 handleDamageToBoss(enemy){
  if (enemy instanceof Endboss && !this.isBroken) {
             enemy.energy -= 20;

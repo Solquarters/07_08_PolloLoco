@@ -1,3 +1,12 @@
+
+
+/**
+ * Represents the game world with the character, items, enemies, and background.
+ * Handles drawing, collisions, audio, and game interactions.
+ * @constructor
+ * @param {HTMLCanvasElement} canvas - The canvas where the game is rendered.
+ * @param {Object} keyboard - The keyboard input object for controlling the character.
+ */
 class World {
   character = new Character();
   statusBar = new StatusBar();
@@ -33,6 +42,10 @@ class World {
     this.checkAudioBoolForGlobalMute();
   }
 
+
+   /**
+   * If user clicks on mute before game initialization: Checks the global mute boolean and mutes all game audio if true. 
+   */
   checkAudioBoolForGlobalMute(){
     if(allAudioMutedBool){
       globalAudioArray.forEach(audio => {
@@ -41,11 +54,17 @@ class World {
     }
 }
 
- //Function to add all audio to the global array for collecive muting
+ /**
+   * Adds all world-specific audio objects to the global audio array for collective muting.
+   */
  addAudioToGlobalArray() {
   globalAudioArray.push(this.coin_sound, this.bottle_sound, this.levelAmbience);
 }
 
+
+ /**
+   * Sets references to the world for the character and enemies in the level.
+   */
   setWorld() {
     this.character.world = this;
     this.level.enemies.forEach((enemy) => {
@@ -53,6 +72,10 @@ class World {
     });
   }
 
+
+   /**
+   * Starts the game logic by periodically checking collisions and handling throwable objects.
+   */
   run() {
     setStoppableInterval(() => {
       this.checkCollisions();
@@ -60,6 +83,11 @@ class World {
     }, 50);
   }
 
+
+   /**
+   * Checks if the throw button is pressed and, if conditions are met, throws a bottle.
+   * Also manages despawning broken bottles after a certain time.
+   */
   checkThrowObjects() {
     const currentTime = Date.now();
     if (this.keyboard.D || this.keyboard.DOWN) {
@@ -80,12 +108,20 @@ class World {
     }
   }
 
+  /**
+   * Removes broken throwable objects (e.g., bottles) from the game world.
+   */
   despawnBrokenBottles() {
     this.throwableObjects = this.throwableObjects.filter(
       (bottle) => !bottle.isBroken
     );
   }
 
+
+    /**
+   * Checks for collisions between the character and enemies, items, or objects.
+   * Updates the character's state, plays audio, and removes collected items.
+   */
   checkCollisions() {
     this.level.enemies.forEach((enemy) => {
       if (
@@ -122,6 +158,11 @@ class World {
     }
   }
 
+
+    /**
+   * Continuously renders the game world, including the background, clouds, enemies, and items.
+   * Handles parallax scrolling and fixed objects.
+   */
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.translate(this.camera_x, 0);
@@ -166,12 +207,22 @@ class World {
     });
   }
 
+
+  /**
+   * Adds an array of objects to the game map by rendering each of them.
+   * @param {Array} objectArray - Array of moveable or drawable objects to render.
+   */
   addObjectsToMap(objectArray) {
     objectArray.forEach((obj) => {
       this.addToMap(obj);
     });
   }
 
+
+   /**
+   * Draws an object to the map, mirroring it if moving the other direction.
+   * @param {MoveableObject} moveableObject - The object to add to the game world.
+   */
   addToMap(moveableObject) {
     ///Mirror images/animation when moving left
     if (moveableObject.otherDirection) {
@@ -184,6 +235,11 @@ class World {
     }
   }
 
+
+  /**
+   * Flips an object horizontally for leftward movement before rendering.
+   * @param {MoveableObject} moveableObject - The object to flip.
+   */
   flipImage(moveableObject) {
     this.ctx.save();
     this.ctx.translate(moveableObject.width, 0);
@@ -191,6 +247,11 @@ class World {
     moveableObject.x = moveableObject.x * -1;
   }
 
+
+   /**
+   * Restores the object's position after flipping it for leftward movement.
+   * @param {MoveableObject} moveableObject - The object to flip back.
+   */
   flipImageBack(moveableObject) {
     this.ctx.restore();
     moveableObject.x = moveableObject.x * -1;
