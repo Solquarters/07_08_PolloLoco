@@ -120,7 +120,8 @@ body {
   transform: translate(-50%, -50%);
   display: none;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
 
   border-radius: 16px;
   background-image: url("img/5_background/layers/air.png");
@@ -133,8 +134,8 @@ body {
   opacity: 0;
   transition: opacity 0.5s ease;
 
-  width: auto;
-  height: auto;
+  width: 50%;
+  height: 50%;
 }
 
 #mainInfoOverlayId img {
@@ -164,9 +165,10 @@ td {
 }
 
 #closeInfoOverlayId {
-  position: relative;
-  left: 94%;
-  bottom: 20%;
+  position: absolute;
+  z-index: 200;
+  right: 5%;
+  top: 5%;
   cursor: pointer;
 }
 #closeInfoOverlayId:hover {
@@ -427,6 +429,16 @@ canvas {
   .canvas-container {
     width: 80%;
   }
+
+  #mainInfoOverlayId {
+  
+    width: 75%;
+    height: 75%;
+  }
+  #closeInfoOverlayId {
+    /* right: 46%;
+    bottom: 12%; */
+  }
 }
 
 @media only screen and (max-width: 820px) {
@@ -438,12 +450,16 @@ canvas {
   .endScreenContentDivClass button {
     width: 70%;
   }
+
+  
 }
 
 @media only screen and (max-width: 720px) {
   .canvas-container {
     width: 100%;
   }
+
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -456,6 +472,8 @@ canvas {
     width: 80%;
     height: 30%;
   }
+
+ 
 }
 
 @media only screen and (max-height: 600px) {
